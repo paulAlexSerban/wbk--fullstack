@@ -1,9 +1,5 @@
 # JavaScript-Software-Engineering
 
-## HackerRank
-* [JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
-* [JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
-
 ## Practice Apps
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
 * [Modal Window - JS](https://github.com/paulAlexSerban/JS-Modal-Window)
@@ -29,3 +25,7 @@
 ## Miscellaneous Technologies
 ### XML Technologies
 * [XML - XSLT - XPath - XQuery](https://github.com/paulAlexSerban/XML-XSLT-XQuery-xPath)
+
+## HackerRank
+* [JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
+* [JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
