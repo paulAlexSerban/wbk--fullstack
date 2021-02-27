@@ -25,3 +25,7 @@
 
 ## Templating
 * [EJS Templating HTML - ExpressJS](https://github.com/paulAlexSerban/EJS-Templating-HTML---NodeJS)
+
+## Miscellaneous Technologies
+### XML Technologies
+* [XML - XSLT - XPath - XQuery](https://github.com/paulAlexSerban/XML-XSLT-XQuery-xPath)
