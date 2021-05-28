@@ -1,5 +1,9 @@
 # JavaScript-Software-Engineering
 
+## HackerRank
+* [JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
+* [JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
+
 ## Practice Apps
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
 * [Modal Window - JS](https://github.com/paulAlexSerban/JS-Modal-Window)
@@ -15,18 +19,10 @@
 * [Directory Explorer and File Reader - NodeJS](https://github.com/paulAlexSerban/NodeJS-Directory-Explorer-and-File-Reader);
 * [Language Detector - NodeJS](https://github.com/paulAlexSerban/NodeJS-Language-Detector)
 
-## ES2015 Concepts
-* [JS Design Patterns]()
+## Concepts
+* [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
 * [Iterators and Generators](https://github.com/paulAlexSerban/ES2015---Iterators-and-Generators)
 * [Deconstruction](https://github.com/paulAlexSerban/ES2015---Desconstruction)
 
 ## Templating
 * [EJS Templating HTML - ExpressJS](https://github.com/paulAlexSerban/EJS-Templating-HTML---NodeJS)
-
-## Miscellaneous Technologies
-### XML Technologies
-* [XML - XSLT - XPath - XQuery](https://github.com/paulAlexSerban/XML-XSLT-XQuery-xPath)
-
-## HackerRank
-* [JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
-* [JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
