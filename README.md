@@ -15,10 +15,8 @@
 * [Directory Explorer and File Reader - NodeJS](https://github.com/paulAlexSerban/NodeJS-Directory-Explorer-and-File-Reader);
 * [Language Detector - NodeJS](https://github.com/paulAlexSerban/NodeJS-Language-Detector)
 
-## Design Patterns
-* [SOLID Principles]() 
-
 ## ES2015 Concepts
+* [JS Design Patterns]()
 * [Iterators and Generators](https://github.com/paulAlexSerban/ES2015---Iterators-and-Generators)
 * [Deconstruction](https://github.com/paulAlexSerban/ES2015---Desconstruction)
 
