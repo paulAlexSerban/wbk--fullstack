@@ -4,6 +4,9 @@
 * [HackerRank - JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
 * [HackerRank - JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
 * [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
+* [Concepts - Iterators and Generators](https://github.com/paulAlexSerban/ES2015---Iterators-and-Generators)
+* [Concepts - Deconstruction](https://github.com/paulAlexSerban/ES2015---Desconstruction)
+* [EJS Templating HTML - ExpressJS](https://github.com/paulAlexSerban/EJS-Templating-HTML---NodeJS)
 
 ## Practice Apps
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
@@ -19,10 +22,3 @@
 * [WebP Image Converter - NodeJS](https://github.com/paulAlexSerban/NodeJS-WebP-Image-Converter)
 * [Directory Explorer and File Reader - NodeJS](https://github.com/paulAlexSerban/NodeJS-Directory-Explorer-and-File-Reader);
 * [Language Detector - NodeJS](https://github.com/paulAlexSerban/NodeJS-Language-Detector)
-
-## Concepts
-* [Iterators and Generators](https://github.com/paulAlexSerban/ES2015---Iterators-and-Generators)
-* [Deconstruction](https://github.com/paulAlexSerban/ES2015---Desconstruction)
-
-## Templating
-* [EJS Templating HTML - ExpressJS](https://github.com/paulAlexSerban/EJS-Templating-HTML---NodeJS)
