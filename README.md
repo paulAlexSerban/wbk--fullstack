@@ -3,6 +3,7 @@
 ## JS Workbook
 * [HackerRank - JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
 * [HackerRank - JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
+* [JavaScript Algorithms and Data Structures](https://github.com/paulAlexSerban/JavaScript-Algorithms-and-Data-Structures)
 * [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
 * [Concepts - Iterators and Generators](https://github.com/paulAlexSerban/ES2015---Iterators-and-Generators)
 * [Concepts - Deconstruction](https://github.com/paulAlexSerban/ES2015---Desconstruction)
