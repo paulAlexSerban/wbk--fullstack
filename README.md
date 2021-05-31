@@ -1,8 +1,9 @@
 # JavaScript-Software-Engineering
 
-## HackerRank
-* [JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
-* [JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
+## JS Workbook
+* [HackerRank - JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
+* [HackerRank - JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
+* [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
 
 ## Practice Apps
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
@@ -20,7 +21,6 @@
 * [Language Detector - NodeJS](https://github.com/paulAlexSerban/NodeJS-Language-Detector)
 
 ## Concepts
-* [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
 * [Iterators and Generators](https://github.com/paulAlexSerban/ES2015---Iterators-and-Generators)
 * [Deconstruction](https://github.com/paulAlexSerban/ES2015---Desconstruction)
 
