@@ -7,7 +7,6 @@
 * [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
 * [Concepts - Iterators and Generators](https://github.com/paulAlexSerban/ES2015---Iterators-and-Generators)
 * [Concepts - Deconstruction](https://github.com/paulAlexSerban/ES2015---Desconstruction)
-* [EJS Templating HTML - ExpressJS](https://github.com/paulAlexSerban/EJS-Templating-HTML---NodeJS)
 
 ## Practice Apps
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
