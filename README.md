@@ -9,7 +9,6 @@
 
 ## Practice Apps
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
-* [Modal Window - JS](https://github.com/paulAlexSerban/JS-Modal-Window)
 * [To Do List App. - JS - MVC](https://github.com/paulAlexSerban/JS-MVC-ToDo-List-App)
 * [TV Show Search App - JS](https://github.com/paulAlexSerban/JS-TV-Show-Search-App)
 * [Guess My Number App. - JS](https://github.com/paulAlexSerban/JS-Guess-My-Number-App)
