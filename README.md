@@ -15,7 +15,7 @@
 * [Guess My Number App. - JS](https://github.com/paulAlexSerban/JS-Guess-My-Number-App)
 * [Score Keeper App. - JS](https://github.com/paulAlexSerban/JS-Score-Keeper-App)
 
-## JavaScript - NodeJS
+## NodeJS Snipets
 * [Basic ExpressJS Server - ExpressJS](https://github.com/paulAlexSerban/Basic-ExpressJS-Server---NodeJS)
 * [Basic Vanilla Server - NodeJS](https://github.com/paulAlexSerban/NodeJS-Basic-Vanilla-Server)
 * [Language Detector - NodeJS](https://github.com/paulAlexSerban/NodeJS-Language-Detector)
