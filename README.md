@@ -3,8 +3,9 @@
 ## JS Workbook
 * [HackerRank - JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
 * [HackerRank - JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
-* [JavaScript Algorithms and Data Structures](https://github.com/paulAlexSerban/JavaScript---Algorithms-and-Data-Structures)
 * [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
+* [JavaScript Algorithms and Data Structures](https://github.com/paulAlexSerban/JavaScript---Algorithms-and-Data-Structures)
+
 
 ## Practice Apps
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
@@ -17,6 +18,4 @@
 ## JavaScript - NodeJS
 * [Basic ExpressJS Server - ExpressJS](https://github.com/paulAlexSerban/Basic-ExpressJS-Server---NodeJS)
 * [Basic Vanilla Server - NodeJS](https://github.com/paulAlexSerban/NodeJS-Basic-Vanilla-Server)
-* [WebP Image Converter - NodeJS](https://github.com/paulAlexSerban/NodeJS-WebP-Image-Converter)
-* [Directory Explorer and File Reader - NodeJS](https://github.com/paulAlexSerban/NodeJS-Directory-Explorer-and-File-Reader);
 * [Language Detector - NodeJS](https://github.com/paulAlexSerban/NodeJS-Language-Detector)
