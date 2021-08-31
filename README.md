@@ -4,7 +4,7 @@
 * Turn Based Board Game
 * Quotation Generator
 
-## Data Structures and Algorihms Workbook
+## Data Structures and Algorithms Workbook
 * [HackerRank - JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
 * [HackerRank - JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-10-Days-of-Code)
 * [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
@@ -20,3 +20,10 @@
 * [Basic ExpressJS Server - ExpressJS](https://github.com/paulAlexSerban/Basic-ExpressJS-Server---NodeJS)
 * [Basic Vanilla Server - NodeJS](https://github.com/paulAlexSerban/NodeJS-Basic-Vanilla-Server)
 * [Language Detector - NodeJS](https://github.com/paulAlexSerban/NodeJS-Language-Detector)
+
+## Certification Repos
+* [FreeCodeCamp.org - Quality Assurance]()
+* [FreeCodeCamp.org - Back End Development and APIs]()
+* [FreeCodeCamp.org - Data Vizualizaion]()
+* [OpenClassrooms - Front-End Developer Diploma Porjects](https://github.com/paulAlexSerban/OpenClassrooms-FrontEnd-Developer-Diploma-Projects)
+* [FreeCodeCamp.org - JavaScript Algorithms and Data Structures]()
