@@ -5,8 +5,8 @@
 * Quotation Generator
 
 ## Data Structures and Algorithms Workbook
-* [HackerRank - JavaScript - 30 Days of Code](https://github.com/paulAlexSerban/HackerRank-JavaScript-30-Days-of-Code)
-* [HackerRank - JavaScript - 10 Days of Code](https://github.com/paulAlexSerban/HackerRank---JavaScript-10-Days-of-Code)
+* [HackerRank - 30 Days of Code - JavaScript](https://github.com/paulAlexSerban/HackerRank---30-Days-of-Code---JavaScript)
+* [HackerRank - 10 Days of JavaScript](https://github.com/paulAlexSerban/HackerRank---JavaScript-10-Days-of-Code)
 * [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
 * [JavaScript Algorithms and Data Structures](https://github.com/paulAlexSerban/JavaScript---Algorithms-and-Data-Structures)
 
