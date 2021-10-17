@@ -22,8 +22,5 @@
 * [Language Detector - NodeJS](https://github.com/paulAlexSerban/NodeJS-Language-Detector)
 
 ## Certifications
-* [FreeCodeCamp.org - Quality Assurance]()
-* [FreeCodeCamp.org - Back End Development and APIs]()
-* [FreeCodeCamp.org - Data Vizualizaion]()
 * [OpenClassrooms - Front-End Developer Diploma Porjects](https://github.com/paulAlexSerban/OpenClassrooms-FrontEnd-Developer-Diploma-Projects)
 * [FreeCodeCamp.org - JavaScript Algorithms and Data Structures]()
