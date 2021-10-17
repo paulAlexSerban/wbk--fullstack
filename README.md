@@ -14,7 +14,7 @@
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
 * [To Do List App. - JS - MVC](https://github.com/paulAlexSerban/JS-MVC-ToDo-List-App)
 * [Guess My Number App. - JS](https://github.com/paulAlexSerban/JS-Guess-My-Number-App)
-* [Score Keeper App. - JS](https://github.com/paulAlexSerban/JS-Score-Keeper-App)
+* [Score Keeper App. - JavaScript](https://github.com/paulAlexSerban/Score-Keeper-App---JavaScript)
 
 ## Back-End JavaScript - Practice Apps
 * [Basic ExpressJS Server - ExpressJS](https://github.com/paulAlexSerban/Basic-ExpressJS-Server---NodeJS)
