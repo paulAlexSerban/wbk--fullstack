@@ -14,6 +14,7 @@
 * [Asynchronous JS, AJAX and Fetch API](https://github.com/paulAlexSerban/Async-JS-AJAX-and-Fetch-API)
 
 ## Front-End JavaScript - Practice Apps
+
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
 * [To Do List App. - JS - MVC](https://github.com/paulAlexSerban/JS-MVC-ToDo-List-App)
 * [Guess My Number App. - JS](https://github.com/paulAlexSerban/JS-Guess-My-Number-App)
