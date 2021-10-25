@@ -10,6 +10,9 @@
 * [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
 * [JavaScript Algorithms and Data Structures](https://github.com/paulAlexSerban/JavaScript---Algorithms-and-Data-Structures)
 
+## R&D
+* [Asynchronous JS, AJAX and Fetch API](https://github.com/paulAlexSerban/Async-JS-AJAX-and-Fetch-API)
+
 ## Front-End JavaScript - Practice Apps
 * [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
 * [To Do List App. - JS - MVC](https://github.com/paulAlexSerban/JS-MVC-ToDo-List-App)
