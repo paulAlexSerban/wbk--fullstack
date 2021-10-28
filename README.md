@@ -1,6 +1,6 @@
 # JavaScript - Software Engineering
 
-## POC Projects
+## POC
 * Turn Based Board Game
 * Quotation Generator
 
@@ -10,17 +10,7 @@
 * [JS Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
 * [JavaScript Algorithms and Data Structures](https://github.com/paulAlexSerban/JavaScript---Algorithms-and-Data-Structures)
 
-## R&D
-* [Asynchronous JS, AJAX and Fetch API](https://github.com/paulAlexSerban/Async-JS-AJAX-and-Fetch-API)
-
-## Front-End JavaScript - Practice Apps
-
-* [Pig Game App. - JS](https://github.com/paulAlexSerban/JS-Pig-Game)
-* [To Do List App. - JS - MVC](https://github.com/paulAlexSerban/JS-MVC-ToDo-List-App)
-* [Guess My Number App. - JS](https://github.com/paulAlexSerban/JS-Guess-My-Number-App)
-* [Score Keeper App. - JavaScript](https://github.com/paulAlexSerban/Score-Keeper-App---JavaScript)
-
-## Back-End JavaScript - Practice Apps
+## Practice
 * [Basic ExpressJS Server - ExpressJS](https://github.com/paulAlexSerban/Basic-ExpressJS-Server---NodeJS)
 * [Basic Vanilla Server - NodeJS](https://github.com/paulAlexSerban/NodeJS-Basic-Vanilla-Server)
 * [Language Detector - NodeJS](https://github.com/paulAlexSerban/NodeJS-Language-Detector)
