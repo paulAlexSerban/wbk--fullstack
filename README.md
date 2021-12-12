@@ -1,7 +1,7 @@
 # JavaScript - Software Engineering
 
 ## POC Apps
-* [Online Shop (NodeJS, ExpressJS, EJS, MVC)]()
+* [Online Shop (NodeJS, ExpressJS, EJS, MVC)](https://github.com/paulAlexSerban/Online-Shop)
 * [Turn Based Board Game]()
 * [Quotation Generator]()
 
