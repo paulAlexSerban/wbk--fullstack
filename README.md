@@ -1,8 +1,9 @@
 # JavaScript - Software Engineering
 
-## POC
-* Turn Based Board Game
-* Quotation Generator
+## POC Apps
+* [Online Shop (NodeJS, ExpressJS, EJS, MVC)]()
+* [Turn Based Board Game]()
+* [Quotation Generator]()
 
 ## Workbooks
 * [NodeJS - Back End Development](https://github.com/paulAlexSerban/NodeJS---Back-End-Development)
