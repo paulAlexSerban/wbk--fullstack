@@ -13,6 +13,15 @@
 * [JavaScript - Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
 * [JavaScript - Algorithms and Data Structures](https://github.com/paulAlexSerban/JavaScript---Algorithms-and-Data-Structures)
 
+## Templating Engines
+* [EJS-ExpressJS](https://github.com/paulAlexSerban/EJS-ExpressJS)
+* [Handlebars-ExpressJS](https://github.com/paulAlexSerban/Handlebars-ExpressJS)
+* [Pug-ExpressJS](https://github.com/paulAlexSerban/Pug-ExpressJS)
+
+## Server Boilerplates
+* [ExpressJS Server (Basic)](https://github.com/paulAlexSerban/Basic-ExpressJS-Server---NodeJS)
+* [NodeJS Vanilla Server (Basic)](https://github.com/paulAlexSerban/NodeJS-Basic-Vanilla-Server)
+
 ## Certifications
 * [OpenClassrooms - Front-End Developer Diploma Porjects](https://github.com/paulAlexSerban/OpenClassrooms-FrontEnd-Developer-Diploma-Projects)
 * [FreeCodeCamp.org - JavaScript Algorithms and Data Structures]()
