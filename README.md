@@ -5,9 +5,10 @@
 * [Turn Based Board Game]()
 * [Quotation Generator]()
 
-## Workbooks
+## Libraries and Framworks
 * [JavaScript Libraries - R&D Labs](https://github.com/paulAlexSerban/JavaScript-Libraries---RnD-Labs)
-* [NodeJS - Backend Development](https://github.com/paulAlexSerban/NodeJS---Back-End-Development)
+
+## Algorithms and Data Structures
 * [HackerRank - 30 Days of Code - JavaScript](https://github.com/paulAlexSerban/HackerRank---30-Days-of-Code---JavaScript)
 * [HackerRank - 10 Days of JavaScript](https://github.com/paulAlexSerban/HackerRank---JavaScript-10-Days-of-Code)
 * [JavaScript - Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
