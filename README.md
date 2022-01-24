@@ -6,7 +6,7 @@
 * [Quotation Generator]()
 
 ## Libraries and Framworks
-* [JavaScript Libraries - R&D Labs](https://github.com/paulAlexSerban/JavaScript-Libraries---RnD-Labs)
+* [JavaScript - Resaearch and Develoemnt](https://github.com/paulAlexSerban/JavaScript---Research-and-Development)
 
 ## Algorithms and Data Structures
 * [HackerRank - 30 Days of Code - JavaScript](https://github.com/paulAlexSerban/HackerRank---30-Days-of-Code---JavaScript)
