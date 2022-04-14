@@ -9,7 +9,6 @@
 * [JavaScript - Resaearch and Develoemnt](https://github.com/paulAlexSerban/JavaScript---Research-and-Development)
 
 ### Templating Engines
-* [EJS-ExpressJS](https://github.com/paulAlexSerban/EJS-ExpressJS)
 * [Handlebars-ExpressJS](https://github.com/paulAlexSerban/Handlebars-ExpressJS)
 * [Pug-ExpressJS](https://github.com/paulAlexSerban/Pug-ExpressJS)
 
