@@ -5,9 +5,6 @@
 * [Turn Based Board Game]()
 * [Quotation Generator]()
 
-## Libraries and Framworks
-* [JavaScript - Resaearch and Develoemnt](https://github.com/paulAlexSerban/JavaScript---Research-and-Development)
-
 ### Templating Engines
 * [Handlebars-ExpressJS](https://github.com/paulAlexSerban/Handlebars-ExpressJS)
 * [Pug-ExpressJS](https://github.com/paulAlexSerban/Pug-ExpressJS)
