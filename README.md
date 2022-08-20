@@ -6,7 +6,7 @@
 ## Workbooks
 * [Algorithms and Data Structures - JavaScript](https://github.com/paulAlexSerban/wbk--algorithms-n-data-structures--javascript)
 * [HackerRank - 30 Days of Code - JavaScript](https://github.com/paulAlexSerban/HackerRank---30-Days-of-Code---JavaScript)
-* [HackerRank - 10 Days of JavaScript](https://github.com/paulAlexSerban/HackerRank---JavaScript-10-Days-of-Code)
+* [HackerRank - 10 Days of JavaScript](https://github.com/paulAlexSerban/wbk--hackerrank--10-days-of-code--javascript)
 * [Design Patterns - JavaScript](https://github.com/paulAlexSerban/wbk--design-patterns--javascript)
 
 ### Templating Engines
