@@ -13,7 +13,7 @@
 * [ExpressJS Server (Basic)](https://github.com/paulAlexSerban/Basic-ExpressJS-Server---NodeJS)
 * [NodeJS Vanilla Server (Basic)](https://github.com/paulAlexSerban/NodeJS-Basic-Vanilla-Server)
 
-## Algorithms and Data Structures
+## Workbooks
 * [HackerRank - 30 Days of Code - JavaScript](https://github.com/paulAlexSerban/HackerRank---30-Days-of-Code---JavaScript)
 * [HackerRank - 10 Days of JavaScript](https://github.com/paulAlexSerban/HackerRank---JavaScript-10-Days-of-Code)
 * [JavaScript - Design Patterns](https://github.com/paulAlexSerban/JavaScript---Design-Patterns)
