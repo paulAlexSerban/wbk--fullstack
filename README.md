@@ -1,7 +1,7 @@
 # JavaScript - Software Engineering
 
 ## POC Apps
-* [Online Shop (NodeJS, ExpressJS, EJS, MVC)](https://github.com/paulAlexSerban/Online-Shop)
+* [Online Shop (NodeJS, ExpressJS, EJS, MVC)](https://github.com/paulAlexSerban/prj--online-shop)
 * [Cops and Robbers (SPA Board Game)](https://github.com/paulAlexSerban/prj--cops-and-robbers--spa-board-game)
 
 ## Workbooks
