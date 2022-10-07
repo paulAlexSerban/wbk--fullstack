@@ -14,6 +14,10 @@
 * [Handlebars-ExpressJS](https://github.com/paulAlexSerban/Handlebars-ExpressJS)
 * [Pug-ExpressJS](https://github.com/paulAlexSerban/Pug-ExpressJS)
 
+### RND
+* [React FE Build w. @netcentric/fe-build]()
+* [Basic FE Build w. @netcentric/fe-build]()
+
 ## Certifications
 * [OpenClassrooms - Front-End Developer Diploma Porjects](https://github.com/paulAlexSerban/OpenClassrooms-FrontEnd-Developer-Diploma-Projects)
 
