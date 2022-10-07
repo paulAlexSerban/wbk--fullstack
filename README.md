@@ -15,7 +15,7 @@
 * [Pug-ExpressJS](https://github.com/paulAlexSerban/Pug-ExpressJS)
 
 ### RND
-* [React FE Build w. @netcentric/fe-build]()
+* [React FE Build w. @netcentric/fe-build](https://github.com/paulAlexSerban/rnd--react-fe-build-w-netcentric-fe-build)
 * [Basic FE Build w. @netcentric/fe-build](https://github.com/paulAlexSerban/rnd--basic-fe-build-w-netcentric-fe-build)
 
 ## Certifications
