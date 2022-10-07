@@ -16,7 +16,7 @@
 
 ### RND
 * [React FE Build w. @netcentric/fe-build](https://github.com/paulAlexSerban/rnd--react-fe-build-w-netcentric-fe-build)
-* [Basic FE Build w. @netcentric/fe-build](https://github.com/paulAlexSerban/rnd--basic-fe-build-w-netcentric-fe-build)
+* [Minimal Project FE Build w. @netcentric/fe-build](https://github.com/paulAlexSerban/rnd--minimal-prj-fe-build-w-netcentric-fe-build)
 
 ## Certifications
 * [OpenClassrooms - Front-End Developer Diploma Porjects](https://github.com/paulAlexSerban/OpenClassrooms-FrontEnd-Developer-Diploma-Projects)
