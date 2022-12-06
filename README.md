@@ -3,6 +3,7 @@
 ## POC Apps
 * [Online Shop (NodeJS, ExpressJS, EJS, MVC)](https://github.com/paulAlexSerban/prj--online-shop)
 * [Cops and Robbers (SPA Board Game)](https://github.com/paulAlexSerban/prj--cops-and-robbers--spa-board-game)
+* [Node Farm](https://github.com/paulAlexSerban/prj--node-farm)
 
 ## Workbooks
 * [Algorithms and Data Structures - JavaScript](https://github.com/paulAlexSerban/wbk--algorithms-n-data-structures--javascript)
