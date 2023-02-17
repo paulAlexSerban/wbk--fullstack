@@ -16,6 +16,7 @@
 * [Pug-ExpressJS](https://github.com/paulAlexSerban/Pug-ExpressJS)
 
 ### RND
+* [Webpack Configurations](https://github.com/paulAlexSerban/rnd--webpack)
 * [Small Project React FE Build w. @netcentric/fe-build](https://github.com/paulAlexSerban/rnd--small-prj-react-fe-build-w-netcentric-fe-build)
 * [Minimal Project FE Build w. @netcentric/fe-build](https://github.com/paulAlexSerban/rnd--minimal-prj-fe-build-w-netcentric-fe-build)
 
