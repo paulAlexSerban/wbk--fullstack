@@ -21,8 +21,3 @@
 
    - Pattern: `./infrastructure/configuration/env/<lambda-name>.env`
    - Eg: `.hello-lambda.compose.env` && `.hello-lambda.compose.env.example` (for Git tracking - keep sensitive data out of .example file)
-
-5. `./infrastructure/provisioning/scripts` - add new script to deploy the lambda
-
-   - Pattern: `./infrastructure/provisioning/scripts/<lambda-name>.localstack.bash`
-   - Eg: `./infrastructure/provisioning/scripts/hello-lambda.localstack.bash`

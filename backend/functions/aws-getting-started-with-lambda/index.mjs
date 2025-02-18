@@ -1,6 +1,7 @@
 import * as fs from "node:fs";
 
 const html = fs.readFileSync("index.html", { encoding: "utf8" });
+const css = fs.readFileSync("styles.css", { encoding: "utf8" });
 
 const dynamicForm = (html, queryStringParameters) => {
   let formres = "";
@@ -15,8 +16,18 @@ const dynamicForm = (html, queryStringParameters) => {
   );
 };
 
+const injectAssets = (html) => {
+  return html
+    .replace("{css}", `<style>${css}</style>`)
+    .replace(
+      "{js}",
+      `<script src="https://code.jquery.com/jquery-3.6.0.min.js" async defer></script>`
+    );
+};
+
 const handler = async (event) => {
   let modifiedHTML = dynamicForm(html, event.queryStringParameters);
+  modifiedHTML = injectAssets(modifiedHTML);
   const response = {
     statusCode: 200,
     headers: {
