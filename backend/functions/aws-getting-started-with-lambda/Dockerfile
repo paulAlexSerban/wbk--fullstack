@@ -7,6 +7,6 @@ RUN apt-get update \
 WORKDIR /app
 COPY . .
 RUN yarn install --immutable --immutable-cache --check-cache
-RUN zip -r /app/function.zip .
+RUN zip -rj /app/function.zip ./src/*
 RUN mkdir -p /package
 CMD ["cp", "/app/function.zip", "/package/function.zip"]
