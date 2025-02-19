@@ -136,3 +136,11 @@ database/_data/*
 allure-results
 reports
 .DS_Store
+# Directories
+.terraform/
+.vagrant/
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+*.terraform.lock.hcl

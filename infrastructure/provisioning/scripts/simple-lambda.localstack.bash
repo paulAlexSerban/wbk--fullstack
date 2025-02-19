@@ -81,7 +81,7 @@ function deploy-lambda() {
 }
 
 function expose-api-gateway() {
-    # API_ID=$(awslocal apigateway get-rest-apis --query "items[-1].id" --output text)
+    API_ID=$(awslocal apigateway get-rest-apis --query "items[-1].id" --output text)
     awslocal apigateway create-deployment \
         --rest-api-id "${API_ID}" \
         --stage-name "${STAGE}" 

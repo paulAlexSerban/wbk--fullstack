@@ -13,7 +13,7 @@ services:
       - "4566:4566" # LocalStack Gateway
       - "4510-4559:4510-4559" # Additional service ports
     environment:
-      - SERVICES=lambda,apigateway,s3
+      - SERVICES=lambda,apigateway,s3,iam
       - DEBUG=1
       - PERSISTENCE=1
       - AWS_DEFAULT_REGION=us-east-1

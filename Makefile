@@ -51,17 +51,17 @@ aws-getting-started-with-lambda_localstack-deploy:
 # ----------------------------------------------
 define localstack-lambda-deploy-via-terraform-template
 $(1)-tf_init:
-	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/$(1).bash --phase=tf-init --app-name=$(1)
+	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/simple-lambda.bash --phase=tf-init --app-name=$(1)
 
 $(1)-tf_apply:
-	@bash $(INFRA_SERVER_TEMPLATING_DOCKER_SCRIPTS)/simple-lambda.bash --phase=build --app-name=hello-lambda
-	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/$(1).bash --phase=tf-apply --app-name=$(1)
+	@bash $(INFRA_SERVER_TEMPLATING_DOCKER_SCRIPTS)/simple-lambda.bash --phase=build --app-name=$(1)
+	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/simple-lambda.bash --phase=tf-apply --app-name=$(1)
 
 $(1)-tf_destroy:
-	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/$(1).bash --phase=tf-destroy --app-name=$(1)
+	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/simple-lambda.bash --phase=tf-destroy --app-name=$(1)
 endef
 
-$(eval $(call terraform-template,hello-lambda))
+$(eval $(call localstack-lambda-deploy-via-terraform-template,hello-lambda))
 
 hello-lambda-tf_init:
-	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/hello-lambda.bash --phase=tf-init --app-name=hello-lambda
+	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/simple-lambda.bash --phase=tf-init --app-name=hello-lambda
