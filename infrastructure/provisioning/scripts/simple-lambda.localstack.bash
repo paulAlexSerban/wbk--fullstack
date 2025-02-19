@@ -5,8 +5,8 @@ cd "$(dirname "$0")" || exit
 APP_NAME=""
 # inspired from maven phases (https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
 PHASE=""
-FUNCTION_SHA256SUM=""
 STAGE="local"
+FUNCTION_SHA256SUM=""
 
 for arg in "$@"; do
     case $arg in
@@ -31,31 +31,6 @@ if [ -z "$PHASE" ]; then
     exit 1
 fi
 
-function build() {
-    echo "[ 🏗️ 🐳 ] --- build "
-    docker build -f ../../../backend/functions/${APP_NAME}/Dockerfile \
-        -t ${APP_NAME}-builder \
-        ../../../backend/functions/${APP_NAME}
-
-    if [ ! -d "../../../backend/functions/${APP_NAME}/dist" ]; then
-        mkdir ../../../backend/functions/${APP_NAME}/dist
-    fi
-
-    docker run --rm -v $(pwd)/../../../backend/functions/${APP_NAME}/dist:/package ${APP_NAME}-builder
-}
-
-function push-lambda-package() {
-    echo "[ 🚀 ] --- deploy"
-    if [[ $(awslocal s3api list-buckets --query "Buckets[?Name=='packages-lambda'].Name" --output text) != "packages-lambda" ]]; then
-        awslocal s3 mb s3://packages-lambda
-    else
-        echo "[ ℹ️ ] --- bucket already exists"
-    fi
-
-    FUNCTION_SHA256SUM=$(sha256sum ../../../backend/functions/${APP_NAME}/dist/function.zip | awk '{print $1}')
-    awslocal s3 cp ../../../backend/functions/${APP_NAME}/dist/function.zip s3://packages-lambda/${APP_NAME}/${FUNCTION_SHA256SUM}.zip
-}
-
 function create-api-gateway() {
     API_ID=$(awslocal apigateway create-rest-api --name "${APP_NAME}-api" --query "id" --output text)
     API_GATEWAY_PARENT_RESOURCE_ID=$(awslocal apigateway get-resources --rest-api-id "$API_ID" --query "items[0].id" --output text) 
@@ -64,7 +39,7 @@ function create-api-gateway() {
     awslocal apigateway put-method --rest-api-id "$API_ID" \
         --resource-id "$RESOURCE_ID" \
         --http-method ANY \
-        --authorization-type "NONE"
+        --authorization-type "NONE" 
 
     awslocal apigateway put-integration \
         --rest-api-id "$API_ID" \
@@ -73,6 +48,20 @@ function create-api-gateway() {
         --integration-http-method POST \
         --type AWS_PROXY \
         --uri arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:000000000000:function:${APP_NAME}/invocations
+}
+
+function install-lambda() {
+    build
+    echo "[ 🚀 ] --- install package in local development setup"
+    if [[ $(awslocal s3api list-buckets --query "Buckets[?Name=='packages-lambda'].Name" --output text) != "packages-lambda" ]]; then
+        awslocal s3 mb s3://packages-lambda
+    else
+        echo "[ ℹ️ ] --- bucket already exists"
+    fi
+
+    FUNCTION_SHA256SUM=$(sha256sum ../../../backend/functions/${APP_NAME}/dist/function.zip | awk '{print $1}')
+    
+    awslocal s3 cp ../../../backend/functions/${APP_NAME}/dist/function.zip s3://packages-lambda/${APP_NAME}/${FUNCTION_SHA256SUM}.zip
 }
 
 function deploy-lambda() {
@@ -87,7 +76,8 @@ function deploy-lambda() {
         --memory-size 128 \
         --timeout 10 \
         --role arn:aws:iam::000000000000:role/lambda-role \
-        --code S3Bucket=packages-lambda,S3Key=${APP_NAME}/${FUNCTION_SHA256SUM}.zip
+        --code S3Bucket=packages-lambda,S3Key=${APP_NAME}/${FUNCTION_SHA256SUM}.zip \
+        --no-cli-pager
 }
 
 function expose-api-gateway() {
@@ -102,11 +92,11 @@ function expose-api-gateway() {
 }
 
 function deploy() {
-    build
-    push-lambda-package
+    echo "[ 🚀 ] --- deploy the lambda function"
     create-api-gateway
+    install-lambda
     deploy-lambda
     expose-api-gateway
 }
 
-$PHASE && echo "[ ✅ ] --- done" || echo "[ 🚫 ] --- failed"
+$PHASE && echo "[ ✅ ] --- done deploying lambda" || echo "[ 🚫 ] --- failed deploying lambda"
