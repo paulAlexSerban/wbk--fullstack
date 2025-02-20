@@ -62,6 +62,10 @@ $(1)-tf_destroy:
 endef
 
 $(eval $(call localstack-lambda-deploy-via-terraform-template,hello-lambda))
+$(eval $(call localstack-lambda-deploy-via-terraform-template,aws-getting-started-with-lambda))
 
 hello-lambda-tf_init:
 	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/simple-lambda.bash --phase=tf-init --app-name=hello-lambda
+
+aws-getting-started-with-lambda-tf_init:
+	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/simple-lambda.bash --phase=tf-init --app-name=aws-getting-started-with-lambda

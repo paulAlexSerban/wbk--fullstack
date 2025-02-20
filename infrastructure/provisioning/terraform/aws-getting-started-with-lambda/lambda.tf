@@ -1,4 +1,4 @@
-resource "aws_lambda_function" "hello-lambda_lambda" {
+resource "aws_lambda_function" "aws-getting-started-with-lambda_lambda" {
   function_name = var.function_name
   handler       = "index.handler"
   runtime       = "nodejs22.x"

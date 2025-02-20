@@ -22,10 +22,10 @@ resource "aws_api_gateway_integration" "lambda_integration" {
   http_method = aws_api_gateway_method.proxy_method.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.hello_lambda.invoke_arn
+  uri                     = aws_lambda_function.hello-lambda_lambda.invoke_arn
 }
 
-resource "aws_api_gateway_deployment" "hello_deployment" {
+resource "aws_api_gateway_deployment" "hello-lambda_deployment" {
   rest_api_id = aws_api_gateway_rest_api.hello-lambda_api.id
 
   depends_on = [
@@ -34,12 +34,12 @@ resource "aws_api_gateway_deployment" "hello_deployment" {
   ]
 }
 
-resource "aws_api_gateway_stage" "hello_stage" {
+resource "aws_api_gateway_stage" "hello-lambda_stage" {
   stage_name    = var.stage
   rest_api_id   = aws_api_gateway_rest_api.hello-lambda_api.id
-  deployment_id = aws_api_gateway_deployment.hello_deployment.id
+  deployment_id = aws_api_gateway_deployment.hello-lambda_deployment.id
 }
 
 output "api_gateway_invoke_url" {
-  value = "http://localhost:4566/restapis/${aws_api_gateway_rest_api.hello-lambda_api.id}/${aws_api_gateway_stage.hello_stage.stage_name}/_user_request_/${var.function_name}"
+  value = "http://localhost:4566/restapis/${aws_api_gateway_rest_api.hello-lambda_api.id}/${aws_api_gateway_stage.hello-lambda_stage.stage_name}/_user_request_/${var.function_name}"
 }
