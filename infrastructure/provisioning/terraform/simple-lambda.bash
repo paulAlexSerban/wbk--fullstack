@@ -37,8 +37,6 @@ ENV_FILE="../../configuration/env/.${APP_NAME}.compose.env"
 export TF_VAR_aws_access_key
 export TF_VAR_aws_secret_key
 
-
-
 function install-lambda() {
     echo "[ 🚀 ] --- install package in local development setup"
     if [[ $(awslocal s3api list-buckets --query "Buckets[?Name=='repo-packages-lambda'].Name" --output text) != "repo-packages-lambda" ]]; then
