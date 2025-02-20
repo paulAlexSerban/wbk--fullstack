@@ -41,15 +41,15 @@ export TF_VAR_aws_secret_key
 
 function install-lambda() {
     echo "[ 🚀 ] --- install package in local development setup"
-    if [[ $(awslocal s3api list-buckets --query "Buckets[?Name=='packages-lambda'].Name" --output text) != "packages-lambda" ]]; then
-        awslocal s3 mb s3://packages-lambda
+    if [[ $(awslocal s3api list-buckets --query "Buckets[?Name=='repo-packages-lambda'].Name" --output text) != "repo-packages-lambda" ]]; then
+        awslocal s3 mb s3://repo-packages-lambda
     else
         echo "[ ℹ️ ] --- bucket already exists"
     fi
 
     FUNCTION_SHA256SUM=$(sha256sum ../../../backend/functions/${APP_NAME}/dist/function.zip | awk '{print $1}')
     
-    awslocal s3 cp ../../../backend/functions/${APP_NAME}/dist/function.zip s3://packages-lambda/${APP_NAME}/${FUNCTION_SHA256SUM}.zip
+    awslocal s3 cp ../../../backend/functions/${APP_NAME}/dist/function.zip s3://repo-packages-lambda/${APP_NAME}/${FUNCTION_SHA256SUM}.zip
 }
 
 function tf-init() {
