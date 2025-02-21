@@ -10,6 +10,10 @@ function up() {
     docker-compose up
 }
 
+function down() {
+    docker-compose down --rmi all
+}
+
 function run-lint() {
     docker-compose run --rm app sh -c "flake8"
 }
@@ -23,12 +27,20 @@ function run-migrate() {
 }
 
 function run-test() {
-    docker-compose run --rm app sh -c "python manage.py test"
+    docker-compose run --rm app sh -c "python manage.py test apps"
 }
 
 # should be run only once to create the project
 # function start-django-project() {
 #     docker-compose run --rm app sh -c "django-admin startproject app ."
 # }
+
+function start-django-app() {
+    docker-compose run --rm app sh -c "python manage.py startapp core"
+}
+
+function wait-for-db() {
+    docker-compose run --rm app sh -c "python manage.py wait_for_db && flake8"
+}
 
 $1
