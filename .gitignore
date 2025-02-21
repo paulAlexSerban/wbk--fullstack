@@ -144,3 +144,14 @@ reports
 *.tfstate.backup
 *.tfstate.lock.info
 *.terraform.lock.hcl
+
+#python
+__pycache__/
+*.pyc
+
+#django
+*.sqlite3
+*.pyc
+*.pyo
+*.pyd
+*.pyc
