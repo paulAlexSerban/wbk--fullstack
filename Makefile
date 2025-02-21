@@ -69,3 +69,24 @@ hello-lambda-tf_init:
 
 aws-getting-started-with-lambda-tf_init:
 	@bash $(INFRA_PROVISIONING_TERRAFORM_DIR)/simple-lambda.bash --phase=tf-init --app-name=aws-getting-started-with-lambda
+
+# ----------------------------------------------
+# Base Django compose
+# ----------------------------------------------
+define base-django-compose_template
+$(1)-compose-up:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=up --app-name=$(1)
+
+$(1)-compose-down:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=down --app-name=$(1)
+
+$(1)-compose-down-clean:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=down-clean --app-name=$(1)
+endef
+
+$(eval $(call base-django-compose_template,hello-django))
+$(eval $(call base-django-compose_template,profiles))
+$(eval $(call base-django-compose_template,recipes))
+
+hello-django-compose-up:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=up --app-name=hello-django
