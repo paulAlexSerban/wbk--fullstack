@@ -66,14 +66,14 @@ function logs() {
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} logs --follow
 }
 
-# # uncomment this function if you want to use it
-# function make-migrations() {
-#     # use this command to create the migration files after creating a new model
-#     APP_MIGRATION_NAME=profiles_api # change this to the app name
-#     echo "[ 🟢 🐳 --- compose make migrations for django ]"
-#     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-#                    -c "python manage.py makemigrations ${APP_MIGRATION_NAME}"
-# }
+# uncomment this function if you want to use it
+function make-migrations() {
+    # use this command to create the migration files after creating a new model
+    APP_MIGRATION_NAME=hello_api # change this to the app name
+    echo "[ 🟢 🐳 --- compose make migrations for django ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+                   -c "python manage.py makemigrations ${APP_MIGRATION_NAME}"
+}
 
 function migrate() {
     # use this command to apply the migration files to the database after you run make-migrations
