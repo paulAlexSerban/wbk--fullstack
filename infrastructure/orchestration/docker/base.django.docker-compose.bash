@@ -91,12 +91,55 @@ function createsuperuser() {
                    -c "echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(name='admin'); user.set_password('admin'); user.save()\" | python manage.py shell"
 }
 
+function test() {
+    # use this command to run the tests
+    echo "[ 🟢 🐳 --- compose test ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+                   -c "python manage.py test apps"
+}
+
+# # uncomment this function if you want to use it
+# function start-project() {
+#     # use this command to start a new Django project
+#     echo "[ 🟢 🐳 --- compose startproject ]"
+#     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+#                    -c "django-admin startproject app ."
+# }
+
+# # uncomment this function if you want to use it
+# function start-app() {
+#     # use this command to start a new Django app
+#     echo "[ 🟢 🐳 --- compose startapp ]"
+#     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+#                    -c "python manage.py startapp core"
+# }
+
+function lint() {
+    # use this command to lint the code
+    echo "[ 🟢 🐳 --- compose lint ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+                   -c "flake8"
+}
+
+function format() {
+    # use this command to format the code
+    echo "[ 🟢 🐳 --- compose format ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+                   -c "autopep8 --in-place --aggressive --aggressive \$(find . -name '*.py' -not -path './venv/*')"
+}
+
 function help() {
     echo "Available commands:"
     echo "  up - start the Docker container"
     echo "  down - stop the Docker container"
+    echo "  down-clean - stop the Docker container and remove the volumes and images"
     echo "  logs - show the logs of the Docker container"
     echo "  list - list the containers"
+    echo "  migrate - apply the migrations to the database"
+    echo "  createsuperuser - create a superuser"
+    echo "  test - run the tests"
+    echo "  lint - lint the code"
+    echo "  format - format the code"
     echo "  help - show this help"
 }
 
