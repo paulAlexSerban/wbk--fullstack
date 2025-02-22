@@ -1,0 +1,51 @@
+@base_url = http://localhost:8000
+@authorization_token = ba5806cd0a21dd3d9bd43d457548a469d31ea749
+
+###
+GET {{base_url}}/api/profile
+Content-Type: application/json
+
+
+###
+POST {{base_url}}/api/profile/
+Content-Type: application/json
+
+{
+    "email": "second@test.com",
+    "name": "second",
+    "password": "second"
+}
+
+###
+POST {{base_url}}/api/login/
+Content-Type: application/json
+
+{
+    "username": "second@test.com",
+    "password": "second"
+}
+
+### /api/profile/:userId/
+PUT {{base_url}}/api/profile/8/
+Content-Type: application/json
+Authorization: Token {{authorization_token}}
+
+{
+    "email": "second@test.com",
+    "name": "secondTest",
+    "password": "second"
+}
+
+###
+PATCH {{base_url}}/api/profile/8/
+Content-Type: application/json
+Authorization: Token {{authorization_token}}
+
+{
+  "name": "John"
+}
+
+###
+DELETE {{base_url}}/api/profile/8/
+Content-Type: application/json
+Authorization: Token {{authorization_token}}
