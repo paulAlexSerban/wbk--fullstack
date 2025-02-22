@@ -109,9 +109,12 @@ function test() {
 # # uncomment this function if you want to use it
 # function start-app() {
 #     # use this command to start a new Django app
+#     NEW_DJANGO_APP_NAME="hello_api"
 #     echo "[ 🟢 🐳 --- compose startapp ]"
 #     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-#                    -c "python manage.py startapp core"
+#                    -c "mkdir apps/${NEW_DJANGO_APP_NAME}"
+#     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+#                    -c "python manage.py startapp ${NEW_DJANGO_APP_NAME} apps/${NEW_DJANGO_APP_NAME}"
 # }
 
 function lint() {

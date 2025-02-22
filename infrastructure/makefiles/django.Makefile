@@ -31,6 +31,9 @@ $(1)-compose-format:
 
 $(1)-compose-help:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=help --app-name=$(1)
+
+$(1)-compose-start-app:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=start-app --app-name=$(1)
 endef
 
 $(eval $(call base-django-compose_template,hello-django))
