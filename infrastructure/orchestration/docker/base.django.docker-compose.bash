@@ -66,6 +66,31 @@ function logs() {
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} logs --follow
 }
 
+# # uncomment this function if you want to use it
+# function make-migrations() {
+#     # use this command to create the migration files after creating a new model
+#     APP_MIGRATION_NAME=profiles_api # change this to the app name
+#     echo "[ 🟢 🐳 --- compose make migrations for django ]"
+#     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+#                    -c "python manage.py makemigrations ${APP_MIGRATION_NAME}"
+# }
+
+function migrate() {
+    # use this command to apply the migration files to the database after you run make-migrations
+    echo "[ 🟢 🐳 --- compose migrate ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+                   -c "python manage.py migrate"
+}
+function createsuperuser() {
+    # use this command to create a superuser
+    echo
+    echo "[ 🟢 🐳 --- compose createsuperuser ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+                   -c "python manage.py createsuperuser --noinput --email admin@example.com --name admin --force-color"
+        docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+                   -c "echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(name='admin'); user.set_password('admin'); user.save()\" | python manage.py shell"
+}
+
 function help() {
     echo "Available commands:"
     echo "  up - start the Docker container"
