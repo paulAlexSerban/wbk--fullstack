@@ -1,13 +1,17 @@
-import express, { Router } from 'express';
+import express, { Router, Request, Response, NextFunction } from "express";
 
-import monstersRouter from './monsters';
-import habitatsRouter from './habitats';
-import livesRouter from './lives';
+// import monstersRouter from "./monsters";
+// import habitatsRouter from "./habitats";
+// import livesRouter from "./lives";
 
 const router: Router = express.Router();
 
-router.use('/monsters', monstersRouter);
-router.use('/habitats', habitatsRouter);
-router.use('/lives', livesRouter);
+router.use("/hello", (req: Request, res: Response) => {
+  res.json({ message: "Hello, world!" });
+});
+
+// router.use('/monsters', monstersRouter);
+// router.use('/habitats', habitatsRouter);
+// router.use('/lives', livesRouter);
 
 export default router;

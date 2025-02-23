@@ -6,3 +6,4 @@ INFRA_PROVISIONING_TERRAFORM_DIR := ./infrastructure/provisioning/terraform
 include infrastructure/makefiles/django.Makefile
 include infrastructure/makefiles/lambda.Makefile
 include infrastructure/makefiles/localstack.Makefile
+include infrastructure/makefiles/nodejs.Makefile

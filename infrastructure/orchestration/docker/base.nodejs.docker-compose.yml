@@ -1,0 +1,24 @@
+---
+networks:
+  base-django-network:
+    driver: bridge
+
+services:
+  # ---------------------------------------------------------------------
+  # | Node.js API Service                                               | 
+  # ---------------------------------------------------------------------
+  nodejs-api-service:
+    build:
+      context: ../../../
+      dockerfile: .${API_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - API_PROJECT_PATH=${API_PROJECT_PATH}
+        - PORT=5000
+    ports:
+      - "5000:5000"
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    volumes:
+      - ../../../${API_PROJECT_PATH}:/app
+    networks:
+      - base-django-network

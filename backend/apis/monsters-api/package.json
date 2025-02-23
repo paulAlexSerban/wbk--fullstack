@@ -6,8 +6,10 @@
   "scripts": {
     "develop": "concurrently \"yarn tsc --watch\" \"nodemon -q /dist/bin/www.js\"",
     "start": "node ./dist/bin/www.js",
-    "build:dev": "yarn tsc",
-    "build:prod": "yarn tsc"
+    "build": "yarn tsc",
+    "test": "echo \"Error: no test specified\"",
+    "test:watch": "echo \"Error: no test specified\"",
+    "test:coverage": "echo \"Error: no test specified\""
   },
   "dependencies": {
     "@types/cookie-parser": "^1.4.6",
