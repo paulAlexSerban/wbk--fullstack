@@ -1,32 +1,38 @@
 @base_url = http://localhost:8000
-@authorization_token = ba5806cd0a21dd3d9bd43d457548a469d31ea749
+@authorization_token = 8829ecdfcd64ed4dc79923ba9838c6800830ffd5
+@profile_id = 5
 
-###
+### List of all profiles
 GET {{base_url}}/api/profile
 Content-Type: application/json
 
 
-###
+### Create a new profile
 POST {{base_url}}/api/profile/
 Content-Type: application/json
 
 {
-    "email": "second@test.com",
+    "email": "second@profileone.com",
     "name": "second",
     "password": "second"
 }
 
-###
+### Login
 POST {{base_url}}/api/login/
 Content-Type: application/json
 
 {
-    "username": "second@test.com",
+    "username": "second@gmail.com",
     "password": "second"
 }
 
+### Get a profile by id with token
+GET {{base_url}}/api/profile/{{profile_id}}/
+Content-Type: application/json
+Authorization: Token {{authorization_token}}
+
 ### /api/profile/:userId/
-PUT {{base_url}}/api/profile/8/
+PUT {{base_url}}/api/profile/{{profile_id}}/
 Content-Type: application/json
 Authorization: Token {{authorization_token}}
 
@@ -49,3 +55,16 @@ Authorization: Token {{authorization_token}}
 DELETE {{base_url}}/api/profile/8/
 Content-Type: application/json
 Authorization: Token {{authorization_token}}
+
+### List of all feeds
+GET {{base_url}}/api/feed/
+Content-Type: application/json
+
+### Create a new feed
+POST {{base_url}}/api/feed/
+Content-Type: application/json
+Authorization: Token {{authorization_token}}
+
+{
+    "status_text": "new feed item from http request"
+}
