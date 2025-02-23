@@ -13,6 +13,7 @@ $(1)-compose-down-clean:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.nodejs.docker-compose.bash --phase=down-clean --app-name=$(1)
 endef
 
+$(eval $(call base-nodejs-compose_template,hello-nodejs))
 $(eval $(call base-nodejs-compose_template,monsters))
 
 .PHONY: monsters-compose-up monsters-compose-down monsters-compose-down-clean
