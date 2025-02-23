@@ -1,4 +1,4 @@
-# Recipes API
+# Hello Django API
 
 ## Tech-stack
 
