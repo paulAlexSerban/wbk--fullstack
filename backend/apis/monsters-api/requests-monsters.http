@@ -13,8 +13,8 @@ POST {{base_url}}/api/monsters
 Content-Type: application/json
 
 {
-    "name": "Grumpy",
-    "personality": "friendly"
+    "name": "Jully",
+    "personality": "barky"
 }
 
 ### update monster

@@ -11,6 +11,12 @@ $(1)-compose-down:
 
 $(1)-compose-down-clean:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.nodejs.docker-compose.bash --phase=down-clean --app-name=$(1)
+
+$(1)-backup-db:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.nodejs.docker-compose.bash --phase=backup-db --app-name=$(1)
+
+$(1)-restore-db:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.nodejs.docker-compose.bash --phase=restore-db --app-name=$(1)
 endef
 
 $(eval $(call base-nodejs-compose_template,hello-nodejs))
