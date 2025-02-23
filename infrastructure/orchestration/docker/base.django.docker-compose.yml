@@ -65,5 +65,5 @@ services:
       - base-django-network
     volumes:
       # - ../../../database/.tmp-data/${PROJECT_NAME}-data/:/var/lib/pgadmin/
-      - ../../../database/initialization/pgAdmin/config_distro.py:/pgadmin4/config_distro.py
-      - ../../../database/initialization/pgAdmin/servers.json:/pgadmin4/servers.json
+      - ../../../database/db-admin/pgAdmin/config_distro.py:/pgadmin4/config_distro.py
+      - ../../../database/db-admin/pgAdmin/servers.json:/pgadmin4/servers.json
