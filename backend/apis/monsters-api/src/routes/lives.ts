@@ -24,4 +24,16 @@ router.get('/conditions', (req: Request, res: Response, next: NextFunction) => {
     });
 });
 
+/* POST */
+router.post('/', (req: Request, res: Response, next: NextFunction) => {
+    const { monster, habitat } = req.body;
+    pool.query('INSERT INTO lives (monster, habitat) VALUES ($1, $2)', [monster, habitat], (err, dbRes) => {
+        if (err) {
+            return next(err);
+        }
+
+        res.send(dbRes.rows);
+    });
+});
+
 export default router;

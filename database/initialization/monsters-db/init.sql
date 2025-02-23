@@ -20,6 +20,7 @@ CREATE TABLE habitats(
 );
 
 CREATE TABLE lives(
+  id serial,
   monster character varying(50),
   habitat character varying(50)
 );

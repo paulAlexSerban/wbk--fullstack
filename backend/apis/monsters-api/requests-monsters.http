@@ -1,0 +1,31 @@
+@base_url = http://localhost:3000
+
+### list all monsters
+GET {{base_url}}/api/monsters
+Content-Type: application/json
+
+### get monster by id
+GET {{base_url}}/api/monsters/1
+Content-Type: application/json
+
+### create monster
+POST {{base_url}}/api/monsters
+Content-Type: application/json
+
+{
+    "name": "Grumpy",
+    "personality": "friendly"
+}
+
+### update monster
+PUT {{base_url}}/api/monsters/1
+Content-Type: application/json
+
+{
+    "name": "FluffyOne",
+    "personality": "aggressiveer"
+}
+
+### delete monster
+DELETE {{base_url}}/api/monsters/4
+Content-Type: application/json

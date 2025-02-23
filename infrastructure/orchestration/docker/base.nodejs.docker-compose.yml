@@ -16,9 +16,9 @@ services:
       dockerfile: .${API_PROJECT_PATH}/Dockerfile.dev
       args:
         - API_PROJECT_PATH=${API_PROJECT_PATH}
-        - PORT=5000
+        - NODE_PORT=${NODE_PORT}
     ports:
-      - "5000:5000"
+      - "3000:${NODE_PORT}"
     depends_on:
       - postgresql_database
     env_file:
