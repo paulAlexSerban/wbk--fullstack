@@ -1,5 +1,11 @@
 # Software Engineering & Fullstack Workbook
 
+## Projects
+
+> built incorporating the core concepts of software engineering and fullstack development detailed in the workbook.
+
+## Workbook
+
 ### **1. Foundations of Software Engineering**
 
 - **Core Concepts**: Software development lifecycle, Agile, DevOps, CI/CD
