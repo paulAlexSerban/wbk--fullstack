@@ -1,6 +1,6 @@
 @base_url = http://localhost:8000
-@authorization_token = 8829ecdfcd64ed4dc79923ba9838c6800830ffd5
-@profile_id = 5
+@authorization_token = 74f0651f2a975abc1e1d75b9dcbaf5e3098cb170
+@profile_id = 2
 
 ### List of all profiles
 GET {{base_url}}/api/profile
@@ -12,9 +12,9 @@ POST {{base_url}}/api/profile/
 Content-Type: application/json
 
 {
-    "email": "second@profileone.com",
-    "name": "second",
-    "password": "second"
+    "email": "sixth@profile.com",
+    "name": "sixth",
+    "password": "sixth"
 }
 
 ### Login
@@ -22,8 +22,8 @@ POST {{base_url}}/api/login/
 Content-Type: application/json
 
 {
-    "username": "second@gmail.com",
-    "password": "second"
+    "username": "sixth@profile.com",
+    "password": "sixth"
 }
 
 ### Get a profile by id with token
@@ -66,5 +66,5 @@ Content-Type: application/json
 Authorization: Token {{authorization_token}}
 
 {
-    "status_text": "new feed item from http request"
+    "status_text": "status text"
 }

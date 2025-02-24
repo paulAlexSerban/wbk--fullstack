@@ -5,7 +5,6 @@ cd "$(dirname "$0")" || exit
 export HOST_USER_ID=$(id -u)
 export HOST_GROUP_ID=$(id -g)
 
-
 APP_NAME=""
 # inspired from maven phases (https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
 PHASE=""
@@ -37,6 +36,9 @@ ENV_FILE="../../configuration/env/.${APP_NAME}.compose.env"
 COMPOSE_FILE_DEV="./base.django.docker-compose.yml"
 COMPOSE_FILE_PROD=""
 
+source ${ENV_FILE}
+
+DB_BACKUP_DIR="../../../database/backup"
 
 function list() {
     echo "[ 📜 🐳 --- compose list ]"
@@ -57,6 +59,7 @@ function down() {
 
 function down-clean() {
     echo "[ 🛑 🐳 --- compose down clean ]"
+    backup-db
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} down --volumes --rmi all
     list
 }
@@ -72,30 +75,30 @@ function make-migrations() {
     APP_MIGRATION_NAME=profiles_api # change this to the app name
     echo "[ 🟢 🐳 --- compose make migrations for django ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "python manage.py makemigrations ${APP_MIGRATION_NAME}"
+        -c "python manage.py makemigrations ${APP_MIGRATION_NAME}"
 }
 
 function migrate() {
     # use this command to apply the migration files to the database after you run make-migrations
     echo "[ 🟢 🐳 --- compose migrate ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "python manage.py migrate"
+        -c "python manage.py migrate"
 }
 function createsuperuser() {
     # use this command to create a superuser
     echo
     echo "[ 🟢 🐳 --- compose createsuperuser ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "python manage.py createsuperuser --noinput --email admin@example.com --name admin --force-color"
-        docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(name='admin'); user.set_password('admin'); user.save()\" | python manage.py shell"
+        -c "python manage.py createsuperuser --noinput --email admin@example.com --name admin --force-color"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+        -c "echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(name='admin'); user.set_password('admin'); user.save()\" | python manage.py shell"
 }
 
 function test() {
     # use this command to run the tests
     echo "[ 🟢 🐳 --- compose test ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "python manage.py test apps"
+        -c "python manage.py test apps"
 }
 
 # # uncomment this function if you want to use it
@@ -121,14 +124,32 @@ function lint() {
     # use this command to lint the code
     echo "[ 🟢 🐳 --- compose lint ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "flake8"
+        -c "flake8"
 }
 
 function format() {
     # use this command to format the code
     echo "[ 🟢 🐳 --- compose format ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "autopep8 --in-place --aggressive --aggressive \$(find . -name '*.py' -not -path './venv/*')"
+        -c "autopep8 --in-place --aggressive --aggressive \$(find . -name '*.py' -not -path './venv/*')"
+}
+
+function save-backup-file() {
+    echo "[ 📦 🐳 --- save backup file ]"
+    if [ -f "${DB_BACKUP_DIR}/${APP_NAME}.sql" ]; then
+        cp ${DB_BACKUP_DIR}/${APP_NAME}.sql ${DB_BACKUP_DIR}/${APP_NAME}.$(date +%Y%m%d%H%M%S).sql
+    fi
+}
+
+function backup-db() {
+    echo "[ 📦 🐳 --- backup db ]"
+    save-backup-file
+    docker exec -it ${APP_NAME}-postgresql_database-1 pg_dump -U ${DB_USER} --inserts ${DB_NAME} >${DB_BACKUP_DIR}/${APP_NAME}.sql
+}
+
+function restore-db() {
+    echo "[ 📦 🐳 --- restore db ]"
+    docker exec -i ${APP_NAME}-postgresql_database-1 psql -U ${DB_USER} ${DB_NAME} <${DB_BACKUP_DIR}/${APP_NAME}.sql
 }
 
 function help() {
