@@ -156,3 +156,4 @@ __pycache__/
 *.pyd
 *.pyc
 *.*.sql
+.ssh

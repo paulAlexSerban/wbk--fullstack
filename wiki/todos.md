@@ -8,3 +8,5 @@
   - [x] `user-profiles`
 - [ ] implement nginx proxy in `hello-nodejs`, `monsters-world`, `hello-django` and `user-profiles`
   - [ ] cleanup `wbk--mern-monorepo-playground` after nginx proxy is implemented
+- [ ] setup **Express.js w DynamoDB**
+  - [ ] local dev setup w. Localstakc
