@@ -37,6 +37,10 @@ ENV_FILE="../../configuration/env/.${APP_NAME}.compose.env"
 COMPOSE_FILE_DEV="./base.django.docker-compose.yml"
 COMPOSE_FILE_PROD=""
 
+source ${ENV_FILE}
+
+DB_BACKUP_DIR="../../../database/backup"
+
 
 function list() {
     echo "[ 📜 🐳 --- compose list ]"
@@ -129,6 +133,24 @@ function format() {
     echo "[ 🟢 🐳 --- compose format ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
                    -c "autopep8 --in-place --aggressive --aggressive \$(find . -name '*.py' -not -path './venv/*')"
+}
+
+function save-backup-file() {
+    echo "[ 📦 🐳 --- save backup file ]"
+    if [ -f "${DB_BACKUP_DIR}/${APP_NAME}.sql" ]; then
+        cp ${DB_BACKUP_DIR}/${APP_NAME}.sql ${DB_BACKUP_DIR}/${APP_NAME}.$(date +%Y%m%d%H%M%S).sql
+    fi
+}
+
+function backup-db() {
+    echo "[ 📦 🐳 --- backup db ]"
+    save-backup-file
+    docker exec -it ${APP_NAME}-postgresql_database-1 pg_dump -U ${DB_USER} --inserts ${DB_NAME} >${DB_BACKUP_DIR}/${APP_NAME}.sql
+}
+
+function restore-db() {
+    echo "[ 📦 🐳 --- restore db ]"
+    docker exec -i ${APP_NAME}-postgresql_database-1 psql -U ${DB_USER} ${DB_NAME} <${DB_BACKUP_DIR}/${APP_NAME}.sql
 }
 
 function help() {

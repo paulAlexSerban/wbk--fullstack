@@ -79,7 +79,7 @@ function save-backup-file() {
 function backup-db() {
     echo "[ 📦 🐳 --- backup db ]"
     save-backup-file
-    docker exec -it ${APP_NAME}-postgresql_database-1 pg_dump -U ${DB_USER} ${DB_NAME} > ${DB_BACKUP_DIR}/${APP_NAME}.sql
+    docker exec -it ${APP_NAME}-postgresql_database-1 pg_dump -U ${DB_USER} --inserts ${DB_NAME} > ${DB_BACKUP_DIR}/${APP_NAME}.sql
 }
 
 function restore-db() {
