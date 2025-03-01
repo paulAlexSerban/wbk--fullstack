@@ -1,0 +1,56 @@
+---
+networks:
+    hello-wordpress-network:
+        driver: bridge
+
+services:
+    # ---------------------------------------------------------------------
+    # | Wordpress                                                          |
+    # ---------------------------------------------------------------------
+    wordpress:
+        image: wordpress:${WORDPRESS_VERSION:-latest}
+        build:
+            context: ../../../ # set context to root of monorepo project
+            dockerfile: .${SSR_PROJECT_PATH}/Dockerfile.dev
+            args:
+                - WORDPRESS_VERSION=${WORDPRESS_VERSION}
+        container_name: ${COMPOSE_PROJECT_NAME:-wordpress}
+        env_file:
+          - ../../configuration/env/.${PROJECT_NAME}.compose.env
+        depends_on:
+            - mariadb-database
+            - phpmyadmin
+        restart: always
+        ports:
+            - ${WORDPRESS_PORT:-80}:80
+        networks:
+            - hello-wordpress-network
+        volumes:
+            - ../../..${SSR_PROJECT_PATH}/src:/var/www/html
+    # ---------------------------------------------------------------------
+    # | MariaDB Database                                                  |
+    # ---------------------------------------------------------------------
+    mariadb-database:
+        image: mariadb:${MARIADB_VERSION:-latest}
+        container_name: ${COMPOSE_PROJECT_NAME}_database
+        env_file:
+          - ../../configuration/env/.${PROJECT_NAME}.compose.env
+        restart: always
+        networks:
+            - hello-wordpress-network
+
+    # ---------------------------------------------------------------------
+    # | PhpMyAdmin                                                         |
+    # ---------------------------------------------------------------------
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:${PHPMYADMIN_VERSION:-latest}
+        container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
+        restart: always
+        ports:
+            - ${PHPMYADMIN_PORT}:80
+        env_file:
+          - ../../configuration/env/.${PROJECT_NAME}.compose.env
+        depends_on:
+            - mariadb-database
+        networks:
+            - hello-wordpress-network
