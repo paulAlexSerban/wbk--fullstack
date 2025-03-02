@@ -25,8 +25,8 @@ services:
       - ${WORDPRESS_PORT:-80}:80
     networks:
       - hello-wordpress-network
-    # volumes:
-    #   - ../../..${SSR_PROJECT_PATH}/src/readme.md:/var/www/html/readme.md
+    volumes:
+      # - ../../..${SSR_PROJECT_PATH}/src/readme.html:/var/www/html/readme.html
     #   # Uncomment as needed:
     #   # -----------------------------------------------------------------
     #   # | Wordpress Core Files                                          |
@@ -51,7 +51,7 @@ services:
     #   # | Wordpress Configuration                                       |
     #   # Mount the wp-config.php file to edit the configuration.         |
     #   # -----------------------------------------------------------------
-    #   - ../../..${SSR_PROJECT_PATH}/src/wp-config.php:/var/www/html/wp-config.php
+      - ../../..${SSR_PROJECT_PATH}/src/wp-config.php:/var/www/html/wp-config.php
     #   # -----------------------------------------------------------------
     #   # | Wordpress Content                                             |
     #   # -----------------------------------------------------------------
