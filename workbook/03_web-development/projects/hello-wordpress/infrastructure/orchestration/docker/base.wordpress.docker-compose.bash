@@ -38,7 +38,7 @@ COMPOSE_FILE_PROD=""
 
 source ${ENV_FILE}
 
-DB_BACKUP_DIR="../../../database/backup"
+DATABASE_BACKUP_DIR="../../../database/backup"
 
 function list() {
     echo "[ 📜 🐳 --- compose list ]"
@@ -69,22 +69,23 @@ function logs() {
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} logs --follow
 }
 
-# function save-backup-file() {
-#     echo "[ 📦 🐳 --- save backup file ]"
-#     if [ -f "${DB_BACKUP_DIR}/${APP_NAME}.sql" ]; then
-#         cp ${DB_BACKUP_DIR}/${APP_NAME}.sql ${DB_BACKUP_DIR}/${APP_NAME}.$(date +%Y%m%d%H%M%S).sql
-#     fi
-# }
+function save-backup-file() {
+    echo "[ 📦 🐳 --- save backup file ]"
+    if [ -f "${DATABASE_BACKUP_DIR}/${APP_NAME}.sql" ]; then
+        cp ${DATABASE_BACKUP_DIR}/${APP_NAME}.sql ${DATABASE_BACKUP_DIR}/${APP_NAME}.$(date +%Y%m%d%H%M%S).sql
+    fi
+}
 
-# function backup-db() {
-#     echo "[ 📦 🐳 --- backup db ]"
-#     save-backup-file
-#     docker exec -it ${APP_NAME}-postgresql_database-1 pg_dump -U ${DB_USER} ${DB_NAME} > ${DB_BACKUP_DIR}/${APP_NAME}.sql
-# }
+function backup-db() {
+    echo "[ 📦 🐳 --- backup db ]"
+    save-backup-file
+    mkdir -p ${DATABASE_BACKUP_DIR}/
+    docker exec -it ${APP_NAME}_database mariadb-dump -u${DATABASE_USER} -p${DATABASE_PASSWORD} ${COMPOSE_PROJECT_NAME} > ${DATABASE_BACKUP_DIR}/${APP_NAME}.sql
+}
 
 # function restore-db() {
 #     echo "[ 📦 🐳 --- restore db ]"
-#     docker exec -i ${APP_NAME}-postgresql_database-1 psql -U ${DB_USER} ${DB_NAME} < ${DB_BACKUP_DIR}/${APP_NAME}.sql
+#     docker exec -i ${APP_NAME}-database psql -U ${DATABASE_USER} ${DB_NAME} < ${DATABASE_BACKUP_DIR}/${APP_NAME}.sql
 # }
 
 function help() {
