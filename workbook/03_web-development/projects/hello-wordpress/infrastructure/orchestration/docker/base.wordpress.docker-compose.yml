@@ -1,56 +1,86 @@
 ---
 networks:
-    hello-wordpress-network:
-        driver: bridge
+  hello-wordpress-network:
+    driver: bridge
 
 services:
-    # ---------------------------------------------------------------------
-    # | Wordpress                                                          |
-    # ---------------------------------------------------------------------
-    wordpress:
-        image: wordpress:${WORDPRESS_VERSION:-latest}
-        build:
-            context: ../../../ # set context to root of monorepo project
-            dockerfile: .${SSR_PROJECT_PATH}/Dockerfile.dev
-            args:
-                - WORDPRESS_VERSION=${WORDPRESS_VERSION}
-        container_name: ${COMPOSE_PROJECT_NAME:-wordpress}
-        env_file:
-          - ../../configuration/env/.${PROJECT_NAME}.compose.env
-        depends_on:
-            - mariadb-database
-            - phpmyadmin
-        restart: always
-        ports:
-            - ${WORDPRESS_PORT:-80}:80
-        networks:
-            - hello-wordpress-network
-        volumes:
-            - ../../..${SSR_PROJECT_PATH}/src:/var/www/html
-    # ---------------------------------------------------------------------
-    # | MariaDB Database                                                  |
-    # ---------------------------------------------------------------------
-    mariadb-database:
-        image: mariadb:${MARIADB_VERSION:-latest}
-        container_name: ${COMPOSE_PROJECT_NAME}_database
-        env_file:
-          - ../../configuration/env/.${PROJECT_NAME}.compose.env
-        restart: always
-        networks:
-            - hello-wordpress-network
+  # ---------------------------------------------------------------------
+  # | Wordpress                                                          |
+  # ---------------------------------------------------------------------
+  wordpress:
+    image: wordpress:${WORDPRESS_VERSION:-latest}
+    build:
+      context: ../../../ # set context to root of monorepo project
+      dockerfile: .${SSR_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - WORDPRESS_VERSION=${WORDPRESS_VERSION}
+    container_name: ${COMPOSE_PROJECT_NAME:-wordpress}
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    depends_on:
+      - mariadb-database
+      - phpmyadmin
+    restart: always
+    ports:
+      - ${WORDPRESS_PORT:-80}:80
+    networks:
+      - hello-wordpress-network
+    # volumes:
+    #   - ../../..${SSR_PROJECT_PATH}/src/readme.md:/var/www/html/readme.md
+    #   # Uncomment as needed:
+    #   # -----------------------------------------------------------------
+    #   # | Wordpress Core Files                                          |
+    #   # Expose entire Wordpress installation directory to edit themes,  |
+    #   # and core files                                                  |
+    #   # -----------------------------------------------------------------
+    #   - ../../..${SSR_PROJECT_PATH}/src:/var/www/html
+    #   # -----------------------------------------------------------------
+    #   # | Wordpress Themes & Plugins                                    |
+    #   # If you only want to edit themes and plugins, you can mount      |
+    #   # the directories directly.                                       |
+    #   # -----------------------------------------------------------------
+    #   - ../../..${SSR_PROJECT_PATH}/src/wp-content/themes:/var/www/html/wp-content/themes
+    #   - ../../..${SSR_PROJECT_PATH}/src/wp-content/plugins:/var/www/html/wp-content/plugins
+    #   # -----------------------------------------------------------------
+    #   # | Wordpress Uploads                                             |
+    #   # If you want to edit uploads, you can mount the uploads directory|
+    #   # directly.                                                       |
+    #   # -----------------------------------------------------------------
+    #   - ../../..${SSR_PROJECT_PATH}/src/uploads:/var/www/html/wp-content/uploads
+    #   # -----------------------------------------------------------------
+    #   # | Wordpress Configuration                                       |
+    #   # Mount the wp-config.php file to edit the configuration.         |
+    #   # -----------------------------------------------------------------
+    #   - ../../..${SSR_PROJECT_PATH}/src/wp-config.php:/var/www/html/wp-config.php
+    #   # -----------------------------------------------------------------
+    #   # | Wordpress Content                                             |
+    #   # -----------------------------------------------------------------
+    #   - ../../..${SSR_PROJECT_PATH}/src/wp-content:/var/www/html/wp-content
 
-    # ---------------------------------------------------------------------
-    # | PhpMyAdmin                                                         |
-    # ---------------------------------------------------------------------
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin:${PHPMYADMIN_VERSION:-latest}
-        container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
-        restart: always
-        ports:
-            - ${PHPMYADMIN_PORT}:80
-        env_file:
-          - ../../configuration/env/.${PROJECT_NAME}.compose.env
-        depends_on:
-            - mariadb-database
-        networks:
-            - hello-wordpress-network
+  # ---------------------------------------------------------------------
+  # | MariaDB Database                                                  |
+  # ---------------------------------------------------------------------
+  mariadb-database:
+    image: mariadb:${MARIADB_VERSION:-latest}
+    container_name: ${COMPOSE_PROJECT_NAME}_database
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    restart: always
+    networks:
+      - hello-wordpress-network
+
+  # ---------------------------------------------------------------------
+  # | PhpMyAdmin                                                         |
+  # ---------------------------------------------------------------------
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:${PHPMYADMIN_VERSION:-latest}
+    container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
+    restart: always
+    ports:
+      - ${PHPMYADMIN_PORT}:80
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    depends_on:
+      - mariadb-database
+    networks:
+      - hello-wordpress-network
