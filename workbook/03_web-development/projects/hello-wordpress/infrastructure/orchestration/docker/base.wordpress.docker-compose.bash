@@ -128,7 +128,7 @@ function install-core-plugins() {
     docker exec $COMPOSE_PROJECT_NAME wp plugin install wpforms-lite --activate --allow-root
     docker exec $COMPOSE_PROJECT_NAME wp plugin install wordpress-seo --activate --allow-root
     docker exec $COMPOSE_PROJECT_NAME wp plugin install pretty-link --activate --allow-root
-
+    docker exec $COMPOSE_PROJECT_NAME wp plugin install wordpress-importer --activate --allow-root
 }
 
 function list-installed-plugins() {
