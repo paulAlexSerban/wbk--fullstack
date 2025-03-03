@@ -46,7 +46,7 @@ services:
     #   # If you want to edit uploads, you can mount the uploads directory|
     #   # directly.                                                       |
     #   # -----------------------------------------------------------------
-    #   - ../../..${SSR_PROJECT_PATH}/src/uploads:/var/www/html/wp-content/uploads
+      - ../../..${SSR_PROJECT_PATH}/src/wp-content/uploads:/var/www/html/wp-content/uploads
     #   # -----------------------------------------------------------------
     #   # | Wordpress Configuration                                       |
     #   # Mount the wp-config.php file to edit the configuration.         |
@@ -61,7 +61,7 @@ services:
   # | MariaDB Database                                                  |
   # ---------------------------------------------------------------------
   mariadb-database:
-    image: mariadb:${MARIADB_VERSION:-latest}
+    image: mariadb:${MARIADB_VERSION}
     container_name: ${COMPOSE_PROJECT_NAME}_database
     env_file:
       - ../../configuration/env/.${PROJECT_NAME}.compose.env
@@ -73,7 +73,7 @@ services:
   # | PhpMyAdmin                                                         |
   # ---------------------------------------------------------------------
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:${PHPMYADMIN_VERSION:-latest}
+    image: phpmyadmin/phpmyadmin:${PHPMYADMIN_VERSION}
     container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
     restart: always
     ports:

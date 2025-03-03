@@ -120,7 +120,20 @@ function uninstall-plugins() {
 function install-plugins() {
     echo "[ 🧹 🐳 --- install plugins ]"
     # use akismet only for non profit websites
-    # docker exec $COMPOSE_PROJECT_NAME wp plugin install akismet --activate --allow-root
+    docker exec $COMPOSE_PROJECT_NAME wp plugin install edit-author-slug --activate --allow-root
+    docker exec $COMPOSE_PROJECT_NAME wp plugin install stop-spammer-registrations-plugin --activate --allow-root
+    docker exec $COMPOSE_PROJECT_NAME wp plugin install updraftplus --activate --allow-root
+    docker exec $COMPOSE_PROJECT_NAME wp plugin install social-pug --activate --allow-root
+    docker exec $COMPOSE_PROJECT_NAME wp plugin install auto-terms-of-service-and-privacy-policy --activate --allow-root
+    docker exec $COMPOSE_PROJECT_NAME wp plugin install wpforms-lite --activate --allow-root
+    docker exec $COMPOSE_PROJECT_NAME wp plugin install wordpress-seo --activate --allow-root
+    docker exec $COMPOSE_PROJECT_NAME wp plugin install pretty-link --activate --allow-root
+
+}
+
+function list-installed-plugins() {
+    echo "[ 🧹 🐳 --- list installed plugins ]"
+    docker exec $COMPOSE_PROJECT_NAME wp plugin list --allow-root
 }
 
 function uninstall-themes() {

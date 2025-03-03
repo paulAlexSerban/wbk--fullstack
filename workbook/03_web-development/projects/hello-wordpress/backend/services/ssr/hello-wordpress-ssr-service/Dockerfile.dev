@@ -5,6 +5,7 @@ LABEL maintainer="paulserban.eu"
 
 COPY ./backend/services/ssr/hello-wordpress-ssr-service/src /var/www/html
 COPY ./backend/services/ssr/hello-wordpress-ssr-service/src/wp-config.php /var/www/html/wp-config.php
+COPY ./backend/services/ssr/hello-wordpress-ssr-service/src/wp-content/uploads /var/www/html/wp-content/uploads
 
 # do not install this on production images
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
