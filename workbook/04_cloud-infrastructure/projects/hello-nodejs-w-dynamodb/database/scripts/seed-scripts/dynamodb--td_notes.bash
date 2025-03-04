@@ -41,8 +41,40 @@ function create-db() {
         --local-secondary-indexes \
         "IndexName=user_id-title-index,KeySchema=[{AttributeName=user_id,KeyType=HASH},{AttributeName=title,KeyType=RANGE}],Projection={ProjectionType=ALL}" \
         "IndexName=user_id-cat-index,KeySchema=[{AttributeName=user_id,KeyType=HASH},{AttributeName=cat,KeyType=RANGE}],Projection={ProjectionType=ALL}" \
-        --global-secondary-indexes \
-        "IndexName=note_id-index,KeySchema=[{AttributeName=note_id,KeyType=HASH}],Projection={ProjectionType=ALL},ProvisionedThroughput={ReadCapacityUnits=1,WriteCapacityUnits=1}" \
+        --global-secondary-indexes '[
+            {
+                "IndexName": "note_id-index",
+                "KeySchema": [
+                    {
+                        "AttributeName": "note_id",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "Projection": {
+                    "ProjectionType": "ALL"
+                },
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": 1,
+                    "WriteCapacityUnits": 1
+                }
+            },
+            {
+                "IndexName": "user_id-index",
+                "KeySchema": [
+                    {
+                        "AttributeName": "user_id",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "Projection": {
+                    "ProjectionType": "ALL"
+                },
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": 1,
+                    "WriteCapacityUnits": 1
+                }
+            }
+        ]' \
         --billing-mode PROVISIONED \
         --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
         --no-cli-pager
@@ -211,7 +243,7 @@ function list-items-to-json() {
         --output json >./json/export_items.json
 }
 
-# create-db
+create-db
 populate_db 10
 
 # describe-table

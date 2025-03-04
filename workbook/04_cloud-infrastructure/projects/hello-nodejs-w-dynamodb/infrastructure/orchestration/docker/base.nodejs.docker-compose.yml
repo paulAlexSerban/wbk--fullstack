@@ -37,7 +37,8 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock" # Required for running dynamodbs in containers
       - "../../configuration/scripts/localstack/dynamodb.init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh" # Auto-create resources
-
+    networks:
+      - base-nodejs-network
   dynamodb-admin:
     image: aaronshaf/dynamodb-admin
     container_name: dynamodb-admin
@@ -47,3 +48,5 @@ services:
       - ../../configuration/env/.${PROJECT_NAME}.compose.env
     depends_on:
       - localstack
+    networks:
+      - base-nodejs-network

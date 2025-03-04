@@ -12,6 +12,7 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY .${API_PROJECT_PATH}/package.json /usr/src/app/
+COPY .${API_PROJECT_PATH}/yarn.lock /usr/src/app/
 
 RUN yarn install
 # if you build you code for production
