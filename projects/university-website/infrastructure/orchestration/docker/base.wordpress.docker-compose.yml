@@ -39,7 +39,7 @@ services:
     #   # If you only want to edit themes and plugins, you can mount      |
     #   # the directories directly.                                       |
     #   # -----------------------------------------------------------------
-    #   - ../../..${SSR_PROJECT_PATH}/src/wp-content/themes:/var/www/html/wp-content/themes
+      - ../../..${SSR_PROJECT_PATH}/src/wp-content/themes:/var/www/html/wp-content/themes
     #   - ../../..${SSR_PROJECT_PATH}/src/wp-content/plugins:/var/www/html/wp-content/plugins
     #   # -----------------------------------------------------------------
     #   # | Wordpress Uploads                                             |

@@ -14,8 +14,11 @@ RUN rm -rf /var/lib/apt/lists/* \
 
 COPY ./backend/services/ssr/university-website-ssr-service/src /var/www/html
 COPY ./backend/services/ssr/university-website-ssr-service/src/wp-config.php /var/www/html/wp-config.php
+COPY ./backend/services/ssr/university-website-ssr-service/src/wp-content/themes /var/www/html/wp-content/themes
+
 RUN mkdir -p /var/www/html/wp-content/uploads
 COPY ./backend/services/ssr/university-website-ssr-service/src/wp-content/uploads /var/www/html/wp-content/uploads
+
 RUN chown -R www-data:www-data /var/www/html/wp-content/uploads \
     && chown -R www-data:www-data /var/www/html/wp-content/themes \
     && chown -R www-data:www-data /var/www/html/wp-content/plugins \
