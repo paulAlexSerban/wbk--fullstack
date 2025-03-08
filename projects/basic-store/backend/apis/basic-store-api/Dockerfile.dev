@@ -1,0 +1,27 @@
+FROM python:3.13
+LABEL maintainer="paulserban.eu"
+
+ARG API_PROJECT_PATH
+
+WORKDIR /app
+COPY .${API_PROJECT_PATH}/requirements.txt /tmp/requirements.txt
+
+RUN python -m venv /py && \
+    /py/bin/pip install --upgrade pip && \
+    /py/bin/pip install -r /tmp/requirements.txt
+
+COPY .${API_PROJECT_PATH}/src /app
+
+RUN rm -rf /tmp
+
+RUN adduser \
+        --disabled-password \
+        --no-create-home \
+        flask-user
+
+ENV PATH="/py/bin:$PATH"    
+
+USER flask-user
+
+ENV FLASK_APP=/app/app.py
+CMD ["flask", "run", "--host=0.0.0.0"]
