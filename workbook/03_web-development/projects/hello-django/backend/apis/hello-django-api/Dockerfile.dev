@@ -7,7 +7,7 @@ ARG API_PROJECT_PATH
 
 COPY .${API_PROJECT_PATH}/requirements.txt /tmp/requirements.txt
 COPY .${API_PROJECT_PATH}/requirements.dev.txt /tmp/requirements.dev.txt
-COPY .${API_PROJECT_PATH}//app /app
+COPY .${API_PROJECT_PATH}/app /app
 WORKDIR /app
 
 EXPOSE 8000
@@ -28,7 +28,6 @@ RUN if [ "$DEV" = "true" ]; then \
 RUN rm -rf /tmp
 RUN apk del .tmp-build-deps
 
-RUN 
 RUN adduser \
         --disabled-password \
         --no-create-home \
