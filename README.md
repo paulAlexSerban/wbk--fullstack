@@ -68,3 +68,14 @@
 - **Tracking Learning Goals with SMART Criteria**
 - **Applying Bloom’s Taxonomy to Software Learning**
 - **Gamifying Knowledge Growth**
+
+## How to use
+### Setup Jupiter Notebook for Local API Testing
+- RUN: `python3 -m venv .venv` -  to create a python virtual environment (make sure .venv is in .gitignore)
+- RUN: `source .venv/bin/activate` - to activate the virtual environment
+- RUN: `pip install -r jupiter-notebook-requirements.txt` - to install the required packages
+- RUN: `pip freeze > jupiter-notebook-requirements.lock.txt` - to save the installed packages
+- RUN: `python -m ipykernel install --user --name=.venv --display-name "Python (.venv)"` - to add the virtual environment to jupiter notebook
+- RUN: `jupyter notebook` - to start the jupiter notebook server
+- OPEN: `http://localhost:8888/` - to access the jupiter notebook server
+- SELECT: `Python (.venv)` - to create a new notebook using the virtual environment

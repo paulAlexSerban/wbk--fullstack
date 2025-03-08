@@ -157,3 +157,7 @@ __pycache__/
 *.pyc
 *.*.sql
 .ssh
+
+#python
+.venv
+.ipynb_checkpoints
