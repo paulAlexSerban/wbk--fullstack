@@ -8,3 +8,9 @@ basic-store-compose-down:
 
 basic-store-compose-down-clean:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.flask.docker-compose.bash --phase=down-clean --app-name=basic-store
+
+basic-store-lint:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.flask.docker-compose.bash --phase=lint --app-name=basic-store
+
+basic-store-foramt:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.flask.docker-compose.bash --phase=format --app-name=basic-store

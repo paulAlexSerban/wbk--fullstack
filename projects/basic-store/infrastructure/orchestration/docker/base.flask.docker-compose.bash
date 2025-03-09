@@ -70,8 +70,6 @@ function logs() {
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} logs --follow
 }
 
-
-
 function test() {
     # use this command to run the tests
     echo "[ 🟢 🐳 --- compose test ]"
@@ -84,6 +82,13 @@ function lint() {
     echo "[ 🟢 🐳 --- compose lint ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm flask-api-service sh \
                    -c "flake8"
+}
+
+function format() {
+    # use this command to format the code
+    echo "[ 🟢 🐳 --- compose format ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm flask-api-service sh \
+                   -c "autopep8 --in-place --aggressive --aggressive \$(find . -name '*.py' -not -path './venv/*')"
 }
 
 $PHASE && echo "[ ✅ ] --- done" || echo "[ 🚫 ]Failed"
