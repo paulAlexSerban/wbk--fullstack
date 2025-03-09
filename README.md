@@ -8,8 +8,8 @@
 
 ### **1. Foundations of Software Engineering**
 
-- **Core Concepts**: Software development lifecycle, Agile, DevOps, CI/CD
-- **Programming Paradigms**: OOP, Functional, Event-Driven
+- **Core Concepts**: Software Development Lifecycle, Agile, DevOps, CI/CD
+- **Programming Paradigms**: Object-Oriented, Functional, Event-Driven
 - **Design Principles**: SOLID, DRY, KISS, YAGNI
 - **Software Design Patterns**: Creational, Structural, Behavioral
 - **Algorithms & Data Structures**: Sorting, Trees, Graphs, Hashing
@@ -29,7 +29,7 @@
 - **Backend Engineering**: Node.js, Express.js, Nest.js
 - **REST vs. GraphQL vs. gRPC**
 - **API Design Principles & Pitfalls**
-- **Authentication & Authorization** (JWT, OAuth, OpenID)
+- **Authentication & Authorization**: JWT, OAuth, OpenID
 
 ### **4. Cloud & Infrastructure**
 
@@ -41,7 +41,7 @@
 
 ### **5. Software Testing & Automation**
 
-- **Unit, Integration, and E2E Testing**
+- **Unit, Integration, and End-to-End Testing**
 - **Contract Testing with Pact**
 - **Test-Driven Development (TDD) & Behavior-Driven Development (BDD)**
 - **Test Automation Frameworks**: Jest, Mocha, WebdriverIO, Cypress
@@ -54,7 +54,15 @@
 - **Data Engineering Principles**
 - **Practical Applications in Software Development**
 
-### **7. Project Management & Engineering Leadership**
+### **7. Cybersecurity**
+
+- **Fundamentals of Cybersecurity**
+- **Common Threats & Vulnerabilities**
+- **Secure Coding Practices**
+- **Network Security**
+- **Incident Response & Management**
+
+### **8. Project Management & Engineering Leadership**
 
 - **Agile & Scrum Practices**
 - **Software Development Metrics & KPIs**
@@ -62,7 +70,7 @@
 - **Scaling Teams & Engineering Culture**
 - **Workshop & Hackathon Organization**
 
-### **8. Personal Knowledge Management & Career Development**
+### **9. Personal Knowledge Management & Career Development**
 
 - **Building a Knowledge Matrix**
 - **Tracking Learning Goals with SMART Criteria**
