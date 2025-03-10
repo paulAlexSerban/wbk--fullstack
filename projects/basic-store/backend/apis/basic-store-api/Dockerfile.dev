@@ -2,6 +2,8 @@ FROM python:3.13
 LABEL maintainer="paulserban.eu"
 
 ARG API_PROJECT_PATH
+ARG FLASK_APP
+ARG FLASK_DEBUG
 
 WORKDIR /app
 COPY .${API_PROJECT_PATH}/requirements.txt /tmp/requirements.txt
@@ -23,5 +25,7 @@ ENV PATH="/py/bin:$PATH"
 
 USER flask-user
 
-ENV FLASK_APP=/app/app.py
+ENV FLASK_APP=${FLASK_APP}
+ENV FLASK_DEBUG=${FLASK_DEBUG}
+
 CMD ["flask", "run", "--host=0.0.0.0"]

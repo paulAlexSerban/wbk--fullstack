@@ -1,3 +1,4 @@
 flask
+flask-smorest
 flake8
 autopep8

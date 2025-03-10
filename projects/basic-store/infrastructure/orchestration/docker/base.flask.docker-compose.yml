@@ -13,6 +13,8 @@ services:
       dockerfile: .${API_PROJECT_PATH}/Dockerfile.dev
       args:
         - DEV=true
+        - FLASK_APP=/app/app.py
+        - FLASK_DEBUG=1
         - API_PROJECT_PATH=${API_PROJECT_PATH}
     ports:
       - "5000:5000"
