@@ -24,7 +24,8 @@ services:
     env_file:
       - ../../configuration/env/.${PROJECT_NAME}.compose.env
     volumes:
-      - ../../../${API_PROJECT_PATH}:/app
+      - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
+      - ../../../${API_PROJECT_PATH}:/usr/src/app
     networks:
       - base-nodejs-network
 

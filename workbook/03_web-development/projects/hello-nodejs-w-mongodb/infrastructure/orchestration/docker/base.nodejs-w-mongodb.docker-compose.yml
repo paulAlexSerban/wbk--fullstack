@@ -22,6 +22,22 @@ services:
     env_file:
       - ../../configuration/env/.${PROJECT_NAME}.compose.env
     volumes:
-      - ../../../${API_PROJECT_PATH}:/app
+      - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
+      - ../../../${API_PROJECT_PATH}:/usr/src/app
+    depends_on:
+      - mongodb-database-service
     networks:
       - base-nodejs-w-mongodb-network
+
+  # ---------------------------------------------------------------------
+  # | MongoDB Database Server                                            |
+  # ---------------------------------------------------------------------
+  mongodb-database-service:
+      image: mongo:${MONGO_VERSION}
+      container_name: mongo-database-container
+      env_file:
+        - ../../configuration/env/.${PROJECT_NAME}.compose.env
+      ports:
+          - '${MONGO_PORT}:27017'
+      networks:
+          - base-nodejs-w-mongodb-network
