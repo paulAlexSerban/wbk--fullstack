@@ -1,0 +1,7 @@
+notebook
+jupyter
+ipykernel
+nbstripout
+boto3
+pylint
+python-dotenv
