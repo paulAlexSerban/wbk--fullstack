@@ -161,3 +161,4 @@ __pycache__/
 #python
 .venv
 .ipynb_checkpoints
+*.pem
