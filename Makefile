@@ -53,4 +53,5 @@ clean_jupyter_notebooks:
 	@du -sh ./* | sort -rh | head -n 5
 	@find . -name "*.ipynb" -exec nbstripout {} \;
 	du -sh ./* | sort -rh | head -n 5
+	find . -name "*.ipynb" -exec du -h {} +
 	@echo "Jupyter Notebook files cleaned."
