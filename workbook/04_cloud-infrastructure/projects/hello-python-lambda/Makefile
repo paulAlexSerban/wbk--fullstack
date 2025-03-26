@@ -12,13 +12,13 @@ INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR := ./infrastructure/orchestration/docker
 		hello-python-lambda-localstack_compose-down-clean
 
 hello-python-lambda-localstack_compose-up: 
-	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/lambda.locakstack.docker-compose.bash --phase=up --app-name=hello-python-lambda
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/hello-python-lambda.locakstack.docker-compose.bash --phase=up --app-name=hello-python-lambda
 
 hello-python-lambda-localstack_compose-down:
-	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/lambda.locakstack.docker-compose.bash --phase=down --app-name=hello-python-lambda
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/hello-python-lambda.locakstack.docker-compose.bash --phase=down --app-name=hello-python-lambda
 
 hello-python-lambda-localstack_compose-down-clean:
-	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/lambda.locakstack.docker-compose.bash --phase=down-clean --app-name=hello-python-lambda
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/hello-python-lambda.locakstack.docker-compose.bash --phase=down-clean --app-name=hello-python-lambda
 
 
 # ----------------------------------------------
@@ -28,7 +28,7 @@ hello-python-lambda-localstack_compose-down-clean:
 
 hello-python-lambda_localstack-deploy:
 	@bash $(INFRA_SERVER_TEMPLATING_DOCKER_SCRIPTS)/simple-lambda.bash --phase=build --app-name=hello-python-lambda
-	@bash $(INFRA_PROVISIONING_SCRIPTS)/simple-lambda.localstack.bash --phase=deploy --app-name=hello-python-lambda
+	@bash $(INFRA_PROVISIONING_SCRIPTS)/python-lambda.localstack.bash --phase=deploy --app-name=hello-python-lambda
 
 
 # ----------------------------------------------
