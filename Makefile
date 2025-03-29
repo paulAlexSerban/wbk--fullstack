@@ -55,3 +55,12 @@ clean_jupyter_notebooks:
 	du -sh ./* | sort -rh | head -n 5
 	find . -name "*.ipynb" -exec du -h {} +
 	@echo "Jupyter Notebook files cleaned."
+
+get_aws_credentials_to_env:
+	@echo "Getting AWS credentials to environment..."
+	@sed -i '' "s|AWS_ACCESS_KEY_ID=.*|AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}|" ./.env
+	@sed -i '' "s|AWS_SECRET_ACCESS_KEY=.*|AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}|" ./.env
+	@sed -i '' "s|AWS_SESSION_TOKEN=.*|AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}|" ./.env
+	@sed -i '' "s|AWS_DEFAULT_REGION=.*|AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}|" ./.env
+	@sed -i '' "s|AWS_REGION=.*|AWS_REGION=${AWS_REGION}|" ./.env
+	@echo "AWS credentials set to environment variables."
