@@ -1,0 +1,21 @@
+---
+networks:
+  base-nginx-network:
+    driver: bridge
+
+services:
+  # ---------------------------------------------------------------------
+  # | Nginx Web Server
+  # ---------------------------------------------------------------------
+    server:
+        container_name: ${COMPOSE_PROJECT_NAME}_server
+        build:
+            context: ../../../
+            dockerfile: ./backend/services/server/hello-nginx-server/Dockerfile.dev
+            args:
+              - SERVER_PROJECT_PATH=${SERVER_PROJECT_PATH}
+        ports:
+            - '3000:80'
+        restart: unless-stopped
+        networks:
+            - base-nginx-network
