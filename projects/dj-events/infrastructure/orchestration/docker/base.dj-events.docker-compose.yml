@@ -5,7 +5,23 @@ networks:
 
 services:
   # ---------------------------------------------------------------------
-  # | Node.js SSR Service                                               | 
+  # | Nginx Web Server
+  # ---------------------------------------------------------------------
+  proxy:
+    container_name: ${COMPOSE_PROJECT_NAME}_proxy
+    build:
+      context: ../../../
+      dockerfile: .${PROXY_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - PROXY_PROJECT_PATH=${PROXY_PROJECT_PATH}
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    networks:
+      - base-nextjs-network
+
+  # ---------------------------------------------------------------------
+  # | Node.js SSR Service                                               |
   # ---------------------------------------------------------------------
   nextjs-ssr-service:
     build:
@@ -14,8 +30,6 @@ services:
       args:
         - SSR_PROJECT_PATH=${SSR_PROJECT_PATH}
         - PORT=${PORT}
-    ports:
-      - "3000:${PORT}"
     env_file:
       - ../../configuration/env/.${PROJECT_NAME}.compose.env
     volumes:
