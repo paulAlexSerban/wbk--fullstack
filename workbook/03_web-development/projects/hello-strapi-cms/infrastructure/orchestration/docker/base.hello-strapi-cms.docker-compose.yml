@@ -1,0 +1,78 @@
+---
+networks:
+  base-strapi-cms-network:
+    driver: bridge
+
+volumes:
+  dev-db-data:
+
+services:
+  # ---------------------------------------------------------------------
+  # | Strapi CMS                                                        |
+  # ---------------------------------------------------------------------
+  strapi-cms:
+    container_name: ${COMPOSE_PROJECT_NAME}
+    build:
+      context: ../../../ # set context to root of monorepo project
+      dockerfile: .${CMS_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - CMS_PROJECT_PATH=${CMS_PROJECT_PATH}
+        - PORT=${PORT}
+    ports:
+      - "1337:1337"
+    restart: unless-stopped
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PORT: ${DATABASE_PORT}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - /usr/src/app/node_modules
+    #     - ../../../backend/cms/hello-strapi-cms/config:/usr/src/app/backend/cms/hello-strapi-cms/config
+    #     - ../../../backend/cms/hello-strapi-cms/src:/usr/src/app/backend/cms/hello-strapi-cms/src
+    #     - ../../../backend/cms/hello-strapi-cms/public/uploads:/usr/src/app/backend/cms/hello-strapi-cms/public/uploads
+    networks:
+      - base-strapi-cms-network
+    depends_on:
+      - postgresql-database
+
+  # ---------------------------------------------------------------------
+  # | Postgres Database                                                 |
+  # ---------------------------------------------------------------------
+  postgresql-database:
+    image: postgres:13-alpine
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    networks:
+      - base-strapi-cms-network
+
+  # ---------------------------------------------------------------------
+  # | PgAdmin                                                           |
+  # ---------------------------------------------------------------------
+  pgadmin:
+    image: dpage/pgadmin4
+    # ensure that the CONTAINER user id and group id are the same as the HOST user id and group id
+    # without this, the container will fail to write files to the host volume
+    # user: "${HOST_USER_ID}:${HOST_GROUP_ID}"
+    ports:
+      - 15433:80
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    depends_on:
+      - postgresql-database
+    networks:
+      - base-strapi-cms-network
+    volumes:
+    - ../../../database/.tmp-data/${PROJECT_NAME}-data/:/var/lib/pgadmin/
+    - ../../../database/db-admin/pgAdmin/config_distro.py:/pgadmin4/config_distro.py
+    - ../../../database/db-admin/pgAdmin/servers.json:/pgadmin4/servers.json
