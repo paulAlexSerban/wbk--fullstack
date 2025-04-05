@@ -1,0 +1,39 @@
+---
+networks:
+  base-nginx-proxy-network:
+    driver: bridge
+services:
+  # ---------------------------------------------------------------------
+  # | Nginx Web Server
+# ---------------------------------------------------------------------
+  proxy:
+      container_name: ${COMPOSE_PROJECT_NAME}_proxy
+      build:
+          context: ../../../
+          dockerfile: .${PROXY_PROJECT_PATH}/Dockerfile.dev
+          args:
+            - PROXY_PROJECT_PATH=${PROXY_PROJECT_PATH}
+      ports:
+          - '3000:80'
+      restart: unless-stopped
+      networks:
+          - base-nginx-proxy-network
+
+  # ---------------------------------------------------------------------
+  # | Node.js API Service                                               | 
+  # ---------------------------------------------------------------------
+  nodejs-api-service:
+    container_name: ${COMPOSE_PROJECT_NAME}_nodejs_api_service
+    build:
+      context: ../../../
+      dockerfile: .${API_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - API_PROJECT_PATH=${API_PROJECT_PATH}
+        - NODE_PORT=${NODE_PORT}
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    volumes:
+      - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
+      - ../../../${API_PROJECT_PATH}:/usr/src/app
+    networks:
+      - base-nginx-proxy-network
