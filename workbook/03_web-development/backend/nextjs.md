@@ -1,0 +1,17 @@
+# Next.js
+- Next.js is a React framework for building server-rendered applications or static websites using React.
+- It provides a set of features and optimizations for building modern web applications, including:
+  - Server-side rendering (SSR)
+  - Static site generation (SSG)
+  - API routes
+  - Automatic code splitting
+  - Built-in CSS and Sass support
+  - Image optimization
+  - Internationalization (i18n)
+  - Fast refresh
+  - TypeScript support
+  - Deployment options (Vercel, Netlify, etc.)
+  - Middleware
+  - Incremental static regeneration (ISR)
+  - Preview mode
+  - Analytics
