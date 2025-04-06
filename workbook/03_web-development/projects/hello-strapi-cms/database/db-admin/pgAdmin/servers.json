@@ -1,13 +1,13 @@
 {
   "Servers": {
     "1": {
-      "Name": "PostgreSQL",
+      "Name": "Strapi CMS - PostgreSQL DB",
       "Group": "Servers",
-      "Host": "postgresql_database",
+      "Host": "postgresql-database",
       "Port": 5432,
       "MaintenanceDB": "postgres",
-      "Username": "devuser",
-      "Password": "changeme",
+      "Username": "admin",
+      "Password": "password",
       "SSLMode": "prefer",
       "Comment": "Primary PostgreSQL server"
     }
