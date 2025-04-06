@@ -24,3 +24,8 @@ password: password
 ### restore the database and uploads
 
 - RUN `make hello-strapi-cms-restore-all`
+
+## PROS of Strapi CMS
+
+- using React 18
+- offers both REST and GraphQL APIs
