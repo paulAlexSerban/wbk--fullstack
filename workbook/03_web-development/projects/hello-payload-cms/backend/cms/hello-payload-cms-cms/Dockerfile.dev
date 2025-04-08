@@ -1,0 +1,39 @@
+#####################################################
+# Base Dependencies stage
+#####################################################
+
+FROM node:22.14.0-bullseye-slim as base-dependencies
+
+ARG CMS_PROJECT_PATH
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Install app dependencies
+COPY .${CMS_PROJECT_PATH}/package.json /usr/src/app/
+COPY .${CMS_PROJECT_PATH}/yarn.lock /usr/src/app/
+
+RUN yarn install
+
+################################################
+# Builder stage
+#################################################
+
+FROM base-dependencies as builder
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY --from=base-dependencies /usr/src/app/node_modules /usr/src/app/node_modules
+
+ARG CMS_PROJECT_PATH
+COPY .${CMS_PROJECT_PATH}/ /usr/src/app/
+
+ARG PORT
+ENV PORT=$PORT
+
+ENV NODE_ENV=development
+
+CMD [ "yarn", "run", "develop"]
