@@ -32,6 +32,6 @@ EXPOSE $PORT
 RUN yarn install
 
 # Bundle app source
-COPY .${API_PROJECT_PATH}/ /usr/src/app/
+COPY .${SSR_PROJECT_PATH}/ /usr/src/app/
 
 CMD [ "yarn", "run", "develop"]
