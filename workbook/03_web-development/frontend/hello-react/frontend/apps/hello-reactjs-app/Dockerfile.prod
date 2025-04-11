@@ -13,7 +13,7 @@ COPY .${APP_PROJECT_PATH}/ /usr/src/app/
 RUN yarn build
 
 # ----------------- PRODUCTION STAGE -----------------
-FROM nginx:latest as prod
+FROM nginx:1.26.3 as prod
 ARG APP_PROJECT_PATH
 
 RUN ln -sf /dev/stdout /var/log/nginx/host.access.log \
