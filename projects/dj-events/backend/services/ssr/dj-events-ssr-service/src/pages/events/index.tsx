@@ -1,13 +1,8 @@
 import type { FC } from 'react';
 
 import GenericLayout from '@/layouts/GenericLayout';
-import type { Event } from '@/types';
 
-type HomePageProps = {
-    events: Event[];
-};
-
-const HomePage: FC<HomePageProps> = () => {
+const EventsPage: FC = () => {
     return (
         <GenericLayout>
             <h1>Upcoming Events</h1>
@@ -15,4 +10,4 @@ const HomePage: FC<HomePageProps> = () => {
     );
 };
 
-export default HomePage;
+export default EventsPage;
