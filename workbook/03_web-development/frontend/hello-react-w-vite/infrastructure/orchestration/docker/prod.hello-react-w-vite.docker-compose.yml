@@ -16,6 +16,7 @@ services:
         - PROTOCOL=${PROTOCOL}
         - DOMAIN=${DOMAIN}
         - PORT=${UI_SERVICE_PORT}
+        - SERVICE_NAME=react-ui-service
     environment:
       - SERVICE_NAME=react-ui-service
       - PROTOCOL=${PROTOCOL}
