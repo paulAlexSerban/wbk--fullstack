@@ -5,7 +5,25 @@ networks:
 
 services:
   # ---------------------------------------------------------------------
-  # | React.js UI-CSR Service                                           | 
+  # | Nginx Web Server
+  # ---------------------------------------------------------------------
+  proxy:
+    container_name: ${COMPOSE_PROJECT_NAME}_proxy
+    build:
+      context: ../../../
+      dockerfile: .${PROXY_PROJECT_PATH}/Dockerfile.prod
+      args:
+        - PROXY_PROJECT_PATH=${PROXY_PROJECT_PATH}
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    networks:
+      - base-birthday-buddy-network
+    depends_on:
+      - react-ui-service
+      - nodejs-api-service
+  # ---------------------------------------------------------------------
+  # | React.js UI-CSR Service                                           |
   # ---------------------------------------------------------------------
   react-ui-service:
     build:
@@ -13,9 +31,15 @@ services:
       dockerfile: .${APP_PROJECT_PATH}/Dockerfile.prod
       args:
         - APP_PROJECT_PATH=${APP_PROJECT_PATH}
-        - PORT=${PORT}
-    env_file:
-      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+        - PROTOCOL=${PROTOCOL}
+        - DOMAIN=${DOMAIN}
+        - PORT=${UI_SERVICE_PORT}
+        - SERVICE_NAME=react-ui-service
+    environment:
+      - SERVICE_NAME=react-ui-service
+      - PROTOCOL=${PROTOCOL}
+      - DOMAIN=${DOMAIN}
+      - PORT=${UI_SERVICE_PORT}
     volumes:
       - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
       - ../../../${APP_PROJECT_PATH}:/usr/src/app
@@ -23,7 +47,7 @@ services:
       - base-birthday-buddy-network
 
   # ---------------------------------------------------------------------
-  # | Node.js API Service                                               | 
+  # | Node.js API Service                                               |
   # ---------------------------------------------------------------------
   nodejs-api-service:
     build:
@@ -31,11 +55,15 @@ services:
       dockerfile: .${API_PROJECT_PATH}/Dockerfile.prod
       args:
         - API_PROJECT_PATH=${API_PROJECT_PATH}
-        - PORT=${PORT}
-    ports:
-      - "3000:${PORT}"
+        - PORT=${API_SERVICE_PORT}
+        - SERVICE_NAME=nodejs-api-service
     env_file:
       - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    environment:
+      - SERVICE_NAME=nodejs-api-service
+      - PROTOCOL=${PROTOCOL}
+      - DOMAIN=${DOMAIN}
+      - PORT=${API_SERVICE_PORT}
     volumes:
       - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
       - ../../../${API_PROJECT_PATH}:/usr/src/app
