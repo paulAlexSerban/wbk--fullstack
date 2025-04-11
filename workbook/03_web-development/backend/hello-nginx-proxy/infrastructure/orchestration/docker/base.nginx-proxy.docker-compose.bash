@@ -34,7 +34,7 @@ fi
 
 ENV_FILE="../../configuration/env/.${APP_NAME}.compose.env"
 COMPOSE_FILE_DEV="./base.nginx-proxy.docker-compose.yml"
-COMPOSE_FILE_PROD=""
+COMPOSE_FILE_PROD="./prod.nginx-proxy.docker-compose.yml"
 
 source ${ENV_FILE}
 
@@ -51,9 +51,21 @@ function up() {
     list
 }
 
+function up-prod() {
+    echo "[ 🟢 🐳 --- compose up prod ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_PROD} up --detach --build
+    list
+}
+
 function down() {
     echo "[ 🛑 🐳 --- compose down ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} down
+    list
+}
+
+function down-prod() {
+    echo "[ 🛑 🐳 --- compose down prod ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_PROD} down
     list
 }
 
@@ -61,6 +73,13 @@ function down-clean() {
     echo "[ 🛑 🐳 --- compose down clean ]"
     backup-db
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} down --volumes --rmi all
+    list
+}
+
+function down-clean-prod() {
+    echo "[ 🛑 🐳 --- compose down clean prod ]"
+    backup-db
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_PROD} down --volumes --rmi all
     list
 }
 

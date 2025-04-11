@@ -10,7 +10,7 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_proxy
     build:
       context: ../../../
-      dockerfile: .${PROXY_PROJECT_PATH}/Dockerfile.dev
+      dockerfile: .${PROXY_PROJECT_PATH}/Dockerfile.prod
       args:
         - PROXY_PROJECT_PATH=${PROXY_PROJECT_PATH}
     ports:
@@ -27,7 +27,7 @@ services:
   nodejs-api-service:
     build:
       context: ../../../
-      dockerfile: .${API_PROJECT_PATH}/Dockerfile.dev
+      dockerfile: .${API_PROJECT_PATH}/Dockerfile.prod
       args:
         - API_PROJECT_PATH=${API_PROJECT_PATH}
         - PORT=${API_SERVICE_PORT}
