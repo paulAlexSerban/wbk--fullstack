@@ -1,0 +1,45 @@
+---
+networks:
+  base-birthday-buddy-network:
+    driver: bridge
+
+services:
+  # ---------------------------------------------------------------------
+  # | React.js UI-CSR Service                                           | 
+  # ---------------------------------------------------------------------
+  react-ui-service:
+    build:
+      context: ../../../
+      dockerfile: .${APP_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - APP_PROJECT_PATH=${APP_PROJECT_PATH}
+        - PROTOCOL=${PROTOCOL}
+        - DOMAIN=${DOMAIN}
+        - PORT=${PORT}
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    volumes:
+      - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
+      - ../../../${APP_PROJECT_PATH}:/usr/src/app
+    networks:
+      - base-birthday-buddy-network
+
+  # ---------------------------------------------------------------------
+  # | Node.js API Service                                               | 
+  # ---------------------------------------------------------------------
+  nodejs-api-service:
+    build:
+      context: ../../../
+      dockerfile: .${API_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - API_PROJECT_PATH=${API_PROJECT_PATH}
+        - PORT=${PORT}
+    ports:
+      - "3000:${PORT}"
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    volumes:
+      - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
+      - ../../../${API_PROJECT_PATH}:/usr/src/app
+    networks:
+      - base-birthday-buddy-network
