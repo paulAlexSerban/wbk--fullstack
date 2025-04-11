@@ -45,7 +45,7 @@ function list() {
 
 function up() {
     echo "[ 🟢 🐳 --- compose up ]"
-    echo $ENV_FILE
+
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} up --detach --build
     list
 }
