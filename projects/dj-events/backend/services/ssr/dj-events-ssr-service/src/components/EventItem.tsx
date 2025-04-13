@@ -21,7 +21,7 @@ export const EventItem: FC<EventItemProps> = ({ event }) => {
     const eventSlug = eventAttributes.slug;
     const imageSrc = eventImage.formats.thumbnail.url
         ? eventImage.formats.thumbnail.url
-        : '/dss/images/event-default.png';
+        : '/assets/images/event-default.png';
 
     useEffect(() => {
         const date = new Date(eventDate).toLocaleDateString('en-US');
