@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
         protocol: NEXT_PUBLIC_PROTOCOL as "http" | "https",
         hostname: NEXT_PUBLIC_HOSTNAME,
         port: NEXT_PUBLIC_PORT,
-        pathname: "/dss/images/**",
+        pathname: "/assets/images/**",
       },
     ],
   },

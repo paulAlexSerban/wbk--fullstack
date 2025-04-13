@@ -13,14 +13,13 @@ type EventItemProps = {
 export const EventItem: FC<EventItemProps> = ({ event }) => {
     const [dateTime, setDateTime] = useState<string>('');
 
-    const eventAttributes = event.attributes;
-    const eventName = eventAttributes.name;
-    const eventDate = eventAttributes.date;
-    const eventTime = eventAttributes.time;
-    const eventImage = eventAttributes.image.data.attributes;
-    const eventSlug = eventAttributes.slug;
-    const imageSrc = eventImage.formats.thumbnail.url
-        ? eventImage.formats.thumbnail.url
+    const eventName = event.name;
+    const eventDate = event.date;
+    const eventTime = event.time;
+    const eventImage = event.image;
+    const eventSlug = event.slug;
+    const imageSrc = event.image
+        ? event.image
         : '/assets/images/event-default.png';
 
     useEffect(() => {
@@ -33,12 +32,11 @@ export const EventItem: FC<EventItemProps> = ({ event }) => {
         <div className={styles.event}>
             <div className={styles.img}>
                 <Image
-                    src={`${PUBLIC_APP_URL}/cms${imageSrc}`}
+                    src={`${PUBLIC_APP_URL}${imageSrc}`}
                     width={170}
                     height={100}
                     alt={eventName}
                     unoptimized
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
             </div>
 

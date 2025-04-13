@@ -32,6 +32,8 @@ services:
         - PORT=${PORT}
     env_file:
       - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    environment:
+      - SERVICE_NAME=nextjs-ssr-service
     volumes:
       - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
       - ../../../${SSR_PROJECT_PATH}:/usr/src/app
