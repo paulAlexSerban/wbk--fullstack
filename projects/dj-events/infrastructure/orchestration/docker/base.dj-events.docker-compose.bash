@@ -61,6 +61,12 @@ function down-clean() {
     backup-db
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} down --volumes --rmi all
     list
+    clean-pg-admin-tmp
+}
+
+function clean-pg-admin-tmp() {
+    echo "[ 🧹 🐳 --- clean pg admin .tmp/* ]"
+    rm -rfv ../../../database/.tmp-data
 }
 
 function logs() {
