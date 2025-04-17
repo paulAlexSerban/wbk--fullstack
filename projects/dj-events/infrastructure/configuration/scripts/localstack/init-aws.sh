@@ -3,6 +3,7 @@ echo "Initializing some LocalStack resources..."
 
 # Create an S3 bucket for Lambda deployments
 awslocal s3 mb s3://assets
+awslocal s3 mb s3://uploads-storage
 
 awslocal s3api put-bucket-policy --bucket assets --policy '{
   "Version": "2012-10-17",
@@ -13,6 +14,19 @@ awslocal s3api put-bucket-policy --bucket assets --policy '{
       "Principal": "*",
       "Action": "s3:GetObject",
       "Resource": "arn:aws:s3:::assets/*"
+    }
+  ]
+}'
+
+awslocal s3api put-bucket-policy --bucket uploads-storage --policy '{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::uploads-storage/*"
     }
   ]
 }'

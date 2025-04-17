@@ -2,11 +2,10 @@
 networks:
   base-nextjs-network:
     driver: bridge
-  backend-network:
-    driver: bridge
 
 volumes:
-  dev-db-data:
+  database-data:
+    driver: local
 
 services:
   # ---------------------------------------------------------------------
@@ -98,7 +97,6 @@ services:
       - ../../../${CMS_PROJECT_PATH}/public/uploads:/usr/src/app/public/uploads
     networks:
       - base-nextjs-network
-      - backend-network
     depends_on:
       - postgresql-database
 
@@ -112,9 +110,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - dev-db-data:/var/lib/postgresql/data
+      - database-data:/var/lib/postgresql/data
     networks:
-      - backend-network
+      - base-nextjs-network
 
   # ---------------------------------------------------------------------
   # | PgAdmin                                                           |
