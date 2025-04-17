@@ -16,11 +16,8 @@ export const EventItem: FC<EventItemProps> = ({ event }) => {
     const eventName = event.name;
     const eventDate = event.date;
     const eventTime = event.time;
-    const eventImage = event.image;
     const eventSlug = event.slug;
-    const imageSrc = event.image
-        ? event.image
-        : '/assets/images/event-default.png';
+    const imageThumbnail = event.image?.formats?.thumbnail?.url ??  `${PUBLIC_APP_URL}/assets/images/event-default.png`
 
     useEffect(() => {
         const date = new Date(eventDate).toLocaleDateString('en-US');
@@ -32,7 +29,7 @@ export const EventItem: FC<EventItemProps> = ({ event }) => {
         <div className={styles.event}>
             <div className={styles.img}>
                 <Image
-                    src={`${PUBLIC_APP_URL}${imageSrc}`}
+                    src={imageThumbnail}
                     width={170}
                     height={100}
                     alt={eventName}

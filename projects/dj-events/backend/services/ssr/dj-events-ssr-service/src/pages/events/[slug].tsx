@@ -7,9 +7,9 @@ import Image from 'next/image';
 
 import GenericLayout from '@/layouts/GenericLayout';
 import styles from '@/styles/eventPage.module.scss';
-import type { Event } from '@/types';
+import type { Event, EventsResponse } from '@/types';
 
-import { PRIVATE_API_URL, PUBLIC_APP_URL } from '@/config';
+import { PRIVATE_CMS_API_URL, PUBLIC_APP_URL } from '@/config';
 
 type EventPageProps = {
     event: Event;
@@ -21,14 +21,12 @@ const EventPage: FC<EventPageProps> = ({ event }) => {
     const eventName = event.name;
     const eventDate = event.date;
     const eventTime = event.time;
-    const eventImage = event.image;
     const eventPerformers = event.performers;
-    const eventDescription = event.description;
+    const eventDescription = event.description[0].children[0].text;
     const eventVenue = event.venue;
     const eventAddress = event.address;
-    const eventImageUrl = eventImage;
 
-    const imageSrc = eventImageUrl ? eventImageUrl : '/assets/images/event-default.png';
+    const imageSrc = event.image?.formats?.large?.url ?? `${PUBLIC_APP_URL}/assets/images/event-default.png`;
 
     const handleDelete = (e: React.MouseEvent<HTMLAnchorElement>) => {
         console.log('delete', { e });
@@ -58,7 +56,7 @@ const EventPage: FC<EventPageProps> = ({ event }) => {
                 {imageSrc && (
                     <div className={styles.image}>
                         <Image
-                            src={`${PUBLIC_APP_URL}${imageSrc}`}
+                            src={imageSrc}
                             width={960}
                             height={600}
                             alt={eventName}
@@ -101,12 +99,13 @@ export default EventPage;
 export const getServerSideProps = (async ({ query }) => {
     const { slug } = query;
 
-    const res = await fetch(`${PRIVATE_API_URL}/events/${slug}`);
-    const event: Event[] = await res.json();
+    const res = await fetch(`${PRIVATE_CMS_API_URL}/events?filters[slug][$eq]=${slug}&populate=image`);
+    const event: EventsResponse = await res.json();
+    const { data } = event;
 
     return {
         props: {
-            event: event[0]
+            event: data[0]
         },
     };
 }) satisfies GetServerSideProps<{ event: Event }>

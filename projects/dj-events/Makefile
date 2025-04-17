@@ -15,7 +15,6 @@ dj-events-compose-down-clean:
 dj-events-restart-ssr-service:
 	@docker restart dj-events-nextjs-ssr-service-1
 
-# rebuild dj-events-strapi-cms container
 dj-events-rebuild-strapi-cms:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.dj-events.docker-compose.bash --phase=rebuild-strapi-cms --app-name=dj-events
 

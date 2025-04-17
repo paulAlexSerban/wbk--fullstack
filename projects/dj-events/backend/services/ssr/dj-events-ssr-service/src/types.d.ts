@@ -13,31 +13,15 @@ type EventDescription = [
 ];
 
 type EventImage = {
-  data: {
-    attributes: {
-      name: string;
-      alternativeText: string;
-      caption: string;
-      formats: {
-        [key in ImageFormats]: {
-          url: string;
-        };
-      };
+  name: string;
+  alternativeText: string;
+  caption: string;
+  url: string;
+  formats: {
+    [key in ImageFormats]: {
+      url: string;
     };
   };
-};
-
-type EventAttributes = {
-  id: string;
-  name: string;
-  slug: string;
-  venue: string;
-  address: string;
-  performers: string;
-  date: string;
-  time: string;
-  description: EventDescription;
-  image: EventImage;
 };
 
 export type Event = {
@@ -47,10 +31,14 @@ export type Event = {
   venue: string;
   address: string;
   performers: string;
-  date: string;
+  date: Date;
   time: string;
-  description: string;
-  image: string;
+  description: EventDescription;
+  image: EventImage
 };
 
 export type EventsResponseData = Event[];
+
+export type EventsResponse = {
+  data: Event[];
+};

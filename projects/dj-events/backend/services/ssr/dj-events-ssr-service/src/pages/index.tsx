@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 import { EventItem } from '@/components';
 import GenericLayout from '@/layouts/GenericLayout';
-import type { Event } from '@/types';
+import type { Event, EventsResponse } from '@/types';
 
-import { PRIVATE_API_URL } from '@/config';
+import { PRIVATE_CMS_API_URL } from '@/config';
 
 type HomePageProps = {
     events: Event[];
@@ -39,15 +39,16 @@ export default HomePage;
  *   - used for server-side rendering as it fetches data on each request
  */
 
-export const getStaticProps = async () => {
-    const res = await fetch(`${PRIVATE_API_URL}/events`);
-    const events: Event[] = await res.json();
 
-    console.log('events', events);
+
+export const getStaticProps = async () => {
+    const res = await fetch(`${PRIVATE_CMS_API_URL}/events?populate=image&pagination[pageSize]=3&sort=date:asc`);
+    const events: EventsResponse = await res.json();
+    const { data } = events;
 
     return {
         props: {
-            events,
+            events: data,
             revalidate: 15, // In seconds - this will revalidate the page every second
         },
     };
