@@ -74,4 +74,9 @@ function logs() {
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} logs --follow
 }
 
+function rebuild-strapi-cms() {
+    echo "[ 🔄 🐳 --- rebuild strapi cms container ]"
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} up --detach --build strapi-cms
+}
+
 $PHASE && echo "[ ✅ ] --- done" || echo "[ 🚫 ]Failed"

@@ -15,6 +15,10 @@ dj-events-compose-down-clean:
 dj-events-restart-ssr-service:
 	@docker restart dj-events-nextjs-ssr-service-1
 
+# rebuild dj-events-strapi-cms container
+dj-events-rebuild-strapi-cms:
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.dj-events.docker-compose.bash --phase=rebuild-strapi-cms --app-name=dj-events
+
 dj-events-upload-static-assets:
 	@bash ./backend/storage/dj-events-static-storage/src/upload.bash
 
@@ -42,8 +46,14 @@ dj-events-backup-cloud-s3-assets:
 dj-events-restore-cloud-s3-assets:
 	@bash ./content/scripts/backup.bash --phase=restore-cloud-s3-assets --app-name=dj-events
 
-dj-events-save-content: dj-events-backup-db dj-events-backup-keys dj-events-backup-server-assets dj-events-backup-cloud-s3-assets
+dj-events-clean-tmp-data:
+	@bash ./content/scripts/backup.bash --phase=clean-tmp-data --app-name=dj-events
+
+dj-events-save-content: dj-events-backup-db dj-events-backup-keys dj-events-backup-server-assets dj-events-backup-cloud-s3-assets 
 	@echo "[ ✅ ] Content saved"
+
+dj-events-save-content-clean: dj-events-save-content dj-events-clean-tmp-data
+	@echo "[ ✅ ] Content saved and ./tmp-data cleaned"
 
 dj-events-restore-content: dj-events-restore-db dj-events-restore-keys dj-events-restore-server-assets dj-events-restore-cloud-s3-assets dj-events-upload-static-assets
 	@echo "[ ✅ ] Content restored"

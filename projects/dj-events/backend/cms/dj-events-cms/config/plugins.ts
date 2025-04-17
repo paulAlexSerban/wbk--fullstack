@@ -17,13 +17,29 @@ export default ({ env }) => ({
                   Bucket: env('AWS_UPLOADS_BUCKET_NAME', 'uploads-storage'),
                 },
                 endpoint: env('AWS_ENDPOINT', 'http://localstack:4566'), // LocalStack endpoint
-                forcePathStyle: true,
+                forcePathStyle: true
               },
             },
             actionOptions: {
               upload: {},
               uploadStream: {},
               delete: {},
+            },
+            sizeOptimization: true,
+            quality: 80,
+            // Caution: Breakpoint changes will only apply to new uploads
+            // existing images will not be resized
+            // *2x breakpoints are automatically generated for retina displays
+            breakpoints: {
+              thumbnail: 240, 
+              small: 425,
+              small2x: 850,
+              medium: 768,
+              medium2x: 1536,
+              large: 1024,
+              large2x: 2048,
+              xlarge: 1920,
+              xlarge2x: 3840,
             },
             // Optional: You can define custom image formats here
             // provider: 'local', // or 'cloudinary', 'aws-s3', etc. if you're using a cloud storage provider

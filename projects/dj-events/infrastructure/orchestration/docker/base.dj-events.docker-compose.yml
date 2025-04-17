@@ -95,6 +95,7 @@ services:
       - ../../../${CMS_PROJECT_PATH}/config:/usr/src/app/config
       - ../../../${CMS_PROJECT_PATH}/src:/usr/src/app/src
       - ../../../${CMS_PROJECT_PATH}/public/uploads:/usr/src/app/public/uploads
+      - ../../../${CMS_PROJECT_PATH}/types:/usr/src/app/types
     networks:
       - base-nextjs-network
     depends_on:

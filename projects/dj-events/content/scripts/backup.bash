@@ -32,7 +32,7 @@ fi
 ENV_FILE="../../infrastructure/configuration/env/.${APP_NAME}.compose.env"
 source ${ENV_FILE}
 
-SERVER_PUBLIC_UPLOADS_DIR="../../${CMS_PROJECT_PATH}/public/uploads"
+SERVER_PUBLIC_UPLOADS_DIR="../..${CMS_PROJECT_PATH}/public/uploads"
 CONTENT_DATA_DIR="../data"
 
 SERVER_ASSETS_DIR="${CONTENT_DATA_DIR}/server-assets"
@@ -54,20 +54,25 @@ function backup-server-assets() {
         mkdir -p "${SERVER_ASSETS_DIR_TMP}"
     fi
 
-    cp -rfv ${SERVER_PUBLIC_UPLOADS_DIR}/* ${SERVER_ASSETS_DIR_TMP}
-    cd ${SERVER_ASSETS_DIR_TMP}
-
-    zip -r ${SERVER_UPLOADS_ZIP} ./*
-    cd $BACK_PATH
-
-    if [ -f "${SERVER_UPLOADS_ZIP_PATH_TMP}" ]; then
-        echo "✅ Uploads have been backed up to ${SERVER_UPLOADS_ZIP_PATH_TMP}"
+    # check if SERVER_PUBLIC_UPLOADS_DIR has content
+    if [ -z "$(ls -A ${SERVER_PUBLIC_UPLOADS_DIR})" ]; then
+        echo "Error: Uploads directory is empty at ${SERVER_PUBLIC_UPLOADS_DIR}"
     else
-        echo "❌ Failed to create the uploads backup file."
-        exit 1
-    fi
+        cp -rfv ${SERVER_PUBLIC_UPLOADS_DIR}/* ${SERVER_ASSETS_DIR_TMP}
+        cd ${SERVER_ASSETS_DIR_TMP}
 
-    mv ${SERVER_UPLOADS_ZIP_PATH_TMP} ${SERVER_ASSETS_DIR}
+        zip -r ${SERVER_UPLOADS_ZIP} ./*
+        cd $BACK_PATH
+
+        if [ -f "${SERVER_UPLOADS_ZIP_PATH_TMP}" ]; then
+            echo "✅ Uploads have been backed up to ${SERVER_UPLOADS_ZIP_PATH_TMP}"
+        else
+            echo "❌ Failed to create the uploads backup file."
+            exit 1
+        fi
+
+        mv ${SERVER_UPLOADS_ZIP_PATH_TMP} ${SERVER_ASSETS_DIR}
+    fi
 }
 
 function restore-server-assets() {
@@ -85,6 +90,7 @@ KEYS_DIR="${CONTENT_DATA_DIR}/keys"
 KEYS_DIR_TMP="${KEYS_DIR}/.tmp-data"
 KEYS_BACKUP_FILE="${KEYS_DIR_TMP}/keys.env"
 KEYS_ZIP_FILE="keys.zip"
+KEYS_ZIP_FILE_PATH_TMP="${KEYS_DIR_TMP}/${KEYS_ZIP_FILE}"
 KEYS_ZIP_FILE_PATH="${KEYS_DIR}/${KEYS_ZIP_FILE}"
 
 function backup-keys() {
@@ -133,7 +139,7 @@ function backup-keys() {
         exit 1
     fi
 
-    mv ${KEYS_ZIP_FILE_PATH} ${KEYS_DIR}
+    mv ${KEYS_ZIP_FILE_PATH_TMP} ${KEYS_DIR}
 
     # # ask user for a password to encrypt the backup file
     # read -sp "Enter a password to encrypt the backup file: " ZIP_PASSWORD
@@ -219,6 +225,22 @@ function restore-cloud-s3-assets() {
 
     # Upload the contents of the temporary directory to the S3 bucket
     aws --endpoint-url=http://localhost:4566 s3 cp "${CLOUD_S3_ASSETS_DIR_TMP}/unzipped/" s3://${AWS_UPLOADS_BUCKET_NAME}/ --recursive
+}
+
+function clean-tmp-data() {
+    echo "[ 🧹 --- Cleaning temporary data ]"
+
+    if [ -d "${SERVER_ASSETS_DIR_TMP}" ]; then
+        rm -rf "${SERVER_ASSETS_DIR_TMP}"
+    fi
+
+    if [ -d "${KEYS_DIR_TMP}" ]; then
+        rm -rf "${KEYS_DIR_TMP}"
+    fi
+
+    if [ -d "${CLOUD_S3_ASSETS_DIR_TMP}" ]; then
+        rm -rf "${CLOUD_S3_ASSETS_DIR_TMP}"
+    fi
 }
 
 
