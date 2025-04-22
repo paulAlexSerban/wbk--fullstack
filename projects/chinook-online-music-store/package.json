@@ -1,5 +1,5 @@
 {
-  "name": "hello-sqlite-w-nodejs",
+  "name": "chinook-online-music-store",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
