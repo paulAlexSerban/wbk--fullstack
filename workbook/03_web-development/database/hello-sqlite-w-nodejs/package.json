@@ -1,0 +1,9 @@
+{
+  "name": "hello-sqlite-w-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  }
+}
