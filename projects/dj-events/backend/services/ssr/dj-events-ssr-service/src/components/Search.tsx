@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useState, FC } from 'react';
 
 import styles from '@/styles/search.module.scss';
+
 export const Search: FC = () => {
     const [term, setTerm] = useState('');
     const router = useRouter();

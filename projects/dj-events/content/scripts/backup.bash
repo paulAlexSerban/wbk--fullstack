@@ -162,6 +162,7 @@ function restore-keys() {
         exit 1
     fi
 
+    mkdir -p "${KEYS_DIR_TMP}/unzipped"
     unzip -o "${KEYS_ZIP_FILE_PATH}" -d "${KEYS_DIR_TMP}/unzipped" > /dev/null
 
     # updated ENV_FILE defined keys with the backup file values
@@ -221,6 +222,7 @@ function restore-cloud-s3-assets() {
         exit 1
     fi
 
+    mkdir -p "${CLOUD_S3_ASSETS_DIR_TMP}/unzipped"
     unzip -o "${CLOUD_S3_ASSETS_ZIP_PATH}" -d "${CLOUD_S3_ASSETS_DIR_TMP}/unzipped" > /dev/null
 
     # Upload the contents of the temporary directory to the S3 bucket
