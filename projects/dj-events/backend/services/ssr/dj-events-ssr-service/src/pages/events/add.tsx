@@ -57,19 +57,17 @@ const AddEventPage: FC = () => {
             body: JSON.stringify({ data: values }),
         });
 
-        console.log('res', res);
-
-        // if (!res.ok) {
-        //     if (res.status === 403 || res.status === 401) {
-        //         toast.error('No token included');
-        //         return;
-        //     }
-        //     toast.error('Something Went Wrong');
-        // } else {
-        //     const evt = await res.json();
-        //     const slug = evt.slug;
-        //     router.push(`/events/${slug}`);
-        // }
+        if (!res.ok) {
+            if (res.status === 403 || res.status === 401) {
+                toast.error('No token included');
+                return;
+            }
+            toast.error('Something Went Wrong');
+        } else {
+            const responseEvent = await res.json();
+            const slug = responseEvent.data.slug;
+            router.push(`/events/${slug}`);
+        }
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { EventsResponseData } from "@/types";
 
+import { PRIVATE_CMS_API_URL } from "@/config";
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const MethodsMapper = {
     GET: async () => {
@@ -9,11 +11,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         message: "GET method is not implemented yet",
       });
     },
-
     POST: async () => {
       const { data } = req.body;
-      const { name, performers, address, venue, date, time, description } =
-        data;
       const hasEmptyFields = Object.values(data).some(
         (element) => element === ""
       );
@@ -23,9 +22,66 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         });
         return;
       }
-      return res.status(200).json({
-        message: "POST method is not implemented yet",
+
+      const strapiFormattedData = {
+        name: data.name,
+        performers: data.performers,
+        address: data.address,
+        venue: data.venue,
+        date: data.date,
+        time: data.time,
+        description: [
+          {
+            type: "paragraph",
+            children: [
+              {
+                type: "text",
+                text: data.description || "",
+              },
+            ],
+          },
+        ],
+      };
+
+      const response = await fetch(`${PRIVATE_CMS_API_URL}/events`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: strapiFormattedData }),
+      });
+
+      if (!response.ok) {
+        if (response.status === 403 || response.status === 401) {
+          res.status(403).json({
+            message: "No token included",
+          });
+          return;
+        }
+        console.error("Error creating event:", { response });
+        res.status(500).json({
+          message: "Something went wrong",
+        });
+        return;
+      }
+      const responseEvent = await response.json();
+
+      const {
+        slug,
+        name,
+        performers,
+        address,
+        venue,
+        date,
+        time,
+        description,
+      } = responseEvent.data;
+
+      res.setHeader("Location", `/events/${slug}`);
+      res.status(201).json({
+        message: "Event created successfully",
         data: {
+          slug,
           name,
           performers,
           address,
@@ -36,7 +92,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         },
       });
     },
-
     default: async () => {
       res.setHeader("Allow", ["GET"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);

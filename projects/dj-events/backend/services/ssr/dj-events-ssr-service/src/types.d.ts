@@ -26,6 +26,7 @@ type EventImage = {
 
 export type Event = {
   id: string;
+  documentId: string;
   name: string;
   slug: string;
   venue: string;

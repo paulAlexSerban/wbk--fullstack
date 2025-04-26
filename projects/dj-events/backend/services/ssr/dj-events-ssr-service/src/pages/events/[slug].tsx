@@ -1,15 +1,15 @@
 import { type FC, useState, useEffect } from 'react';
 import { FaPencilAlt, FaTimes } from 'react-icons/fa';
 import type { GetServerSideProps } from 'next'
-
 import Link from 'next/link';
 import Image from 'next/image';
+import { ToastContainer } from 'react-toastify';
 
 import GenericLayout from '@/layouts/GenericLayout';
 import styles from '@/styles/eventPage.module.scss';
 import type { Event, EventsResponse } from '@/types';
 
-import { PRIVATE_CMS_API_URL, PUBLIC_APP_URL } from '@/config';
+import { PRIVATE_CMS_API_URL, PUBLIC_API_URL, PUBLIC_APP_URL } from '@/config';
 
 type EventPageProps = {
     event: Event;
@@ -18,18 +18,38 @@ type EventPageProps = {
 const EventPage: FC<EventPageProps> = ({ event }) => {
     const [dateTime, setDateTime] = useState<string>('');
 
+    console.log('Event:', event);
+
+    const eventDocumentId = event.documentId;
     const eventName = event.name;
     const eventDate = event.date;
     const eventTime = event.time;
     const eventPerformers = event.performers;
-    const eventDescription = event.description[0].children[0].text;
+    let eventDescription = '';
+    if (Array.isArray(event.description) && event.description[0]?.children) {
+        eventDescription = event.description[0]?.children[0]?.text || '';
+    }
     const eventVenue = event.venue;
     const eventAddress = event.address;
 
     const imageSrc = event.image?.formats?.large?.url ?? `${PUBLIC_APP_URL}/assets/images/event-default.png`;
 
     const handleDelete = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        console.log('delete', { e });
+        const confirmDelete = confirm('Are you sure you want to delete this event?');
+        if (confirmDelete) {
+            fetch(`${PUBLIC_API_URL}/events/${eventDocumentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    window.location.href = '/events';
+                })
+                .catch((err) => {
+                    console.error('Error deleting event:', err);
+                });
+        }
     };
 
     useEffect(() => {
@@ -53,6 +73,7 @@ const EventPage: FC<EventPageProps> = ({ event }) => {
                 </div>
                 <span>{dateTime}</span>
                 <h1>{eventName}</h1>
+                <ToastContainer />
                 {imageSrc && (
                     <div className={styles.image}>
                         <Image
@@ -67,8 +88,12 @@ const EventPage: FC<EventPageProps> = ({ event }) => {
                 <h3>Performers:</h3>
                 <p>{eventPerformers}</p>
 
-                <h3>Description:</h3>
-                <p>{eventDescription}</p>
+                {eventDescription &&
+                    <>
+                        <h3>Description:</h3>
+                        <p>{eventDescription}</p>
+                    </>
+                }
 
                 <h3>Venue: {eventVenue}</h3>
                 <p>{eventAddress}</p>
@@ -99,9 +124,17 @@ export default EventPage;
 export const getServerSideProps = (async ({ query }) => {
     const { slug } = query;
 
-    const res = await fetch(`${PRIVATE_CMS_API_URL}/events?filters[slug][$eq]=${slug}&populate=image`);
-    const event: EventsResponse = await res.json();
+    const response = await fetch(`${PRIVATE_CMS_API_URL}/events?filters[slug][$eq]=${slug}&populate=image`);
+    const event: EventsResponse = await response.json();
+    console.log('Event:', event);
     const { data } = event;
+
+    // Handle case when event is not found
+    if (!data || data.length === 0) {
+        return {
+            notFound: true, // This will render the 404 page
+        };
+    }
 
     return {
         props: {
