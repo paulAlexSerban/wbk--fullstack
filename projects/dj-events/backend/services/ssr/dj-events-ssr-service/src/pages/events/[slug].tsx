@@ -18,8 +18,6 @@ type EventPageProps = {
 const EventPage: FC<EventPageProps> = ({ event }) => {
     const [dateTime, setDateTime] = useState<string>('');
 
-    console.log('Event:', event);
-
     const eventDocumentId = event.documentId;
     const eventName = event.name;
     const eventDate = event.date;
@@ -62,7 +60,7 @@ const EventPage: FC<EventPageProps> = ({ event }) => {
         <GenericLayout>
             <div className={styles.event}>
                 <div className={styles.controls}>
-                    <Link href={`/events/edit/${event.id}`}>
+                    <Link href={`/events/edit/${eventDocumentId}`}>
                         <FaPencilAlt />
                         Edit Event
                     </Link>
@@ -126,7 +124,6 @@ export const getServerSideProps = (async ({ query }) => {
 
     const response = await fetch(`${PRIVATE_CMS_API_URL}/events?filters[slug][$eq]=${slug}&populate=image`);
     const event: EventsResponse = await response.json();
-    console.log('Event:', event);
     const { data } = event;
 
     // Handle case when event is not found
