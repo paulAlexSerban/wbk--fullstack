@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import GenericLayout from '@/layouts/GenericLayout';
+import { Modal } from '@/components/index';
 import styles from '@/styles/form.module.scss';
 
 import { PUBLIC_API_URL, PUBLIC_APP_URL, PRIVATE_CMS_API_URL } from '@/config/index';
@@ -40,7 +41,8 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
         description: event.description[0]?.children[0]?.text || '',
     });
     const [imagePreview, setImagePreview] = useState<string | null>(event.image?.formats?.thumbnail?.url || null);
-    console.log(event.image?.formats)
+    const [showModal, setShowModal] = useState(false);
+
     const eventDocumentId = event.documentId;
 
 
@@ -165,10 +167,29 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
                     />
                 )}
                 <div>
-                    <button className="btn-secondary">
+                    <button className="btn-secondary" onClick={(e) => {
+                        e.preventDefault();
+                        setShowModal(true);
+                    }
+                    }>
                         <FaImage /> Set Image
                     </button>
                 </div>
+
+                <Modal show={showModal} onClose={() => setShowModal(false)} title="Set Image">
+                    <p>Image upload functionality will be implemented here.</p>
+                    <p>For now, you can set the image URL directly in the code.</p>
+                    <p>Image URL: {imagePreview}</p>
+                    <button
+                        className="btn-secondary"
+                        onClick={() => {
+                            setImagePreview(null);
+                            setShowModal(false);
+                        }}
+                    >
+                        Close
+                    </button>
+                </Modal>
 
                 <input type="submit" value="Save Event Changes" className="btn" />
             </form>
