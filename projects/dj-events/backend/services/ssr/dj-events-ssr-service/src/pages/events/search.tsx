@@ -78,7 +78,6 @@ export const getServerSideProps = (async ({ query }) => {
     const res = await fetch(`${PRIVATE_CMS_API_URL}/events?${cmsQuery}`);
     const events: EventsResponse = await res.json();
     const { data } = events;
-    console.log({ data })
     return {
         props: {
             events: data

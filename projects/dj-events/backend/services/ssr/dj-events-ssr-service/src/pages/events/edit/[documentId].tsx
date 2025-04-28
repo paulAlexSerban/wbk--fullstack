@@ -8,12 +8,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import GenericLayout from '@/layouts/GenericLayout';
-import { Modal } from '@/components/index';
+import { Modal, ImageUpload } from '@/components/index';
 import styles from '@/styles/form.module.scss';
 
 import { PUBLIC_API_URL, PUBLIC_APP_URL, PRIVATE_CMS_API_URL } from '@/config/index';
 import type { Event, EventsResponse } from '@/types';
-import { env } from 'process';
+
 
 type EditEventPageProps = {
     event: Event;
@@ -44,7 +44,6 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
     const [showModal, setShowModal] = useState(false);
 
     const eventDocumentId = event.documentId;
-
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -82,6 +81,17 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
     };
+
+    const imageUploaded = async () => {
+        const response = await fetch(`${PUBLIC_API_URL}/events/${eventDocumentId}`);
+        const eventResponse = await response.json();
+        const eventData = eventResponse.data;
+        if (eventData && eventData.image) {
+            setImagePreview(eventData.image.formats.thumbnail.url);
+            setShowModal(false);
+            toast.success('Image uploaded successfully');
+        }
+    }
 
     return (
         <GenericLayout title="Add New Event">
@@ -175,24 +185,21 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
                         <FaImage /> Set Image
                     </button>
                 </div>
-
-                <Modal show={showModal} onClose={() => setShowModal(false)} title="Set Image">
-                    <p>Image upload functionality will be implemented here.</p>
-                    <p>For now, you can set the image URL directly in the code.</p>
-                    <p>Image URL: {imagePreview}</p>
-                    <button
-                        className="btn-secondary"
-                        onClick={() => {
-                            setImagePreview(null);
-                            setShowModal(false);
-                        }}
-                    >
-                        Close
-                    </button>
-                </Modal>
-
                 <input type="submit" value="Save Event Changes" className="btn" />
             </form>
+
+            <Modal show={showModal} onClose={() => setShowModal(false)} title="Set Image">
+                <ImageUpload eventId={eventDocumentId} imageUploaded={imageUploaded} />
+                <button
+                    className="btn-secondary"
+                    onClick={() => {
+                        setImagePreview(null);
+                        setShowModal(false);
+                    }}
+                >
+                    Close
+                </button>
+            </Modal>
         </GenericLayout>
     );
 };

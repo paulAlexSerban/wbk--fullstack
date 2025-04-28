@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { EventsResponseData } from "@/types";
-
 import { PRIVATE_CMS_API_URL } from "@/config";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

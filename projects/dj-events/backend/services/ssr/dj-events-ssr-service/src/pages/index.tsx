@@ -15,11 +15,11 @@ const HomePage: FC<HomePageProps> = ({ events }) => {
     return (
         <GenericLayout>
             <h1>Upcoming Events</h1>
-            {events.length === 0 && <h3>No events to show</h3>}
-            {events.map((evt, index) => (
+            {!Array.isArray(events) || (events.length === 0) && <h3>No events to show</h3>}
+            {Array.isArray(events) && events.map((evt, index) => (
                 <EventItem key={index} event={evt} />
             ))}
-            {events.length > 0 && (
+            {Array.isArray(events) && events.length > 0 && (
                 <Link href="/events" className="btn-secondary">
                     View All Events
                 </Link>
