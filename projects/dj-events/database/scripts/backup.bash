@@ -59,7 +59,7 @@ function export-db-data() {
         touch ${DATABASE_BACKUP_DIR}/${APP_NAME}.sql
     fi
 
-    docker exec -it ${APP_NAME}-postgresql-database-1 pg_dump -U ${DATABASE_USERNAME} --inserts ${DATABASE_NAME} >${DATABASE_BACKUP_DIR}/${APP_NAME}.sql
+    docker exec -it ${APP_NAME}_postgresql-database pg_dump -U ${DATABASE_USERNAME} --inserts ${DATABASE_NAME} >${DATABASE_BACKUP_DIR}/${APP_NAME}.sql
 }
 
 function save-for-content-package() {
@@ -98,7 +98,7 @@ function restore-db() {
         restore-from-content-package
     fi
 
-    docker exec -i ${APP_NAME}-postgresql-database-1 psql -U ${DATABASE_USERNAME} -d ${DATABASE_NAME} <${DATABASE_BACKUP_DIR}/${APP_NAME}.sql > /dev/null 2>&1
+    docker exec -i ${APP_NAME}_postgresql-database psql -U ${DATABASE_USERNAME} -d ${DATABASE_NAME} <${DATABASE_BACKUP_DIR}/${APP_NAME}.sql > /dev/null 2>&1
     docker start ${APP_NAME} > /dev/null 2>&1
 }
 
