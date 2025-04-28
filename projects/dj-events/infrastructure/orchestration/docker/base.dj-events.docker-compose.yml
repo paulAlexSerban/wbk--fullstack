@@ -28,6 +28,7 @@ services:
   # | Node.js SSR Service                                               |
   # ---------------------------------------------------------------------
   nextjs-ssr-service:
+    container_name: ${COMPOSE_PROJECT_NAME}_nextjs-ssr-service
     build:
       context: ../../../
       dockerfile: .${SSR_PROJECT_PATH}/Dockerfile.dev
@@ -48,6 +49,7 @@ services:
   # | AWS LocalStack Infrastructure                                          |
   # ---------------------------------------------------------------------
   localstack:
+    container_name: ${COMPOSE_PROJECT_NAME}_localstack
     image: localstack/localstack:latest
     ports:
       - "4566:4566" # LocalStack Gateway
@@ -69,7 +71,7 @@ services:
   # | Strapi CMS                                                        |
   # ---------------------------------------------------------------------
   strapi-cms:
-    container_name: ${COMPOSE_PROJECT_NAME}
+    container_name: ${COMPOSE_PROJECT_NAME}_strapi-cms
     build:
       context: ../../../ # set context to root of monorepo project
       dockerfile: .${CMS_PROJECT_PATH}/Dockerfile.dev
@@ -105,6 +107,7 @@ services:
   # | Postgres Database                                                 |
   # ---------------------------------------------------------------------
   postgresql-database:
+    container_name: ${COMPOSE_PROJECT_NAME}_postgresql-database
     image: postgres:13-alpine
     env_file:
       - ../../configuration/env/.${PROJECT_NAME}.compose.env
@@ -119,6 +122,7 @@ services:
   # | PgAdmin                                                           |
   # ---------------------------------------------------------------------
   pgadmin:
+    container_name: ${COMPOSE_PROJECT_NAME}_pgadmin
     image: dpage/pgadmin4
     ports:
       - 15433:80
