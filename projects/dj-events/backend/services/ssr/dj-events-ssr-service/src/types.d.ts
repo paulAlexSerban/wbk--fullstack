@@ -35,11 +35,27 @@ export type Event = {
   date: Date;
   time: string;
   description: EventDescription;
-  image: EventImage
+  image: EventImage;
 };
 
 export type EventsResponseData = Event[];
 
 export type EventsResponse = {
   data: Event[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+};
+
+export type EventsPageProps = {
+  events: Event[];
+  page: number;
+  total: number;
+  pageCount: number;
+  pageSize: number;
 };

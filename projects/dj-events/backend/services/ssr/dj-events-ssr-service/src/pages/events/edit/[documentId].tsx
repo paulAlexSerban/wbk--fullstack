@@ -164,17 +164,7 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
                         }}
                     />
                 ) : (
-                    <Image
-                        src={`${PUBLIC_APP_URL}/assets/images/event-default.png`}
-                        alt="Event Image"
-                        width={170}
-                        height={100}
-                        unoptimized
-                        className={styles.imagePreview}
-                        onError={() => {
-                            setImagePreview(null);
-                        }}
-                    />
+                    <p>No image uploaded.</p>
                 )}
                 <div>
                     <button className="btn-secondary" onClick={(e) => {

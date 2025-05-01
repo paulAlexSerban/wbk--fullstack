@@ -53,6 +53,7 @@ export const getServerSideProps = (async ({ query }) => {
             $or: [
                 {
                     name: {
+                        // $containsi: term - case insensitive
                         $containsi: term,
                     }
                 },

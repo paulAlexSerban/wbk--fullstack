@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import { GetServerSideProps } from 'next';
-
 import { stringify } from 'qs';
 
 import { EventItem, Pagination } from '@/components';
@@ -12,8 +11,7 @@ import { PRIVATE_CMS_API_URL } from '@/config';
 const EventsPage: FC<EventsPageProps> = ({ events, page, total, pageCount, pageSize }) => {
     return (
         <GenericLayout>
-            <h1>Upcoming Events</h1>
-
+            <h1>Past Events</h1>
             {events.length === 0 && <h3>No events to show</h3>}
             {events.map((evt, index) => (
                 <EventItem key={index} event={evt} />
@@ -24,10 +22,9 @@ const EventsPage: FC<EventsPageProps> = ({ events, page, total, pageCount, pageS
                 pageSize={pageSize}
                 total={total}
             />}
-            <p>Past events:
-                <a href="/events/past"> Click here</a>
+            <p>Upcoming events:
+                <a href="/events"> Click here</a>
             </p>
-
         </GenericLayout>
     );
 };
@@ -59,7 +56,7 @@ export default EventsPage;
 export const getServerSideProps = (async ({ query }) => {
     const { page = '1' } = query as { page: string };
     const pageNumber = parseInt(page, 10);
-    const pageSize = 2;
+    const pageSize = 10;
     const offset = (pageNumber - 1) * pageSize;
     const limit = pageSize;
     const cmsQuery = stringify({
@@ -74,12 +71,16 @@ export const getServerSideProps = (async ({ query }) => {
         },
         filters: {
             date: {
-                $gte: new Date().toISOString(),
+                $lte: new Date().toISOString(),
             },
         },
     })
 
     const url = new URL(`${PRIVATE_CMS_API_URL}/events`);
+
+    // url.searchParams.append('filters', JSON.stringify(filters));
+    // url.searchParams.append('pagination[filters]', JSON.stringify(filters));
+    // url.searchParams.append('pagination[page]', pageNumber.toString());
     const res = await fetch(`${url}?${cmsQuery}`, {
         method: 'GET',
         headers: {
