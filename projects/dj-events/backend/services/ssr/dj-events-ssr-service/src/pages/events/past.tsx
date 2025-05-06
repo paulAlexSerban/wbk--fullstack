@@ -8,7 +8,7 @@ import type { Event, EventsResponse, EventsPageProps } from '@/types';
 
 import { PRIVATE_CMS_API_URL } from '@/config';
 
-const EventsPage: FC<EventsPageProps> = ({ events, page, total, pageCount, pageSize }) => {
+const PastEventsPage: FC<EventsPageProps> = ({ events, page, total, pageCount, pageSize }) => {
     return (
         <GenericLayout>
             <h1>Past Events</h1>
@@ -29,7 +29,7 @@ const EventsPage: FC<EventsPageProps> = ({ events, page, total, pageCount, pageS
     );
 };
 
-export default EventsPage;
+export default PastEventsPage;
 
 /**
  * Notes

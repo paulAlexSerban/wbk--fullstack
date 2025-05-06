@@ -26,7 +26,7 @@ const GenericLayout: FC<GenericLayoutProps> = ({
                 <meta name="description" content={description} />
                 <meta name="keywords" content={keywords} />
             </Head>
-            <Header />
+            <Header isLoggedIn={false}/>
             {router.pathname === '/' && <Showcase />}
             <div className={styles.container}>
                 {children}

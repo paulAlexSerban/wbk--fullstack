@@ -59,7 +59,7 @@ export default EventsPage;
 export const getServerSideProps = (async ({ query }) => {
     const { page = '1' } = query as { page: string };
     const pageNumber = parseInt(page, 10);
-    const pageSize = 2;
+    const pageSize = 10;
     const offset = (pageNumber - 1) * pageSize;
     const limit = pageSize;
     const cmsQuery = stringify({

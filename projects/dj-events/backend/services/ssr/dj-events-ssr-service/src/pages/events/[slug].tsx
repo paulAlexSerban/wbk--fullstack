@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import GenericLayout from '@/layouts/GenericLayout';
 import styles from '@/styles/eventPage.module.scss';
 import type { Event, EventsResponse } from '@/types';
+import { useAuth } from '@/context/AuthContext';
 
 import { PRIVATE_CMS_API_URL, PUBLIC_API_URL, PUBLIC_APP_URL } from '@/config';
 
@@ -17,6 +18,7 @@ type EventPageProps = {
 
 const EventPage: FC<EventPageProps> = ({ event }) => {
     const [dateTime, setDateTime] = useState<string>('');
+    const { user } = useAuth();
 
     const eventDocumentId = event.documentId;
     const eventName = event.name;
@@ -59,7 +61,7 @@ const EventPage: FC<EventPageProps> = ({ event }) => {
     return (
         <GenericLayout>
             <div className={styles.event}>
-                <div className={styles.controls}>
+               {user && <div className={styles.controls}>
                     <Link href={`/events/edit/${eventDocumentId}`}>
                         <FaPencilAlt />
                         Edit Event
@@ -68,7 +70,7 @@ const EventPage: FC<EventPageProps> = ({ event }) => {
                         <FaTimes />
                         Delete Event
                     </a>
-                </div>
+                </div>}
                 <span>{dateTime}</span>
                 <h1>{eventName}</h1>
                 <ToastContainer />

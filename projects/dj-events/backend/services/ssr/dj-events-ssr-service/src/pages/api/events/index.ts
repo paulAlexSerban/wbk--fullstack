@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
+import cookie from "cookie";
 import { PRIVATE_CMS_API_URL } from "@/config";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -10,6 +10,21 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       });
     },
     POST: async () => {
+      if (!req.headers.cookie) {
+        res.status(403).json({
+          message: "Not authorized",
+        });
+        return;
+      }
+
+      const { token } = cookie.parse(req.headers.cookie);
+      if (!token) {
+        res.status(403).json({
+          message: "Not authorized",
+        });
+        return;
+      }
+
       const { data } = req.body;
       const hasEmptyFields = Object.values(data).some(
         (element) => element === ""
@@ -45,6 +60,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ data: strapiFormattedData }),
       });
@@ -91,7 +107,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       });
     },
     default: async () => {
-      res.setHeader("Allow", ["GET"]);
+      res.setHeader("Allow", ["GET", "POST"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);
     },
   };

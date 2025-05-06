@@ -1,9 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import cookie from "cookie";
 import { PRIVATE_CMS_API_URL } from "@/config";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const MethodsMapper = {
     PUT: async () => {
+      if (!req.headers.cookie) {
+        res.status(403).json({
+          message: "Not authorized",
+        });
+        return;
+      }
+
+      const { token } = cookie.parse(req.headers.cookie);
+      if (!token) {
+        res.status(403).json({
+          message: "Not authorized",
+        });
+        return;
+      }
       // slug comes as url param not query param
       const { documentId } = req.query;
       const { data } = req.body;
@@ -35,6 +50,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ data: strapiFormattedData }),
         }
@@ -62,7 +78,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     },
 
     default: async () => {
-      res.setHeader("Allow", ["GET"]);
+      res.setHeader("Allow", ["PUT"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);
     },
   };

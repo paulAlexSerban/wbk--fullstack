@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import cookie from "cookie";
 import { PRIVATE_CMS_API_URL } from "@/config";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -6,7 +7,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     GET: async () => {
       const { documentId } = req.query;
 
-      const response = await fetch(`${PRIVATE_CMS_API_URL}/events/${documentId}?populate=image`);
+      const response = await fetch(
+        `${PRIVATE_CMS_API_URL}/events/${documentId}?populate=image`
+      );
       if (!response.ok) {
         if (response.status === 403 || response.status === 401) {
           res.status(403).json({
@@ -30,15 +33,33 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       });
     },
     DELETE: async () => {
+      if (!req.headers.cookie) {
+        res.status(403).json({
+          message: "Not authorized",
+        });
+        return;
+      }
+
+      const { token } = cookie.parse(req.headers.cookie);
+      if (!token) {
+        res.status(403).json({
+          message: "Not authorized",
+        });
+        return;
+      }
       // slug comes as url param not query param
       const { documentId } = req.query;
 
-      const response = await fetch(`${PRIVATE_CMS_API_URL}/events/${documentId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${PRIVATE_CMS_API_URL}/events/${documentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (!response.ok) {
         if (response.status === 403 || response.status === 401) {
           res.status(403).json({
@@ -60,7 +81,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     },
 
     default: async () => {
-      res.setHeader("Allow", ["GET"]);
+      res.setHeader("Allow", ["GET", "DELETE"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);
     },
   };
