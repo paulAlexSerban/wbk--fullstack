@@ -408,12 +408,12 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   };
   options: {
     draftAndPublish: true;
+    populateCreatorFields: true;
   };
   attributes: {
     address: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
     date: Schema.Attribute.DateTime;
     description: Schema.Attribute.Blocks;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
@@ -426,8 +426,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     slug: Schema.Attribute.UID<'name'>;
     time: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
     user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
