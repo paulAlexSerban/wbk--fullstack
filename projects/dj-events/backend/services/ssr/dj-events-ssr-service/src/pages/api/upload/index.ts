@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import formidable from "formidable";
 import fs from "fs";
 import { PRIVATE_CMS_API_URL } from "@/config";
+import { parseCookies } from '@/helpers';
 
 // Disable default body parser for this route to handle form data
 export const config = {
@@ -74,10 +75,20 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           }
         }
 
+        const {token} = parseCookies(req);
+        if (!token) {
+          return res.status(403).json({
+            message: "Not authorized",
+          });
+        }
+
         // Send to Strapi
         const uploadResponse = await fetch(`${PRIVATE_CMS_API_URL}/upload`, {
           method: "POST",
           body: formData,
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
         });
 
         if (!uploadResponse.ok) {
@@ -106,6 +117,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
               data: {
@@ -118,6 +130,25 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         );
 
         const linkData = await linkResponse.json();
+
+        if (!linkResponse.ok) {
+          if (linkResponse.status === 403 || linkResponse.status === 401) {
+            return res.status(403).json({
+              message: "Authorization failed",
+            });
+          }
+          console.error("Error linking file:", {
+            status: linkResponse.status,
+          });
+          return res.status(500).json({
+            message: "Error linking file",
+          });
+        }
+        if (!linkData) {
+          return res.status(500).json({
+            message: "Error linking file",
+          });
+        }
 
         return res.status(200).json({
           message: "File uploaded successfully",

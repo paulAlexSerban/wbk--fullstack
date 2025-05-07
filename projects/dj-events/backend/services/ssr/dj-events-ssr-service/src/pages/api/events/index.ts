@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import cookie from "cookie";
+import { parseCookies } from '@/helpers';
 import { PRIVATE_CMS_API_URL } from "@/config";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -17,7 +17,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         return;
       }
 
-      const { token } = cookie.parse(req.headers.cookie);
+      const { token } = parseCookies(req);
       if (!token) {
         res.status(403).json({
           message: "Not authorized",

@@ -75,7 +75,7 @@ export const getServerSideProps = (async ({ query }) => {
             ]
         }
     })
-    console.log({ cmsQuery })
+
     const res = await fetch(`${PRIVATE_CMS_API_URL}/events?${cmsQuery}`);
     const events: EventsResponse = await res.json();
     const { data } = events;

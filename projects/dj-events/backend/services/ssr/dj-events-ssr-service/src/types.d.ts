@@ -1,3 +1,4 @@
+import { DashboardPageProps } from '@/types';
 type ImageFormats = "thumbnail" | "small" | "medium" | "large" | "custom";
 
 type EventDescription = [
@@ -59,3 +60,5 @@ export type EventsPageProps = {
   pageCount: number;
   pageSize: number;
 };
+
+export type DashboardPageProps = EventsPageProps;

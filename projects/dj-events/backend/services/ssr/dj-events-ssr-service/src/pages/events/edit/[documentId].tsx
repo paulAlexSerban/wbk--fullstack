@@ -87,6 +87,7 @@ const EditEventPage: FC<EditEventPageProps> = ({ event }) => {
     const imageUploaded = async () => {
         const response = await fetch(`${PUBLIC_API_URL}/events/${eventDocumentId}`);
         const eventResponse = await response.json();
+        console.log('imageUploaded > eventResponse', eventResponse);
         const eventData = eventResponse.data;
         if (eventData && eventData.image) {
             setImagePreview(eventData.image.formats.thumbnail.url);

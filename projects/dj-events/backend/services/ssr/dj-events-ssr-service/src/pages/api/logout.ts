@@ -11,6 +11,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           secure: process.env.NODE_ENV === "production",
           maxAge: -1, // Expire the cookie immediately
           sameSite: "strict",
+          path: "/",
         })
       );
       res.status(200).json({

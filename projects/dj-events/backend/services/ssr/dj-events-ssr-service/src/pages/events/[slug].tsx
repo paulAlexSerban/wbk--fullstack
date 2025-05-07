@@ -32,7 +32,7 @@ const EventPage: FC<EventPageProps> = ({ event }) => {
     const eventVenue = event.venue;
     const eventAddress = event.address;
 
-    const imageSrc = event.image?.formats?.large?.url ?? `${PUBLIC_APP_URL}/assets/images/event-default.png`;
+    const imageSrc = (event.image?.formats?.medium?.url || event.image?.formats?.large?.url) ?? `${PUBLIC_APP_URL}/assets/images/event-default.png`;
 
     const handleDelete = (e: React.MouseEvent<HTMLAnchorElement>) => {
         const confirmDelete = confirm('Are you sure you want to delete this event?');
@@ -61,7 +61,7 @@ const EventPage: FC<EventPageProps> = ({ event }) => {
     return (
         <GenericLayout>
             <div className={styles.event}>
-               {user && <div className={styles.controls}>
+                {user && <div className={styles.controls}>
                     <Link href={`/events/edit/${eventDocumentId}`}>
                         <FaPencilAlt />
                         Edit Event

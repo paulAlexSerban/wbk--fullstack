@@ -49,6 +49,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
               secure: process.env.NODE_ENV === "production",
               maxAge: 60 * 60 * 24 * 7, // 1 week
               sameSite: "strict",
+              path: "/",
             })
           );
           res.status(200).json(data);

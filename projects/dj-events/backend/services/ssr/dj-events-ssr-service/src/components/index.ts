@@ -1,3 +1,4 @@
+export * from "./DashboardEvent";
 export * from "./EventItem";
 export * from "./Footer";
 export * from "./Header";
