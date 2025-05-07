@@ -20,6 +20,11 @@ compose-restart-ssr-service:
 	@docker restart dj-events_nextjs-ssr-service
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.dj-events.docker-compose.bash --phase=logs --app-name=dj-events
 
+compose-restart-cms:
+	@docker restart dj-events_strapi-cms
+	@docker restart dj-events_proxy
+	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.dj-events.docker-compose.bash --phase=logs --app-name=dj-events
+
 compose-rebuild-strapi-cms:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.dj-events.docker-compose.bash --phase=rebuild-strapi-cms --app-name=dj-events
 
