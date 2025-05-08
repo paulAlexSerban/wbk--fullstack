@@ -5,8 +5,8 @@
   "elements": [
     {
       "type": "rectangle",
-      "version": 79,
-      "versionNonce": 1756987658,
+      "version": 80,
+      "versionNonce": 198799999,
       "isDeleted": false,
       "id": "wDYEXcRJyYvAefLnAbS8h",
       "fillStyle": "solid",
@@ -37,14 +37,15 @@
           "type": "arrow"
         }
       ],
-      "updated": 1740253569615,
+      "updated": 1746694095642,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "a0"
     },
     {
       "type": "text",
-      "version": 25,
-      "versionNonce": 264263434,
+      "version": 28,
+      "versionNonce": 180817873,
       "isDeleted": false,
       "id": "CgTLz0BZmY_BoVnGb0TJm",
       "fillStyle": "solid",
@@ -53,34 +54,36 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 469.109375,
-      "y": 392.826171875,
+      "x": 456.04296875,
+      "y": 392.326171875,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
-      "width": 83.8671875,
-      "height": 24,
+      "width": 110,
+      "height": 25,
       "seed": 979528854,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740253569620,
+      "updated": 1746694100545,
       "link": null,
       "locked": false,
       "fontSize": 20,
-      "fontFamily": 3,
+      "fontFamily": 8,
       "text": "django api",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "wDYEXcRJyYvAefLnAbS8h",
       "originalText": "django api",
-      "lineHeight": 1.2,
-      "baseline": 18
+      "lineHeight": 1.25,
+      "baseline": 18,
+      "index": "a1",
+      "autoResize": true
     },
     {
       "type": "rectangle",
-      "version": 198,
-      "versionNonce": 694175370,
+      "version": 199,
+      "versionNonce": 1512360607,
       "isDeleted": false,
       "id": "8sv3tySO7lzYhPAEKd0TH",
       "fillStyle": "solid",
@@ -111,14 +114,15 @@
           "type": "arrow"
         }
       ],
-      "updated": 1740253569615,
+      "updated": 1746694095642,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "a2"
     },
     {
       "type": "text",
-      "version": 162,
-      "versionNonce": 1886709194,
+      "version": 165,
+      "versionNonce": 886002111,
       "isDeleted": false,
       "id": "6akF-er86hYGUtDg8331r",
       "fillStyle": "solid",
@@ -127,34 +131,36 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 1102.4931640625,
-      "y": 390.10546875,
+      "x": 1090.271484375,
+      "y": 389.60546875,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
-      "width": 85.556640625,
-      "height": 24,
+      "width": 110,
+      "height": 25,
       "seed": 1351925526,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740253569621,
+      "updated": 1746694100545,
       "link": null,
       "locked": false,
       "fontSize": 20,
-      "fontFamily": 3,
+      "fontFamily": 8,
       "text": "postgreSql",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "8sv3tySO7lzYhPAEKd0TH",
       "originalText": "postgreSql",
-      "lineHeight": 1.2,
-      "baseline": 18
+      "lineHeight": 1.25,
+      "baseline": 18,
+      "index": "a3",
+      "autoResize": true
     },
     {
       "type": "rectangle",
-      "version": 131,
-      "versionNonce": 1613999114,
+      "version": 132,
+      "versionNonce": 1368399551,
       "isDeleted": false,
       "id": "BgB3fdKYXSvUfZpB7jkLJ",
       "fillStyle": "solid",
@@ -181,14 +187,15 @@
           "id": "rAuXs5s0q4AUlEMRBaqge"
         }
       ],
-      "updated": 1740253569615,
+      "updated": 1746694095642,
       "link": null,
-      "locked": false
+      "locked": false,
+      "index": "a4"
     },
     {
       "type": "text",
-      "version": 87,
-      "versionNonce": 1361681546,
+      "version": 90,
+      "versionNonce": 1071050161,
       "isDeleted": false,
       "id": "rAuXs5s0q4AUlEMRBaqge",
       "fillStyle": "solid",
@@ -197,34 +204,36 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 470.9501953125,
-      "y": 597.89453125,
+      "x": 470.228515625,
+      "y": 597.39453125,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
-      "width": 75.556640625,
-      "height": 24,
+      "width": 77,
+      "height": 25,
       "seed": 791966102,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1740253569622,
+      "updated": 1746694100545,
       "link": null,
       "locked": false,
       "fontSize": 20,
-      "fontFamily": 3,
+      "fontFamily": 8,
       "text": "pgAdmin",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "BgB3fdKYXSvUfZpB7jkLJ",
       "originalText": "pgAdmin",
-      "lineHeight": 1.2,
-      "baseline": 18
+      "lineHeight": 1.25,
+      "baseline": 18,
+      "index": "a5",
+      "autoResize": true
     },
     {
       "type": "arrow",
-      "version": 47,
-      "versionNonce": 579580298,
+      "version": 48,
+      "versionNonce": 1153167071,
       "isDeleted": false,
       "id": "u8V4Gx5EouNzCS8JweRSu",
       "fillStyle": "solid",
@@ -246,7 +255,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740253569615,
+      "updated": 1746694095642,
       "link": null,
       "locked": false,
       "startBinding": {
@@ -271,12 +280,13 @@
           301.0546875,
           -2.05859375
         ]
-      ]
+      ],
+      "index": "a6"
     },
     {
       "type": "arrow",
-      "version": 71,
-      "versionNonce": 1978724426,
+      "version": 72,
+      "versionNonce": 1751528081,
       "isDeleted": false,
       "id": "c1wpIBvemKyJgwAXG-AR-",
       "fillStyle": "solid",
@@ -298,7 +308,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1740253569615,
+      "updated": 1746694095642,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -315,11 +325,14 @@
           308.171875,
           -165.7421875
         ]
-      ]
+      ],
+      "index": "a7"
     }
   ],
   "appState": {
-    "gridSize": null,
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
     "viewBackgroundColor": "#ffffff"
   },
   "files": {}
