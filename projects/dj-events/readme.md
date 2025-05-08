@@ -7,6 +7,7 @@
 - [ ] script to populate DB with sample (lorem data) data via APP API (no interaction with CMS API or DB)
 - [ ] Improve ImageUpload component to showcase image preview
 - [ ] Improve ImageUpload component to allow drag and drop
+- [ ] Auth & Autz - Validate JWT token on API routes
 - [ ] Shift left testing
   - [ ] Unit-testing (code, components)
   - [ ] Integration Testing (FE components, API routes)
