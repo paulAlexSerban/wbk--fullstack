@@ -1,6 +1,6 @@
 # Backend
 
--   server-side code written with Node.js and Express.js
+-   server-side code written with Node.js and Express.js, Python and Django, or Java and Spring Boot
 
 ## API vs Service vs Middleware
 

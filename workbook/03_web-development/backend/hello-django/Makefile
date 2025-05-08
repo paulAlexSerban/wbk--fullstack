@@ -37,6 +37,10 @@ compose-help:
 compose-start-app:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=start-app --app-name=hello-django
 
+#########################################################################
+# Content Management
+#########################################################################
+
 hello-django-backup-db:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=backup-db --app-name=hello-django
 
