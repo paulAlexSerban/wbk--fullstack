@@ -86,9 +86,9 @@ function createsuperuser() {
     echo
     echo "[ 🟢 🐳 --- compose createsuperuser ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "python manage.py createsuperuser --noinput --email admin@example.com --name admin --force-color"
+                   -c "python manage.py createsuperuser --noinput --email admin@example.com --username admin --force-color"
         docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(name='admin'); user.set_password('admin'); user.save()\" | python manage.py shell"
+                   -c "echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(username='admin'); user.set_password('admin'); user.save()\" | python manage.py shell"
 }
 
 function test() {

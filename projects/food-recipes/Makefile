@@ -41,8 +41,8 @@ compose-start-app:
 # Content Management
 #########################################################################
 
-hello-django-backup-db:
-	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=backup-db --app-name=hello-django
+backup-db:
+	@bash ./database/scripts/backup.bash --phase=backup-db --app-name=recipes
 
-hello-django-restore-db:
-	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=restore-db --app-name=hello-django
+restore-db:
+	@bash ./database/scripts/backup.bash --phase=restore-db --app-name=recipes
