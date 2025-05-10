@@ -69,7 +69,7 @@ function logs() {
 # uncomment this function if you want to use it
 function make-migrations() {
     # STEP 1: use this command to create the migration files after creating a new model
-    APP_MIGRATION_NAME=profiles_api # change this to the app name
+    APP_MIGRATION_NAME=core # change this to the app name
     echo "[ 🟢 🐳 --- compose make migrations for django ]"
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
                    -c "python manage.py makemigrations ${APP_MIGRATION_NAME}"
@@ -86,10 +86,24 @@ function createsuperuser() {
     # use this command to create a superuser
     echo
     echo "[ 🟢 🐳 --- compose createsuperuser ]"
+    # create the superuser via the command line
     docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "python manage.py createsuperuser --noinput --email admin@example.com --username admin --force-color"
-        docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
-                   -c "echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(username='admin'); user.set_password('admin'); user.save()\" | python manage.py shell"
+                   -c "python manage.py createsuperuser --noinput --email admin@example.com --force-color"
+
+    # set the password for the superuser
+    # this is a workaround to set the password for the superuser
+    # because the createsuperuser command does not allow to set the password
+    # via the command line
+    docker compose --env-file ${ENV_FILE} --file ${COMPOSE_FILE_DEV} run --rm django-api-service sh \
+                -c "echo \"from django.contrib.auth import get_user_model; User = get_user_model(); user = User.objects.get(email='admin@example.com'); user.set_password('admin'); user.save()\" | python manage.py shell"
+
+    # IMPORTANT:
+    # make sure to use same user identifier
+    # in the CLI command above and in the shell command below
+    # the CLI uses the email as identifier as it was the new model created
+    # the shell command uses the email as identifier as it was the new model created
+    # default model uses username/user as identifier
+
 }
 
 function test() {

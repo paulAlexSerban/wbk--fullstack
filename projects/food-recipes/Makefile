@@ -10,6 +10,9 @@ compose-up:
 compose-down:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=down --app-name=recipes
 
+compose-restart-django-api-service:
+	@docker restart recipes_django-api-service
+
 compose-down-clean:
 	@bash $(INFRA_ORCHESTRATION_SCRIPTS_DOCKER_DIR)/base.django.docker-compose.bash --phase=down-clean --app-name=recipes
 
