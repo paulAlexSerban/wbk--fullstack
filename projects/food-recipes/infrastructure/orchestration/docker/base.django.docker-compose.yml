@@ -1,6 +1,6 @@
 ---
 networks:
-  base-django-network:
+  food-recipies-network:
     driver: bridge
 
 volumes:
@@ -31,7 +31,7 @@ services:
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     networks:
-      - base-django-network
+      - food-recipies-network
 
   # ---------------------------------------------------------------------
   # | Postgres Database                                                 |
@@ -46,7 +46,7 @@ services:
     volumes:
       - dev-db-data:/var/lib/postgresql/data
     networks:
-      - base-django-network
+      - food-recipies-network
 
   # ---------------------------------------------------------------------
   # | PgAdmin                                                           |
@@ -65,7 +65,7 @@ services:
     depends_on:
       - postgresql_database
     networks:
-      - base-django-network
+      - food-recipies-network
     volumes:
       - ../../../database/.tmp-data/${PROJECT_NAME}-data/:/var/lib/pgadmin/
       - ../../../database/db-admin/pgAdmin/config_distro.py:/pgadmin4/config_distro.py

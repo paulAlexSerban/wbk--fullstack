@@ -69,10 +69,9 @@ function backup-db() {
 
 function restore-db() {
     echo "[ 📦 🐳 --- restore db ]"
-    docker stop ${APP_NAME} > /dev/null 2>&1
-
-    docker exec -i ${APP_NAME}_postgresql_database psql -U ${DB_USERNAME} -d ${DB_NAME} <${DB_BACKUP_DIR}/${APP_NAME}.sql > /dev/null 2>&1
-    docker start ${APP_NAME} > /dev/null 2>&1
+    docker stop ${APP_NAME}_django-api-service > /dev/null 2>&1
+    docker exec -i ${APP_NAME}_postgresql_database psql -U ${DB_USERNAME} -d ${DB_NAME} <${DB_BACKUP_DIR}/${APP_NAME}.sql
+    docker start ${APP_NAME}_django-api-service  > /dev/null 2>&1
 }
 
 $PHASE && echo "[ ✅ ] --- done" || echo "[ 🚫 ]Failed"
