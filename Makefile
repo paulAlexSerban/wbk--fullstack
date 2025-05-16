@@ -58,9 +58,9 @@ clean_jupyter_notebooks:
 
 get_aws_credentials_to_env:
 	@echo "Getting AWS credentials to environment..."
-	@sed -i '' "s|AWS_ACCESS_KEY_ID=.*|AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}|" ./.env
-	@sed -i '' "s|AWS_SECRET_ACCESS_KEY=.*|AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}|" ./.env
-	@sed -i '' "s|AWS_SESSION_TOKEN=.*|AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}|" ./.env
-	@sed -i '' "s|AWS_DEFAULT_REGION=.*|AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}|" ./.env
-	@sed -i '' "s|AWS_REGION=.*|AWS_REGION=${AWS_REGION}|" ./.env
+	@sed -i '' -e "/^AWS_ACCESS_KEY_ID=/ s|^AWS_ACCESS_KEY_ID=.*|AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}|" ./.env
+	@sed -i '' -e "/^AWS_SECRET_ACCESS_KEY=/ s|^AWS_SECRET_ACCESS_KEY=.*|AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}|" ./.env
+	@sed -i '' -e "/^AWS_SESSION_TOKEN=/ s|^AWS_SESSION_TOKEN=.*|AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}|" ./.env
+	@sed -i '' -e "/^AWS_DEFAULT_REGION=/ s|^AWS_DEFAULT_REGION=.*|AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}|" ./.env
+	@sed -i '' -e "/^AWS_REGION=/ s|^AWS_REGION=.*|AWS_REGION=${AWS_REGION}|" ./.env
 	@echo "AWS credentials set to environment variables."
