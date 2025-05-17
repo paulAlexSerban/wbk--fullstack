@@ -52,5 +52,5 @@ class ModelTests(TestCase):
         """Test creating a user with a short password raises error."""
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user(
-                email="test@example.com", password="testpass123"
+                email="test@example.com", password="test"
             )

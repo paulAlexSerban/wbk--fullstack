@@ -22,6 +22,9 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError("Users must have an email address")
 
+        if password and len(password) < 8:
+            raise ValueError("Password must be at least 8 characters long")
+
         email = email.lower()
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)

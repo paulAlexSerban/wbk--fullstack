@@ -26,3 +26,7 @@
 - Swagger - API documentation generator
 - Git - version control system for tracking changes in code
 - GitHub - platform for hosting and sharing code repositories
+
+## Test Credentials
+- admin@example.com = admin
+- testd@gmail.com = test@password
