@@ -17,12 +17,6 @@ install_deps:
 	@echo "Dependencies installed."
 	@make freeze_deps
 
-install_ci_deps:
-	@echo "Installing dependencies..."
-	@pip install -r requirements.lock.txt
-	@python machine-learning/nltk_deps.py 
-	@echo "Dependencies installed."
-
 install_jupiter_n_ipykernel:
 	@echo "Installing Jupyter Notebook..."
 	@pip install jupyter

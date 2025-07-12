@@ -1,0 +1,3 @@
+[submodule "workbook/02_web-development/frontend/wbk--frontend-playground"]
+	path = workbook/02_web-development/frontend/wbk--frontend-playground
+	url = https://github.com/paulAlexSerban/wbk--frontend-playground.git
