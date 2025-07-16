@@ -7,3 +7,7 @@ install_deps:
 	@echo "Installing dependencies..."
 	@pip install -r requirements.txt	
 	@echo "Dependencies installed."
+
+run:
+	@echo "Running the application..."
+	@python3 main.py
