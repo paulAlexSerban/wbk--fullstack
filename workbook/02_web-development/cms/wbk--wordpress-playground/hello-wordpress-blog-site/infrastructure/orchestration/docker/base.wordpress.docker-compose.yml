@@ -26,7 +26,7 @@ services:
     networks:
       - hello-wordpress-blog-site-network
     volumes:
-      # - ../../..${SSR_PROJECT_PATH}/src/readme.html:/var/www/html/readme.html
+    # - ../../..${SSR_PROJECT_PATH}/src/readme.html:/var/www/html/readme.html
     #   # Uncomment as needed:
     #   # -----------------------------------------------------------------
     #   # | Wordpress Core Files                                          |
