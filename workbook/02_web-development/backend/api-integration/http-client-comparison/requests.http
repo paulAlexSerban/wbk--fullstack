@@ -1,0 +1,16 @@
+GET http://localhost:5001/target
+
+###
+GET http://localhost:5000/call-requests
+
+###
+GET http://localhost:5000/call-httpx-manual-retries
+
+###
+GET http://localhost:5000/call-httpx-retries
+
+###
+GET http://localhost:5000/call-httpx-tenacity
+
+###
+GET http://localhost:5000/call-aiohttp
