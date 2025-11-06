@@ -20,3 +20,4 @@
 - remove submodule: `git rm --cached <path>` - to remove the submodule from the repository
 - commit changes: `git commit -m "Updated submodule"` - to commit the changes
 - push changes: `git push` - to push the changes to the remote repository
+
