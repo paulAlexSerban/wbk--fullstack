@@ -1,0 +1,25 @@
+---
+networks:
+  base-nextjs-network:
+    driver: bridge
+
+services:
+  # ---------------------------------------------------------------------
+  # | Node.js SSR Service                                               | 
+  # ---------------------------------------------------------------------
+  nextjs-ssr-service:
+    build:
+      context: ../../../
+      dockerfile: .${SSR_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - SSR_PROJECT_PATH=${SSR_PROJECT_PATH}
+        - PORT=${PORT}
+    ports:
+      - "3000:${PORT}"
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    volumes:
+      - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
+      - ../../../${SSR_PROJECT_PATH}:/usr/src/app
+    networks:
+      - base-nextjs-network
