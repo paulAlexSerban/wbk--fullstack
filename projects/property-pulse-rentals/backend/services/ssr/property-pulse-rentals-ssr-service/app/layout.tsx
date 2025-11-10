@@ -1,6 +1,9 @@
 import "@/assets/styles/globals.css";
 import { ReactNode } from "react";
 
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+
 export const metadata = {
     title: "Property Pulse Rentals",
     keywords: "real estate, rentals, property, apartments, houses, homes, leasing, rental listings, property management, tenant services",
@@ -10,9 +13,11 @@ export const metadata = {
 const MainLayout = ({ children }: { children: ReactNode }) => {
     return <html>
         <body>
+            <Navbar />
             <main>
                 {children}
             </main>
+            <Footer />
         </body>
     </html>
 }
