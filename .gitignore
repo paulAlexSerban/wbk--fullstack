@@ -164,3 +164,7 @@ __pycache__/
 *.pem
 
 *.bak
+
+*.egg-info
+
+.vscode

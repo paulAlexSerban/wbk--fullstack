@@ -2,6 +2,13 @@
 
 > Coursework project from Udemy course "Next.js Dev to Deployment" by Brad Traversy
 
+## Tech Stack
+- Next.js SSR / React.js CSR
+- Strapi CMS
+- TypeScript
+- Nginx as API Gateway & Proxy
+- PostgreSQL
+
 ## To Do's & Improvements
 
 - [ ] script to populate DB with sample (lorem data) data via APP API (no interaction with CMS API or DB)
