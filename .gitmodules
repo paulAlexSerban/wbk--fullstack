@@ -1,15 +1,23 @@
 [submodule "workbook/02_web-development/cms/wbk--wordpress-playground"]
 	path = workbook/02_web-development/cms/wbk--wordpress-playground
 	url = https://github.com/paulAlexSerban/wbk--wordpress-playground.git
+
 [submodule "workbook/02_web-development/frontend/wbk--frontend-playground"]
 	path = workbook/02_web-development/frontend/wbk--frontend-playground
 	url = https://github.com/paulAlexSerban/wbk--frontend-playground.git
+
 [submodule "workbook/02_web-development/frontend/wbk--reactjs-playground"]
 	path = workbook/02_web-development/frontend/wbk--reactjs-playground
 	url = https://github.com/paulAlexSerban/wbk--reactjs-playground.git
+
+[submodule "workbook/02_web-development/frontend/wbk--lerna-monorepo-playground"]
+	path = workbook/02_web-development/frontend/wbk--lerna-monorepo-playground
+	url = https://github.com/paulAlexSerban/wbk--lerna-monorepo-playground.git
+
 [submodule "workbook/06_software-testing/effective-software-testing/wbk--hello-pytest"]
 	path = workbook/06_software-testing/effective-software-testing/wbk--hello-pytest
 	url = https://github.com/paulAlexSerban/wbk--hello-pytest.git
+
 [submodule "workbook/06_software-testing/effective-software-testing/wbk--hello-pytest-w-appium"]
 	path = workbook/06_software-testing/effective-software-testing/wbk--hello-pytest-w-appium
 	url = https://github.com/paulAlexSerban/wbk--hello-pytest-w-appium.git
