@@ -12,6 +12,8 @@
 - SELECT: `Python (.venv)` - to create a new notebook using the virtual environment
 
 ### Use Git Submodules
+- cd to path where you want to add the submodule
+- clone submodule reposiory if not already cloned
 - check if submodule exists: `git submodule status` and check .gitmodules file
 - add submodule: `git submodule add <repository-url> <path>` - to add a new submodule
 - update submodule: `git submodule update --remote --merge` - to update the submodule to the latest commit
