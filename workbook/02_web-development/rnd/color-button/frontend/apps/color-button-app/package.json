@@ -1,5 +1,5 @@
 {
-    "name": "@wbk--mern-playground-v2/color-button-app",
+    "name": "color-button-app",
     "private": true,
     "version": "0.1.2",
     "type": "module",

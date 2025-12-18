@@ -1,5 +1,5 @@
 {
-    "name": "@wbk--mern-playground-v2/hello-wdio-cucumber-test-e2e",
+    "name": "hello-wdio-cucumber-test-e2e",
     "version": "0.0.0",
     "type": "module",
     "devDependencies": {

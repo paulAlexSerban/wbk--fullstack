@@ -26,9 +26,6 @@ const Router = createBrowserRouter(
             ],
         },
     ],
-    // {
-    //     basename: import.meta.env.DEV ? '/apps/solid-in-react/' : `/wbk--mern-playground/apps/solid-in-react/`,
-    // }
 );
 
 function App() {
