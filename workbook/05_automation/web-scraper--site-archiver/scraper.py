@@ -162,7 +162,7 @@ class SiteScraper:
 
             # ── collect asset URLs ──────────────────────────────────────────
             asset_urls = await page.evaluate(
-                """() => {
+                r"""() => {
                 const urls = new Set();
                 document.querySelectorAll('img[src],video[src],audio[src],source[src]').forEach(e => e.src && urls.add(e.src));
                 document.querySelectorAll('link[rel="stylesheet"]').forEach(e => e.href && urls.add(e.href));
