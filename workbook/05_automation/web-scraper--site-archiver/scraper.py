@@ -12,7 +12,7 @@ from pathlib import Path
 from urllib.parse import urljoin, urlparse, urlunparse
 from collections import deque
 
-from playwright.async_api import async_playwright
+from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 
 
 # ─── helpers ────────────────────────────────────────────────────────────────
@@ -182,8 +182,13 @@ class SiteScraper:
             created_page = True
 
         try:
-            await page.goto(norm, wait_until="networkidle", timeout=30_000)
-            await page.wait_for_timeout(500)  # let late JS settle
+            try:
+                await page.goto(norm, wait_until="networkidle", timeout=15_000)
+            except PlaywrightTimeoutError:
+                # Next.js / SPA sites keep the network busy (analytics, prefetch,
+                # WebSockets) so networkidle never fires.  The DOM is ready though.
+                await page.wait_for_load_state("load", timeout=15_000)
+            await page.wait_for_timeout(2_000)  # let JS hydration settle (Next.js)
 
             # ── collect asset URLs ──────────────────────────────────────────
             asset_urls = await page.evaluate(
@@ -250,16 +255,17 @@ class SiteScraper:
 
                 context = None
                 selected_idx = None
-                for _ in range(20):
-                    if self.browser.contexts:
-                        # Prefer the context that already has regular tabs open.
-                        # In CDP mode, the first context can sometimes be an isolated one.
-                        contexts_by_pages = sorted(
-                            enumerate(self.browser.contexts),
-                            key=lambda it: len(it[1].pages),
-                            reverse=True,
+                for _ in range(40):
+                    contexts_with_pages = [
+                        (idx, ctx)
+                        for idx, ctx in enumerate(self.browser.contexts)
+                        if ctx.pages
+                    ]
+                    if contexts_with_pages:
+                        # Prefer the context with the most open tabs.
+                        selected_idx, context = max(
+                            contexts_with_pages, key=lambda it: len(it[1].pages)
                         )
-                        selected_idx, context = contexts_by_pages[0]
                         break
                     await asyncio.sleep(0.25)
 
@@ -274,6 +280,12 @@ class SiteScraper:
                     f"[browser] Reusing existing browser profile context index={selected_idx} (pages={len(context.pages)})."
                 )
                 self._log_cdp_contexts("before crawl")
+                if not context.pages:
+                    raise RuntimeError(
+                        "CDP attached, but selected context has zero tabs. "
+                        "This usually means Chrome was started in an isolated/empty instance. "
+                        "Quit all Chrome windows, then relaunch with your target profile and remote debugging enabled."
+                    )
                 if context.pages:
                     self._seed_page = context.pages[0]
                     self.on_log(
