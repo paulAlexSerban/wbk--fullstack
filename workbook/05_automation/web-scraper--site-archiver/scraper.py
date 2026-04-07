@@ -116,6 +116,7 @@ class SiteScraper:
         self.sem: asyncio.Semaphore = None
         self.browser = None
         self._attached_browser = False
+        self._seed_page = None
         self._stop = False
 
     def stop(self):
@@ -127,6 +128,21 @@ class SiteScraper:
     def _normalize(self, url: str) -> str:
         p = urlparse(url)
         return urlunparse((p.scheme, p.netloc, p.path, "", "", ""))
+
+    def _log_cdp_contexts(self, label: str):
+        """Emit a compact snapshot of all CDP contexts and their open page URLs."""
+        if not self.browser:
+            return
+        contexts = self.browser.contexts
+        self.on_log(f"[cdp debug] {label}: contexts={len(contexts)}")
+        for idx, ctx in enumerate(contexts):
+            urls = [p.url or "about:blank" for p in ctx.pages]
+            preview = ", ".join(urls[:3])
+            if len(urls) > 3:
+                preview += ", ..."
+            self.on_log(
+                f"[cdp debug] context[{idx}] pages={len(ctx.pages)} urls=[{preview}]"
+            )
 
     async def _download_asset(self, url: str, page) -> str | None:
         """Download a binary asset and return its local path string (relative to output_dir)."""
@@ -157,7 +173,13 @@ class SiteScraper:
         self.visited_pages.add(norm)
 
         self.on_log(f"[page] {norm}")
-        page = await context.new_page()
+        created_page = False
+        if self._seed_page is not None:
+            page = self._seed_page
+            self._seed_page = None
+        else:
+            page = await context.new_page()
+            created_page = True
 
         try:
             await page.goto(norm, wait_until="networkidle", timeout=30_000)
@@ -209,7 +231,8 @@ class SiteScraper:
         except Exception as e:
             self.on_log(f"  [error] {norm}: {e}")
         finally:
-            await page.close()
+            if created_page:
+                await page.close()
 
         self.on_progress(len(self.visited_pages), self.max_pages, norm)
 
@@ -223,15 +246,38 @@ class SiteScraper:
                 self.on_log(f"[browser] Attaching to existing Chromium via CDP: {self.cdp_url}")
                 self.browser = await pw.chromium.connect_over_cdp(self.cdp_url)
                 self._attached_browser = True
+                self._log_cdp_contexts("after attach")
 
-                if self.browser.contexts:
-                    context = self.browser.contexts[0]
-                    self.on_log("[browser] Reusing existing browser context.")
-                else:
-                    self.on_log("[browser] No existing context found; creating a new one.")
-                    context = await self.browser.new_context(
-                        user_agent="Mozilla/5.0 (compatible; SiteMirror/1.0)",
-                        java_script_enabled=True,
+                context = None
+                selected_idx = None
+                for _ in range(20):
+                    if self.browser.contexts:
+                        # Prefer the context that already has regular tabs open.
+                        # In CDP mode, the first context can sometimes be an isolated one.
+                        contexts_by_pages = sorted(
+                            enumerate(self.browser.contexts),
+                            key=lambda it: len(it[1].pages),
+                            reverse=True,
+                        )
+                        selected_idx, context = contexts_by_pages[0]
+                        break
+                    await asyncio.sleep(0.25)
+
+                if not context:
+                    raise RuntimeError(
+                        "No existing Chrome context found via CDP. "
+                        "Open at least one regular tab in the target profile and retry. "
+                        "CDP mode intentionally avoids creating a new incognito context."
+                    )
+
+                self.on_log(
+                    f"[browser] Reusing existing browser profile context index={selected_idx} (pages={len(context.pages)})."
+                )
+                self._log_cdp_contexts("before crawl")
+                if context.pages:
+                    self._seed_page = context.pages[0]
+                    self.on_log(
+                        f"[browser] Reusing existing tab for first navigation: {self._seed_page.url or 'about:blank'}"
                     )
             else:
                 self.browser = await pw.chromium.launch(headless=self.headless)
