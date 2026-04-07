@@ -34,6 +34,9 @@ python run.py https://example.com --output ./mirror --max-pages 500 --concurrenc
 
 # Show the browser window while crawling (useful for debugging JS-heavy sites)
 python run.py https://example.com --no-headless
+
+# Reuse an already-open Chrome/Chromium session (non-incognito context)
+python run.py https://example.com --cdp-url http://127.0.0.1:9222
 ```
 
 ### All options
@@ -44,6 +47,37 @@ python run.py https://example.com --no-headless
 | `--max-pages` / `-m`   | `200`         | Stop after N pages        |
 | `--concurrency` / `-c` | `3`           | Browser tabs open at once |
 | `--no-headless`        | off           | Show browser window       |
+| `--cdp-url`            | none          | Attach to open browser via CDP |
+
+### Reuse an existing open browser
+
+Start Chrome/Chromium with remote debugging enabled, then pass the CDP URL to the scraper.
+
+```bash
+# macOS example
+open -na "Google Chrome" --args --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-cdp-profile
+
+# then run scraper against the existing browser session
+python run.py https://example.com --cdp-url http://127.0.0.1:9222
+```
+
+If you use the Make target `archive-site-w-cdp`, it now auto-starts this debug Chrome instance when needed and waits for `http://127.0.0.1:9222` to become available.
+
+To get path to you existing Chrome profile, open `chrome://version` in Chrome and look for "Profile Path". Use that path as `CHROME_USER_DATA_DIR` and the profile folder name (e.g. `Default`) as `CHROME_PROFILE_DIR`.
+
+To use your existing Chrome profile instead of `/tmp/chrome-cdp-profile`:
+
+```bash
+# convenience target (uses ~/Library/Application Support/Google/Chrome)
+make archive-site-w-cdp-existing-profile
+
+# or override explicitly
+make archive-site-w-cdp \
+    CHROME_USER_DATA_DIR="$HOME/Library/Application Support/Google/Chrome" \
+    CHROME_PROFILE_DIR="Default"
+```
+
+If Chrome is already running without remote debugging, close it first, then run one of the commands above so it starts with `--remote-debugging-port`.
 
 ---
 

@@ -94,6 +94,7 @@ class SiteScraper:
         max_pages: int = 200,
         concurrency: int = 3,
         headless: bool = True,
+        cdp_url: str | None = None,
         on_progress=None,  # callback(scraped, total, url)
         on_log=None,  # callback(message)
     ):
@@ -104,6 +105,7 @@ class SiteScraper:
         self.max_pages = max_pages
         self.concurrency = concurrency
         self.headless = headless
+        self.cdp_url = cdp_url
         self.on_progress = on_progress or (lambda *a: None)
         self.on_log = on_log or print
 
@@ -113,6 +115,7 @@ class SiteScraper:
         self.queue: deque[str] = deque()
         self.sem: asyncio.Semaphore = None
         self.browser = None
+        self._attached_browser = False
         self._stop = False
 
     def stop(self):
@@ -216,11 +219,26 @@ class SiteScraper:
         self.sem = asyncio.Semaphore(self.concurrency)
 
         async with async_playwright() as pw:
-            self.browser = await pw.chromium.launch(headless=self.headless)
-            context = await self.browser.new_context(
-                user_agent="Mozilla/5.0 (compatible; SiteMirror/1.0)",
-                java_script_enabled=True,
-            )
+            if self.cdp_url:
+                self.on_log(f"[browser] Attaching to existing Chromium via CDP: {self.cdp_url}")
+                self.browser = await pw.chromium.connect_over_cdp(self.cdp_url)
+                self._attached_browser = True
+
+                if self.browser.contexts:
+                    context = self.browser.contexts[0]
+                    self.on_log("[browser] Reusing existing browser context.")
+                else:
+                    self.on_log("[browser] No existing context found; creating a new one.")
+                    context = await self.browser.new_context(
+                        user_agent="Mozilla/5.0 (compatible; SiteMirror/1.0)",
+                        java_script_enabled=True,
+                    )
+            else:
+                self.browser = await pw.chromium.launch(headless=self.headless)
+                context = await self.browser.new_context(
+                    user_agent="Mozilla/5.0 (compatible; SiteMirror/1.0)",
+                    java_script_enabled=True,
+                )
 
             while (
                 self.queue
@@ -241,7 +259,8 @@ class SiteScraper:
                     for url in batch:
                         tg.create_task(self._scrape_page(url, context))
 
-            await self.browser.close()
+            if self.browser:
+                await self.browser.close()
 
         self.on_log(
             f"\n✓ Done. {len(self.visited_pages)} pages, {len(self.visited_assets)} assets → {self.output_dir}/"

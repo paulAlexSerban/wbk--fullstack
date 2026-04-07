@@ -19,6 +19,7 @@ def parse_args():
     p.add_argument("--max-pages", "-m",     type=int, default=200,  help="Max pages to crawl (default: 200)")
     p.add_argument("--concurrency", "-c",   type=int, default=3,    help="Concurrent browser tabs (default: 3)")
     p.add_argument("--no-headless",         action="store_true",    help="Show the browser window")
+    p.add_argument("--cdp-url",             help="Attach to an existing Chromium via CDP (e.g. http://127.0.0.1:9222)")
     return p.parse_args()
 
 
@@ -31,11 +32,14 @@ async def main():
         max_pages=args.max_pages,
         concurrency=args.concurrency,
         headless=not args.no_headless,
+        cdp_url=args.cdp_url,
     )
 
     print(f"Starting crawl: {args.url}")
     print(f"Output dir:     {args.output}/")
     print(f"Max pages:      {args.max_pages}   Concurrency: {args.concurrency}\n")
+    if args.cdp_url:
+        print(f"CDP attach:     {args.cdp_url}\n")
 
     try:
         await scraper.run()
