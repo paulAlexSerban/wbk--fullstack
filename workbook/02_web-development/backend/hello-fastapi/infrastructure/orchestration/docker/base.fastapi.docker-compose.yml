@@ -1,0 +1,25 @@
+---
+networks:
+  base-fastapi-network:
+    driver: bridge
+
+services:
+  # ---------------------------------------------------------------------
+  # | FastAPI Api Service                                                |
+  # ---------------------------------------------------------------------
+  fastapi-api-service:
+    build:
+      context: ../../../
+      dockerfile: .${API_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - DEV=true
+        - API_PROJECT_PATH=${API_PROJECT_PATH}
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    volumes:
+      - ../../../${API_PROJECT_PATH}/src:/app
+    networks:
+      - base-fastapi-network
