@@ -1,0 +1,30 @@
+---
+networks:
+  base-reactjs-network:
+    driver: bridge
+
+services:
+  # ---------------------------------------------------------------------
+  # | React.js UI-CSR Service                                           | 
+  # ---------------------------------------------------------------------
+  react-ui-service:
+    build:
+      context: ../../../
+      dockerfile: .${APP_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - APP_PROJECT_PATH=${APP_PROJECT_PATH}
+        - PROTOCOL=${PROTOCOL}
+        - DOMAIN=${DOMAIN}
+        - PORT=${UI_SERVICE_PORT}
+    environment:
+      - SERVICE_NAME=react-ui-service
+      - PROTOCOL=${PROTOCOL}
+      - DOMAIN=${DOMAIN}
+      - PORT=${UI_SERVICE_PORT}
+    ports:
+      - "3000:${UI_SERVICE_PORT}"
+    volumes:
+      - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
+      - ../../../${APP_PROJECT_PATH}:/usr/src/app
+    networks:
+      - base-reactjs-network

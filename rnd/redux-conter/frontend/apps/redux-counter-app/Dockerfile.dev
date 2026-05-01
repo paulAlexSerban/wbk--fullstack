@@ -1,0 +1,25 @@
+FROM node:22.14.0-bullseye-slim
+
+ARG APP_PROJECT_PATH
+
+ARG PROTOCOL
+ARG DOMAIN_NAME
+ARG PORT
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+ENV VITE_PROTOCOL=$PROTOCOL
+ENV VITE_DOMAIN_NAME=$DOMAIN_NAME
+ENV VITE_PORT=$PORT
+
+COPY .${APP_PROJECT_PATH}/package.json /usr/src/app/
+
+EXPOSE $PORT
+
+RUN yarn install
+
+COPY .${APP_PROJECT_PATH}/ /usr/src/app/
+
+CMD [ "yarn", "run", "develop"]
