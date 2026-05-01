@@ -1,0 +1,1 @@
+# Property Pulse Rentals - SSR Service w. Next.js

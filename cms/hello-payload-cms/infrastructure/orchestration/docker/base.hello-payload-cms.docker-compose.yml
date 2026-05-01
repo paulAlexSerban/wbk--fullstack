@@ -1,0 +1,26 @@
+---
+networks:
+  base-payload-cms-network:
+    driver: bridge
+
+services:
+  # ---------------------------------------------------------------------
+  # | Payload CMS Service                                               | 
+  # ---------------------------------------------------------------------
+  payload-cms-service:
+    build:
+      context: ../../../
+      dockerfile: .${CMS_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - CMS_PROJECT_PATH=${CMS_PROJECT_PATH}
+        - PORT=${PORT}
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    volumes:
+      - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
+      - ../../../${CMS_PROJECT_PATH}:/usr/src/app
+      - ../../../database/backup/sqlite.db:/usr/src/app/sqlite.db
+    ports:
+      - "3000:3000"
+    networks:
+      - base-payload-cms-network

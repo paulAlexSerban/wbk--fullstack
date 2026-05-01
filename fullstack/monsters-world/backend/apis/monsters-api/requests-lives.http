@@ -1,0 +1,18 @@
+@base_url = http://localhost:3000
+
+### list all lives
+GET {{base_url}}/api/lives
+Content-Type: application/json
+
+### join monsters and habitats
+GET {{base_url}}/api/lives/conditions
+Content-Type: application/json
+
+### create new life
+POST {{base_url}}/api/lives
+Content-Type: application/json
+
+{
+    "monster": "Grumpy",
+    "habitat": "ice-desert"
+}

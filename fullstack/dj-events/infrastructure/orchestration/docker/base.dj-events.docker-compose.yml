@@ -1,0 +1,138 @@
+---
+networks:
+  base-nextjs-network:
+    driver: bridge
+
+volumes:
+  database-data:
+    driver: local
+
+services:
+  # ---------------------------------------------------------------------
+  # | Nginx Web Server
+  # ---------------------------------------------------------------------
+  proxy:
+    container_name: ${COMPOSE_PROJECT_NAME}_proxy
+    build:
+      context: ../../../
+      dockerfile: .${PROXY_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - PROXY_PROJECT_PATH=${PROXY_PROJECT_PATH}
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    networks:
+      - base-nextjs-network
+
+  # ---------------------------------------------------------------------
+  # | Node.js SSR Service                                               |
+  # ---------------------------------------------------------------------
+  nextjs-ssr-service:
+    container_name: ${COMPOSE_PROJECT_NAME}_nextjs-ssr-service
+    build:
+      context: ../../../
+      dockerfile: .${SSR_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - SSR_PROJECT_PATH=${SSR_PROJECT_PATH}
+        - PORT=${SSR_SERVICE_PORT}
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    environment:
+      - SERVICE_NAME=nextjs-ssr-service
+    volumes:
+      - /usr/src/app/node_modules # Avoids overwriting node_modules with local volume
+      - ../../../${SSR_PROJECT_PATH}:/usr/src/app
+    networks:
+      - base-nextjs-network
+
+  # ---------------------------------------------------------------------
+  # | AWS LocalStack Infrastructure                                          |
+  # ---------------------------------------------------------------------
+  localstack:
+    container_name: ${COMPOSE_PROJECT_NAME}_localstack
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566" # LocalStack Gateway
+      - "4510-4559:4510-4559" # Additional service ports
+    environment:
+      - SERVICES=lambda,apigateway,s3,iam
+      - DEBUG=1
+      - PERSISTENCE=1
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=localstack
+      - AWS_SECRET_ACCESS_KEY=localstack
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock" # Required for running Lambdas in containers
+      - "../../configuration/scripts/localstack/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh" # Auto-create resources
+    networks:
+      - base-nextjs-network
+
+  # ---------------------------------------------------------------------
+  # | Strapi CMS                                                        |
+  # ---------------------------------------------------------------------
+  strapi-cms:
+    container_name: ${COMPOSE_PROJECT_NAME}_strapi-cms
+    build:
+      context: ../../../ # set context to root of monorepo project
+      dockerfile: .${CMS_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - CMS_PROJECT_PATH=${CMS_PROJECT_PATH}
+        - PORT=${CMS_SERVICE_PORT}
+    ports:
+      - "1337:1337"
+    restart: unless-stopped
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PORT: ${DATABASE_PORT}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - /usr/src/app/node_modules
+      - ../../../${CMS_PROJECT_PATH}/config:/usr/src/app/config
+      - ../../../${CMS_PROJECT_PATH}/src:/usr/src/app/src
+      - ../../../${CMS_PROJECT_PATH}/public/uploads:/usr/src/app/public/uploads
+      - ../../../${CMS_PROJECT_PATH}/types:/usr/src/app/types
+    networks:
+      - base-nextjs-network
+    depends_on:
+      - postgresql-database
+
+  # ---------------------------------------------------------------------
+  # | Postgres Database                                                 |
+  # ---------------------------------------------------------------------
+  postgresql-database:
+    container_name: ${COMPOSE_PROJECT_NAME}_postgresql-database
+    image: postgres:13-alpine
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    networks:
+      - base-nextjs-network
+
+  # ---------------------------------------------------------------------
+  # | PgAdmin                                                           |
+  # ---------------------------------------------------------------------
+  pgadmin:
+    container_name: ${COMPOSE_PROJECT_NAME}_pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - 15433:80
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    depends_on:
+      - postgresql-database
+    networks:
+      - base-nextjs-network
+    volumes:
+      - ../../../database/.tmp-data/${PROJECT_NAME}-data/:/var/lib/pgadmin/
+      - ../../../database/db-admin/pgAdmin/config_distro.py:/pgadmin4/config_distro.py
+      - ../../../database/db-admin/pgAdmin/servers.json:/pgadmin4/servers.json

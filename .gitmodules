@@ -1,20 +1,10 @@
+
 [submodule "cms/wbk--wordpress-playground"]
 	path = cms/wbk--wordpress-playground
 	url = https://github.com/paulAlexSerban/wbk--wordpress-playground.git
-
-[submodule "frontend/wbk--frontend-playground"]
-	path = frontend/wbk--frontend-playground
-	url = https://github.com/paulAlexSerban/wbk--frontend-playground.git
-
+[submodule "frontend/wbk--frontend-forge"]
+	path = frontend/wbk--frontend-forge
+	url = https://github.com/paulAlexSerban/wbk--frontend-forge.git
 [submodule "frontend/wbk--reactjs-playground"]
 	path = frontend/wbk--reactjs-playground
 	url = https://github.com/paulAlexSerban/wbk--reactjs-playground.git
-
-[submodule "frontend/wbk--lerna-monorepo-playground"]
-	path = frontend/wbk--lerna-monorepo-playground
-	url = https://github.com/paulAlexSerban/wbk--lerna-monorepo-playground.git
-
-[submodule "fullstack/prj--bloom-cycle-tracker"]
-	path = fullstack/prj--bloom-cycle-tracker
-	url = https://github.com/paulAlexSerban/prj--bloom-cycle-tracker.git
-
