@@ -1,4 +1,4 @@
-# Scale from Zero to Millions: Leaderboard Application
+# Scale from Zero to Millions: Leaderboard
 > System Design and Architecture / Case Studies
 
 ## Resources
