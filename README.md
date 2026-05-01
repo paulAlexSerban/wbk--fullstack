@@ -1,4 +1,4 @@
-# Software Engineering & Fullstack Workbook
+# Workbook: Web Engineering
 
 ## How to use
 ### Setup Jupiter Notebook for Local API Testing
