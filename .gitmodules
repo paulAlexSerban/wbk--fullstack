@@ -24,3 +24,6 @@
 [submodule "projects/prj--bloom-cycle-tracker"]
 	path = projects/prj--bloom-cycle-tracker
 	url = https://github.com/paulAlexSerban/prj--bloom-cycle-tracker.git
+[submodule "workbook/03_system-design-architecture/wbk--software-architecture-n-design"]
+	path = workbook/03_system-design-architecture/wbk--software-architecture-n-design
+	url = https://github.com/paulAlexSerban/wbk--software-architecture-n-design.git
