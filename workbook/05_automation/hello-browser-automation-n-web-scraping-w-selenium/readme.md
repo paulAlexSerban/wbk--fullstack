@@ -1,1 +1,0 @@
-coursework project from: udemy - "Automate Everything with Python"

@@ -1,1 +1,0 @@
- - terraform vs kubernetes - https://aws.amazon.com/compare/the-difference-between-terraform-and-kubernetes/
