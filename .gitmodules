@@ -21,8 +21,8 @@
 [submodule "workbook/06_software-testing/effective-software-testing/wbk--hello-pytest-w-appium"]
 	path = workbook/06_software-testing/effective-software-testing/wbk--hello-pytest-w-appium
 	url = https://github.com/paulAlexSerban/wbk--hello-pytest-w-appium.git
-[submodule "projects/prj--bloom-cycle-tracker"]
-	path = projects/prj--bloom-cycle-tracker
+[submodule "workbook/02_web-development/fullstack/prj--bloom-cycle-tracker"]
+	path = workbook/02_web-development/fullstack/prj--bloom-cycle-tracker
 	url = https://github.com/paulAlexSerban/prj--bloom-cycle-tracker.git
 [submodule "workbook/03_system-design-architecture/wbk--software-architecture-n-design"]
 	path = workbook/03_system-design-architecture/wbk--software-architecture-n-design
