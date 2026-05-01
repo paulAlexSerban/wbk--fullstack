@@ -1,8 +1,0 @@
-Flask
-requests
-httpx
-httpx-retries
-aiohttp
-tenacity
-pytest
-statistics
