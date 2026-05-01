@@ -1,5 +1,5 @@
 services:
-  leaderboard-ssr-service:
+  leaderboard-service:
     build:
       context: .
       dockerfile: Dockerfile
