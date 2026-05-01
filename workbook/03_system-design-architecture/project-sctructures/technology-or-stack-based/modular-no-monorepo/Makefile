@@ -1,1 +1,0 @@
-include infrastructure/makefiles/example.Makefile

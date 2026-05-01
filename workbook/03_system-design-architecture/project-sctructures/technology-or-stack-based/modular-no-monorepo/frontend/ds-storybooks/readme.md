@@ -1,1 +1,0 @@
-# Frontend / Design Systems / Storybooks
