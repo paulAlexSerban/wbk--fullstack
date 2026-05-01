@@ -1,0 +1,25 @@
+---
+networks:
+  base-flask-network:
+    driver: bridge
+
+services:
+  # ---------------------------------------------------------------------
+  # | Flask Api Service                                                |
+  # ---------------------------------------------------------------------
+  flask-api-service:
+    build:
+      context: ../../../
+      dockerfile: .${API_PROJECT_PATH}/Dockerfile.dev
+      args:
+        - DEV=true
+        - API_PROJECT_PATH=${API_PROJECT_PATH}
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - ../../configuration/env/.${PROJECT_NAME}.compose.env
+    volumes:
+      - ../../../${API_PROJECT_PATH}/src:/app
+    networks:
+      - base-flask-network
